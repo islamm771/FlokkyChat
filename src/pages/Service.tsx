@@ -21,10 +21,10 @@ const TabContent = ({activeTab,tab}:ITabContentProps) => {
             opacity : activeTab == tab ? 1 : 0
         }}
         >
-            <img className="w-full h-full" src="/cover/01.jpg" alt="" onClick={ (e) => console.log(e.target) } />
-            <img className="w-full h-full" src="/cover/02.jpg" alt="" />
-            <img className="w-full h-full" src="/cover/03.jpg" alt="" />
-            <img className="w-full h-full" src="/cover/04.jpg" alt="" />
+            <img className="w-full h-full" src="/img/cover/01.jpg" alt="" onClick={ (e) => console.log(e.target) } />
+            <img className="w-full h-full" src="/img/cover/02.jpg" alt="" />
+            <img className="w-full h-full" src="/img/cover/03.jpg" alt="" />
+            <img className="w-full h-full" src="/img/cover/04.jpg" alt="" />
         </div>
     )
 }

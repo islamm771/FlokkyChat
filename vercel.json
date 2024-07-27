@@ -1,0 +1,40 @@
+{
+    "routes":[
+        {
+            "src":"/",
+            "dest" : "/"
+        },
+        {
+            "src":"/about",
+            "dest" : "/"
+        },
+        {
+            "src":"/services",
+            "dest" : "/"
+        },
+        {
+            "src":"/contribute",
+            "dest" : "/"
+        },
+        {
+            "src":"/chat",
+            "dest" : "/"
+        },
+        {
+            "src":"/learn",
+            "dest" : "/"
+        },
+        {
+            "src":"/learn/thinking-in-react",
+            "dest" : "/"
+        },
+        {
+            "src":"/learn/installation",
+            "dest" : "/"
+        },
+        {
+            "src":"/login",
+            "dest" : "/"
+        }
+    ]
+}
