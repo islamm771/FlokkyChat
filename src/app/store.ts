@@ -5,7 +5,8 @@ import CounterSlice from "./features/counterSlice"
 import AuthSlice from "./features/authSlice"
 import ChatTabSlice from './features/chatTabSlice'
 import ModalsSlice  from './features/modalsSlice'
-import  ChatOptionsSlice  from './features/chatOptionsSlice'
+import ChatOptionsSlice  from './features/chatOptionsSlice'
+import SectionsSlice  from './features/sectionsSlice'
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     counter:CounterSlice,
     chatTab:ChatTabSlice,
     modals:ModalsSlice,
-    chatOptions:ChatOptionsSlice
+    chatOptions:ChatOptionsSlice,
+    sections:SectionsSlice
   },
 })
 

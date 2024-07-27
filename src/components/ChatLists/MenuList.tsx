@@ -28,7 +28,7 @@ const MenuList = () => {
         }, []);
   return (
     <div className="message-options relative" ref={messageOptionsRef}>
-        <span className='bg-[#eee] text-[#6d6d6d] block p-4 rounded-[50%] cursor-pointer' onClick={() => setMessageOptions(prev => !prev) }>
+        <span className='bg-[#eee] text-[#6d6d6d] block p-3 md:p-4 rounded-[50%] cursor-pointer' onClick={() => setMessageOptions(prev => !prev) }>
             <HiMiniSquares2X2 />
         </span>
 

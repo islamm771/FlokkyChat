@@ -36,11 +36,12 @@ main .chats-wrapper .chats .chat:hover .chat-options{
 main.chat-container{
   height: calc(100vh - 66px);
   overflow-x: hidden;
+  position: relative;
 }
 
 main .chat-content {
   border-right:1px solid #eee ;
-  border-left:1px solid #eee ;
+  border-left:1px solid #eee;
 }
 
 main .message-wrapper{
@@ -55,12 +56,35 @@ main .chat-footer .chat-footer-input textarea::-webkit-scrollbar {
 
 
 
-@media (991px <= width <= 1200px){
+@media ( 991px <= width <= 1200px){
   main .chats-info{
     position: fixed;
     top: 57px;
     right: 0;
     height: calc(100% - 57px);
+  }
+}
+
+
+@media ( width <= 768px){
+  main .chats-wrapper,
+  main .chat-content,
+  main .chats-info{
+    position: fixed;
+    top: 66px;
+    right: 0;
+    height: calc(100% - 66px);
+    z-index: 15;
+    background-color: #fff;
+    width: 100%;
+    transition: 0.5s;
+  }
+  main .chat-content{
+    z-index: 50;
+  }
+  main .chats-info{
+    transform: translateX(100%);
+    z-index: 51;
   }
 }
 

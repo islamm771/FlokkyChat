@@ -4,9 +4,12 @@ import { MdAdminPanelSettings } from 'react-icons/md';
 import ConversationList from '../ChatLists/ConversationList';
 import ArchiveModal from '../ChatModals/ArchiveModal';
 import MuteModal from '../ChatModals/MuteModal';
+import { useDispatch } from 'react-redux';
+import { setIsChatContentHidden } from '../../app/features/sectionsSlice';
 
 
 const GroupTab = () => {
+    const dispatch = useDispatch()
   return (
     <>
         <header className='flex items-center justify-between p-4'>
@@ -20,7 +23,8 @@ const GroupTab = () => {
             <input className='border-none rounded-[30px] bg-[#ddd] w-full' type="text" name="" id="" placeholder='Search in chats...' />
         </div>
         <div className="chats">
-            <div className='chat flex gap-3 relative p-4'>
+            <div className='chat flex gap-3 relative p-4'
+            onClick={ () => dispatch(setIsChatContentHidden(false)) }>
                 <div className="after:content-[''] border-solid border-[1px] border-[#ff6728] after:bg-[#1df377] after:w-[9px] after:h-[9px] after:absolute after:top-0 after:-left-2 after:rounded-full relative w-[45px] h-[45px] rounded-full">
                     <div className="relative w-full h-full rounded-full p-[1px] bg-white">
                         <img
@@ -56,7 +60,8 @@ const GroupTab = () => {
                 </div>
                 <ConversationList />
             </div>
-            <div className='chat flex gap-3 relative p-4'>
+            <div className='chat flex gap-3 relative p-4'
+            onClick={ () => dispatch(setIsChatContentHidden(false)) }>
                 <div className="after:content-[''] border-solid border-[1px] border-[#ff6728] after:bg-[#1df377] after:w-[9px] after:h-[9px] after:absolute after:top-0 after:-left-2 after:rounded-full relative w-[45px] h-[45px] rounded-full">
                     <div className="relative w-full h-full rounded-full p-[1px] bg-white">
                         <img
@@ -92,7 +97,8 @@ const GroupTab = () => {
                 </div>
                 <ConversationList />
             </div>
-            <div className='chat flex gap-3 relative p-4'>
+            <div className='chat flex gap-3 relative p-4'
+            onClick={ () => dispatch(setIsChatContentHidden(false)) }>
                 <div className="after:content-[''] border-solid border-[1px] border-[#ff6728] after:bg-[#1df377] after:w-[9px] after:h-[9px] after:absolute after:top-0 after:-left-2 after:rounded-full relative w-[45px] h-[45px] rounded-full">
                     <div className="relative w-full h-full rounded-full p-[1px] bg-white">
                         <img
