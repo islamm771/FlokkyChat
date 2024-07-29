@@ -369,6 +369,11 @@
 @media screen and (max-width: 1115px) {
   .wrap-grouping-people-chat {
     width: auto !important;
+    transition: left .1s ease-in-out;
+    -webkit-transition: left .1s ease-in-out;
+    -moz-transition: left .1s ease-in-out;
+    -ms-transition: left .1s ease-in-out;
+    -o-transition: left .1s ease-in-out;
   }
 
   .OnlineListContainer {
@@ -382,19 +387,19 @@
 
   .OnlineListContainerHidden {
     right: -100%;
-    transition: right 0.3s ease-in-out;
-    -webkit-transition: right 0.3s ease-in-out;
-    -moz-transition: right 0.3s ease-in-out;
-    -ms-transition: right 0.3s ease-in-out;
-    -o-transition: right 0.3s ease-in-out;
+    transition: left .1s ease-in-out;
+    -webkit-transition: left .1s ease-in-out;
+    -moz-transition: left .1s ease-in-out;
+    -ms-transition: left .1s ease-in-out;
+    -o-transition: left .1s ease-in-out;
   }
   .OnlineListContainer,
   .OnlineListContainerHidden {
-    transition: right 0.3s ease-in-out;
-    -webkit-transition: right 0.3s ease-in-out;
-    -moz-transition: right 0.3s ease-in-out;
-    -ms-transition: right 0.3s ease-in-out;
-    -o-transition: right 0.3s ease-in-out;
+    transition: left .1s ease-in-out;
+    -webkit-transition: left .1s ease-in-out;
+    -moz-transition: left .1s ease-in-out;
+    -ms-transition: left .1s ease-in-out;
+    -o-transition: left .1s ease-in-out;
   }
   .header-OnlineList-page {
     justify-content: space-between;
@@ -428,11 +433,11 @@
     overflow: hidden;
     position: fixed;
     top: 0;
-    transition: left 0.3s ease-in-out;
-    -webkit-transition: left 0.3s ease-in-out;
-    -moz-transition: left 0.3s ease-in-out;
-    -ms-transition: left 0.3s ease-in-out;
-    -o-transition: left 0.3s ease-in-out;
+    transition: left .1s ease-in-out;
+    -webkit-transition: left .1s ease-in-out;
+    -moz-transition: left .1s ease-in-out;
+    -ms-transition: left .1s ease-in-out;
+    -o-transition: left .1s ease-in-out;
     z-index: 555555555555555555555;
   }
 

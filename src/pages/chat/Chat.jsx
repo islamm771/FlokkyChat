@@ -71,6 +71,9 @@ const Chat = () => {
     if(isWrapgroupPeopleChat){
       setPosition(0)
     }
+    else{
+      setPosition(-divRef.current.clientWidth)
+    }
   } ,[isWrapgroupPeopleChat])
 
   return (
