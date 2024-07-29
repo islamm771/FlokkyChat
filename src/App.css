@@ -1,0 +1,70 @@
+:root {
+  --main-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.25);
+  --primary-text-color: #656980;
+  --input-bg-color: #f4f4f4;
+  --input-border-color: #11d8dc;
+}
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: hidden !important;
+  /* background-color: #fff !important; */
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  margin: 0;
+  font-size: 16px;
+  background-color: #f8f8fb;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/****************************/
+
+.page-title {
+	display: flex;
+	align-items: baseline;
+	justify-content: start;
+	margin-top: 21px;
+	margin-left: 0;
+}
+
+.page-title svg {
+	margin-right: 8px;
+	margin-left: 0px;
+	margin-top: 1px;
+}
+
+@media screen and (max-width: 680px) {
+  .page-title {
+    margin-top: 12px;
+  }
+}
+
+/*  */
+
+.custom-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.custom-overlay.active {
+  pointer-events: auto;
+  opacity: 1;
+}

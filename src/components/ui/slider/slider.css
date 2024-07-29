@@ -1,0 +1,139 @@
+.category-slider {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-top: 21px;
+	background-color: #f8f8fb;
+	padding-bottom: 4px;
+}
+
+@media screen and (max-width: 680px) {
+	.category-slider {
+		position: sticky;
+		top: 150px;
+		z-index: 999999;
+	}
+}
+
+@media screen and (max-width: 605px) {
+	.category-slider {
+		top: 138px;
+	}
+}
+
+@media screen and (max-width: 515px) {
+	.category-slider {
+		top: 128px;
+	}
+}
+
+@media screen and (max-width: 430px) {
+	.category-slider {
+		top: 115px;
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.category-slider {
+		top: 107px;
+	}
+}
+
+@media screen and (max-width: 430px) {
+	/* .slider {
+		top: 12%;
+	} */
+}
+
+@media screen and (max-width: 410px) {
+	/* .slider {
+		top: 11.4%;
+	} */
+}
+
+@media screen and (max-width: 330px) {
+	/* .slider {
+		top: 10.4%;
+	} */
+}
+
+.search-slider {
+	position: relative;
+	padding: 0 4px !important;
+	width: 100%;
+	overflow-x: scroll;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	scroll-behavior: smooth;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	margin-bottom: 0 !important;
+	margin-top: 0 !important;
+	height: 80px;
+}
+
+@media screen and (max-width: 680px) {
+	.search-slider {
+		height: 60px;
+		margin-top: 0 !important;
+	}
+}
+
+.section-menu-item-text {
+	font-size: 1.2rem;
+}
+
+.section-menu {
+	position: absolute;
+	display: flex;
+	align-items: center;
+}
+
+.section-menu-item.tab-slider-item{
+	width: 224px;
+}
+
+.section-menu-item:hover svg line,
+.section-menu-item:hover svg path,
+.section-menu-item:hover svg circle,
+.section-menu-item:hover svg rect {
+	fill: #23d2e2 !important;
+}
+
+.section-menu-item.active svg line,
+.section-menu-item.active svg path,
+.section-menu-item.active svg circle,
+.section-menu-item.active svg rect {
+	fill: #ff6728 !important;
+}
+
+.search-slider::-webkit-scrollbar {
+	display: none;
+}
+
+@media screen and (max-width: 680px) {
+	.slider-control.left {
+		display: none;
+	}
+
+	.slider-control.right {
+		display: none;
+	}
+
+	.section-menu-item.tab-slider-item{
+		width: 200px;
+	}
+
+	.section-menu-item-text {
+		font-size: 1.1rem;
+	}
+}
+
+@media screen and (max-width: 465px) {
+	.section-menu-item.tab-slider-item{
+		width: 140px;
+	}
+}

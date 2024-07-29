@@ -1,0 +1,137 @@
+.filter-bar {
+  background-color: white;
+  margin: 21px 0;
+  padding: 16px 18px;
+  border-radius: 10px;
+}
+
+.filter-bar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 21px;
+}
+
+.filter-bar .form-item {
+  margin: 0 !important;
+}
+
+.filter-bar-search {
+  position: relative;
+  min-width: calc(25% - 10px);
+}
+
+.filter-bar-search input {
+  padding: 0 40px 0 10px;
+}
+
+.filter-bar-search-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  height: 48px;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-bar-search-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.filter-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.filter-bar-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.filter-bar-view .number-of-results {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-bar-view .number-of-results button {
+  all: unset;
+  opacity: 0.7;
+  font-size: 17px;
+  font-weight: 700;
+  color: #adafca;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+}
+
+.filter-bar-view .number-of-results button:is(:hover, .active) {
+  opacity: 1;
+  color: #fd6729;
+}
+
+.filter-bar-view .grid-view {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-bar-view .grid-view button {
+  all: unset;
+  cursor: pointer;
+}
+
+.filter-bar-view .grid-view button svg {
+  width: 20px;
+  height: 20px;
+  color: #adafca;
+  opacity: 0.4;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-bar-view .grid-view button:is(:hover, .active) svg {
+  opacity: 1;
+  fill: #fd6729;
+}
+
+@media screen and (max-width: 1200px) {
+  .filter-bar-container {
+    flex-wrap: wrap;
+  }
+
+  .filter-bar-search,
+  .filter-bar-container button,
+  .filter-bar-container .form-item {
+    width: calc(50% - 10px) !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .filter-bar {
+    padding: 20px 16px;
+  }
+
+  .filter-bar-top {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+
+  .filter-bar-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .filter-bar-search,
+  .filter-bar-container button,
+  .filter-bar-container .form-item {
+    width: 100% !important;
+  }
+}

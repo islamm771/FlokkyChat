@@ -1,0 +1,10 @@
+.form-item-css {
+	margin: 15px 0 !important;
+	/* margin-right: 12px !important; */
+}
+
+@media screen and (max-width: 560px) {
+	.form-item-css {
+		margin: 15px 0 !important;
+	}
+}
