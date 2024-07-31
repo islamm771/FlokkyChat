@@ -57,6 +57,7 @@ const Chat = () => {
 
     if( Math.abs(distance) >= divRef?.current?.clientWidth ){
       setPosition(-divRef.current.clientWidth)
+      console.log(Math.abs(distance))
       dispatch(toggleWrapgroupPeopleChat());
     }
 
@@ -68,11 +69,13 @@ const Chat = () => {
   };
 
   useEffect( () => {
-    if(isWrapgroupPeopleChat){
-      setPosition(0)
-    }
-    else{
-      setPosition(-divRef.current.clientWidth)
+    if(screen.width <= 768){
+      if(isWrapgroupPeopleChat){
+        setPosition(0)
+      }
+      else{
+        setPosition(-divRef.current.clientWidth)
+      }
     }
   } ,[isWrapgroupPeopleChat])
 

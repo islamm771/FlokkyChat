@@ -1,4 +1,4 @@
-import { FaCircle, FaMinusCircle, FaPen } from "react-icons/fa";
+import { FaBell, FaCircle, FaMinusCircle, FaPen } from "react-icons/fa";
 import "../../OnlineList/OnlineList.css";
 import { MdAdminPanelSettings, MdModeNight, MdPermMedia } from "react-icons/md";
 import { IoEllipsisVerticalSharp, IoOptionsOutline } from "react-icons/io5";
@@ -13,6 +13,9 @@ import { FiMapPin } from "react-icons/fi";
 import { Tabs } from 'antd';
 import { Wheel } from '@uiw/react-color';
 import { IoIosInformationCircle } from "react-icons/io";
+import { setIsMuteModel } from "../../../../app/feature/ListChatSlice";
+import { useDispatch } from "react-redux";
+import UserProfileImage from "../../../user-profile-image/UserProfileImage";
 
 const items = [
   {
@@ -71,6 +74,7 @@ const items = [
 
 
 const InformationChat = ({ direction }) => {
+  const dispatch = useDispatch()
   const BoxRef1 = useRef(null);
   const BoxRef2 = useRef(null);
   const BoxRef3 = useRef(null);
@@ -205,7 +209,8 @@ const InformationChat = ({ direction }) => {
               <figure className="navigation-widget-cover liquid onlineListFigure">
                 <img src="img/cover/01.jpg" alt="cover-01" />
               </figure>
-              <div className="user-short-description">
+
+              <div className="user-short-description relative">
                 <div className="image-profile-big user-short-description-avatar user-avatar medium onlineListPosition">
                   <img src="/img/avatar/01.jpg" alt="" />
                 </div>
@@ -218,6 +223,10 @@ const InformationChat = ({ direction }) => {
                     incidunt exercitationem odio quam.
                   </p>
                 </div>
+                <p className="absolute top-4 right-6 cursor-pointer" onClick={() => dispatch( setIsMuteModel(true) )}>
+                  <FaBell size={20} />
+                  {/* <p className="font-semibold">Mute</p> */}
+                </p>
               </div>
             </div>
           </div>
@@ -292,31 +301,17 @@ const InformationChat = ({ direction }) => {
                         : ".box-online-chat-item-info-disactive"
                     } `}
                   >
-                    <div className="bg-online-chat-item-info">
-                      <div className="closeBox" onClick={handleToggleShowBox}>
-                        <RiCloseFill />
-                      </div>
-                      <div className="icon-chat-item">
-                        <p className="hoverHashtag">Edit Profile</p>
-                        <FaPen />
-                      </div>
+                    <div className="closeBox" onClick={handleToggleShowBox}>
+                      <RiCloseFill />
                     </div>
-                    <div className="img-hashtag-chat-item">
-                      <div className="navigation-widget-info-wrap PositionListChat">
+                    <div className="navigation-widget-info-wrap PositionListChat">
                         <div className="navigation-widget-info flex-onlineChatBox">
-                          <div className="user-avatar small no-outline user-chat user-status-avatar">
-                            <img src="/img/avatar/01.jpg" alt="Profile" />
-                            <RiVerifiedBadgeFill size={20} color={"#36e9f7"} />
-                            <div className="badge-container-nav-mobile">
-                              <img src="/img/download.png" alt="Padge" />
-                              <p className="badge-number-nav-mobile">12</p>
-                            </div>
-                          </div>
+                          <UserProfileImage />
                           <div className="infoListChatBox">
                             <p className="navigation-widget-info-title navTitle style-nameBoxOnline">
-                              <div>
+                              <div className="flex items-center gap-2">
                                 Marina Valentine{" "}
-                                <MdAdminPanelSettings size={20} color={"#d7006a"} />
+                                <MdAdminPanelSettings className="-mt-1" size={20} color={"#d7006a"} />
                               </div>
                             </p>
                             <p className="navigation-widget-info-text navInfo StyleTwo-NameBoxOnline">
@@ -327,12 +322,19 @@ const InformationChat = ({ direction }) => {
                             </p>
                           </div>
                         </div>
+                    </div>
+                    <div className="img-hashtag-chat-item">
+
+                      <div className="icon-chat-item">
+                        <p className="hoverHashtag">Edit Profile</p>
+                        <FaPen />
                       </div>
                       <div className="icon-hashtag-chat-item">
                         <div className="circle-wrap-hash">
                           <FaHashtag />
                         </div>
                       </div>
+                      
                     </div>
                     <div className="content-box-chat-item">
                       <div className="about-me-box-chat">
@@ -342,37 +344,40 @@ const InformationChat = ({ direction }) => {
                           specialized in creating value through brand exprience
                           </p> */}
                         <div className="connection-desc">
-                          <div className="businesses-card-flokkers-list flex items-center flex-wrap">
-                            <div className="fldkker w-full">
+                          <div className="businesses-card-flokkers-list grid !grid-cols-2 !gap-0">
+                            <div className="fldkker col-span-2">
                               <img
                                 src="/img/avatar/01.jpg"
                                 alt="fldkker-avatar"
                                 loading="lazy"
                               />
                             </div>
-                            <div className="fldkker w-1/2">
+                            <div className="fldkker">
                               <img
+                                className="w-full h-full"
                                 src="/img/avatar/02.jpg"
                                 alt="fldkker-avatar"
                                 loading="lazy"
                               />
                             </div>
-                            <div className="fldkker w-1/2">
+                            <div className="fldkker">
                               <img
+                                className="w-full h-full"
                                 src="/img/avatar/03.jpg"
                                 alt="fldkker-avatar"
                                 loading="lazy"
                               />
                             </div>
-                            <div className="fldkker w-1/2">
+                            <div className="fldkker">
                               <img
+                                className="w-full h-full"
                                 src="/img/avatar/04.jpg"
                                 alt="fldkker-avatar"
                                 loading="lazy"
                               />
                             </div>
-                            <div className="fldkker plus w-1/2 felx items-center justify-center text-lg">
-                              <p>+19K</p>
+                            <div className="fldkker plus h-full">
+                              <p className="w-full h-full bg-[#ff57221a] text-[#fd6729] flex items-center justify-center !text-2xl !font-semibold">+19K</p>
                             </div>
                           </div>
                         </div>
@@ -1632,7 +1637,7 @@ const InformationChat = ({ direction }) => {
             </>
           ) :
           chatSettings == "media" ? (
-              <div className="content-files-images-audio-online-chat">
+              <div className="content-files-images-audio-online-chat px-[15px]">
                 <Tabs defaultActiveKey="1" items={items} onChange={onTabChange} />
               </div>
             ) : (

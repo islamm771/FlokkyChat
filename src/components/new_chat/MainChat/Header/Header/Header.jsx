@@ -1,5 +1,6 @@
 import { FaArrowsAltH, FaVideo } from "react-icons/fa";
 import { IoIosCall } from "react-icons/io";
+import { IoArrowBack } from "react-icons/io5";
 import { LuPhone } from "react-icons/lu";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
@@ -18,10 +19,12 @@ const Header = ({
           <FaArrowsAltH />
         </div>
         <div className="iconSm" onClick={handleToggleWrapgroupPeopleChat}>
-          <FaArrowsAltH />
+          {/* <FaArrowsAltH /> */}
+          <IoArrowBack />
         </div>
         <div className="info-main-chat">
-          <div className="profile-header__avatar online-profile-header-chat border-header-profile-chat">
+          <div className="profile-header__avatar online-profile-header-chat border-header-profile-chat"
+            onClick={handleToggleOnlineList} >
             <img src={bfs4} alt={`'s avatar`} />
           </div>
           <div className="info-username-hashtag">
@@ -52,7 +55,7 @@ const Header = ({
         <div className="btn-call" onClick={handleToggleVideoCall}>
           <FaVideo />
         </div>
-        <div className="icon" onClick={handleToggleOnlineList}>
+        <div className="!hidden md:!flex icon" onClick={handleToggleOnlineList}>
           <FaArrowsAltH />
         </div>
       </div>

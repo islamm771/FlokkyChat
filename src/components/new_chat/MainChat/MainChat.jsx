@@ -144,19 +144,20 @@ const MainChat = () => {
   };
 
   let timeout;
-const handleLongPressReactionsList = (index) => {
-  timeout = setTimeout(() => {
-    setActiveReactionsIndex(index);
-  }, 500); 
-};
-const handleTouchEnd = (index) => {
-  clearTimeout(timeout);
-  setActiveReactionsIndex(activeReactionsIndex === index ? null : index);
-};
+  const handleLongPressReactionsList = (index) => {
+    timeout = setTimeout(() => {
+      setActiveReactionsIndex(index);
+    }, 500); 
+    console.log("long press")
+  };
+  const handleTouchEnd = (index) => {
+    clearTimeout(timeout);
+    setActiveReactionsIndex(activeReactionsIndex === index ? null : index);
+  };
 
-const clearLongPress = () => {
-  clearTimeout(timeout);
-};
+  const clearLongPress = () => {
+    clearTimeout(timeout);
+  };
 
 
   const handleToggleListPeople = () => {
@@ -403,109 +404,107 @@ const clearLongPress = () => {
           </div>
         </div>
         <div className="images-actions-main-chat">
-        <div className="icons-actions-main-chat icons-actions-main-chat-camera">
-          <div className="text-icons-actions-camera">
-            <p>Upload Images</p>
+          <div className="icons-actions-main-chat icons-actions-main-chat-camera">
+            <div className="text-icons-actions-camera">
+              <p>Upload Images</p>
+            </div>
+            <div className="box-camera-chat">
+              <input type="file" accept="image/x-png, image/gif, image/jpeg" />
+              <img src={camera} alt="" />
+            </div>
           </div>
-          <div className="box-camera-chat">
-            <input type="file" accept="image/x-png, image/gif, image/jpeg" />
-            <img src={camera} alt="" />
+          <div className="cursor-pointer"
+            onClick={() => setActiveMessageOption( prev => !prev )}
+          >
+            <FaPlusCircle size={20} color="#fd6729" />
           </div>
-        </div>
-        <div className="cursor-pointer"
-          onClick={() => setActiveMessageOption( prev => !prev )}
-        >
-          <FaPlusCircle size={20} color="#fd6729" />
-        </div>
 
-        <div className={`flex flex-col bg-white gap-3 py-[5px] px-[10px] rounded-lg shadow-[0px_0px_7px_0px_#ddd] absolute bottom-[60px] left-[8px] transition-opacity duration-[0.5s]
-              ${ activeMessageOption ? "opacity-100" : "opacity-0" } `}>
+          <div className={`flex flex-col bg-white gap-3 py-[5px] px-[10px] rounded-lg shadow-[0px_0px_7px_0px_#ddd] absolute bottom-[60px] left-[8px] transition-opacity duration-[0.5s]
+                ${ activeMessageOption ? "opacity-100" : "opacity-0" } `}>
 
-        <div className="icons-actions-main-chat icons-actions-main-chat-bg"
-          onClick={handleToggleOpenMessageOptionModel}
-        >
-          <div className="text-icons-actions-bg">
-            <p>Background</p>
+          <div className="icons-actions-main-chat icons-actions-main-chat-bg"
+            onClick={handleToggleOpenMessageOptionModel}
+          >
+            <div className="text-icons-actions-bg">
+              <p>Background</p>
+            </div>
+            <img src={bg} alt="" />
           </div>
-          <img src={bg} alt="" />
-        </div>
-        <div className="icons-actions-main-chat icons-actions-main-chat-gif"
-          onClick={handleToggleOpenMessageOptionModel}
-        >
-          <div className="text-icons-actions-gif">
-            <p>GIF</p>
+          <div className="icons-actions-main-chat icons-actions-main-chat-gif"
+            onClick={handleToggleOpenMessageOptionModel}
+          >
+            <div className="text-icons-actions-gif">
+              <p>GIF</p>
+            </div>
+            <img src={gif} alt="" />
           </div>
-          <img src={gif} alt="" />
-        </div>
-        <div className="icons-actions-main-chat icons-actions-main-chat-audio">
-          <div className="text-icons-actions-audio">
-            <p>Audio Upload</p>
+          <div className="icons-actions-main-chat icons-actions-main-chat-audio">
+            <div className="text-icons-actions-audio">
+              <p>Audio Upload</p>
+            </div>
+            <div className="box-camera-chat">
+              <input type="file" accept="audio/*" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                className="feather feather-mic"
+              >
+                <path
+                  fill="#3f51b5"
+                  d="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z"
+                ></path>
+              </svg>
+            </div>
           </div>
-          <div className="box-camera-chat">
-            <input type="file" accept="audio/*" />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              className="feather feather-mic"
-            >
-              <path
-                fill="#3f51b5"
-                d="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z"
-              ></path>
-            </svg>
+          <div className="icons-actions-main-chat icons-actions-main-chat-video">
+            <div className="text-icons-actions-video">
+              <p>Upload Video</p>
+            </div>
+            <div className="box-camera-chat">
+              <input type="file" accept="video/*" />
+              <img src={video} alt="" />
+            </div>
+          </div>
+          <div className="icons-actions-main-chat icons-actions-main-chat-poll"
+            onClick={handleToggleOpenMessageOptionModel}
+          >
+            <div className="text-icons-actions-poll">
+              <p>Create Poll</p>
+            </div>
+            <img src={poll} alt="" />
+          </div>
+          <div className="icons-actions-main-chat icons-actions-main-chat-product"
+            onClick={handleToggleSellProduct}
+          >
+            <div className="text-icons-actions-product">
+              <p>Sell product</p>
+            </div>
+            <img src={sellProduct} alt="" />
+          </div>
+          <div className="icons-actions-main-chat icons-actions-main-chat-services"
+            onClick={handleToggleOpenMessageOptionModel}
+          >
+            <div className="text-icons-actions-services">
+              <p>Share Services</p>
+            </div>
+            <GrServices />
+          </div>
+          <div className="icons-actions-main-chat icons-actions-main-chat-contacts"
+            onClick={handleToggleContacts}
+          >
+            <div className="text-icons-actions-contacts">
+              <p>Contacts</p>
+            </div>
+            <IoMdContacts />
+          </div>
           </div>
         </div>
-        <div className="icons-actions-main-chat icons-actions-main-chat-video">
-          <div className="text-icons-actions-video">
-            <p>Upload Video</p>
-          </div>
-          <div className="box-camera-chat">
-            <input type="file" accept="video/*" />
-            <img src={video} alt="" />
-          </div>
-        </div>
-        <div className="icons-actions-main-chat icons-actions-main-chat-poll"
-          onClick={handleToggleOpenMessageOptionModel}
-        >
-          <div className="text-icons-actions-poll">
-            <p>Create Poll</p>
-          </div>
-          <img src={poll} alt="" />
-        </div>
-        <div className="icons-actions-main-chat icons-actions-main-chat-product"
-          onClick={handleToggleSellProduct}
-        >
-          <div className="text-icons-actions-product">
-            <p>Sell product</p>
-          </div>
-          <img src={sellProduct} alt="" />
-        </div>
-        <div className="icons-actions-main-chat icons-actions-main-chat-services"
-          onClick={handleToggleOpenMessageOptionModel}
-        >
-          <div className="text-icons-actions-services">
-            <p>Share Services</p>
-          </div>
-          <GrServices />
-        </div>
-        <div className="icons-actions-main-chat icons-actions-main-chat-contacts"
-          onClick={handleToggleContacts}
-        >
-          <div className="text-icons-actions-contacts">
-            <p>Contacts</p>
-          </div>
-          <IoMdContacts />
-        </div>
-        </div>
-
-        </div>
-
 
         <div className="input-send-messag-main-chat">
           <input
@@ -516,13 +515,6 @@ const clearLongPress = () => {
           />
           <BsEmojiSmile onClick={handleOpenPickerEmoji} />
         </div>
-
-        <div className="open-list-chat-action-main-chat"
-          onClick={handleToggleOpenMessageOptionModel}
-        >
-          <FaPlusCircle />
-        </div>
-
 
         <div className="send-message-main-chat flex gap-1">
           <div className="icons-actions-main-chat icons-actions-main-chat-mic">
@@ -547,6 +539,12 @@ const clearLongPress = () => {
             </svg>
           </div>
           <FaPaperPlane />
+        </div>
+
+        <div className="open-list-chat-action-main-chat"
+          onClick={handleToggleOpenMessageOptionModel}
+        >
+          <FaPlusCircle />
         </div>
 
         {isForward && (

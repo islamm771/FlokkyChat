@@ -114,7 +114,7 @@ const Communities = () => {
             </button>
         </div>
       </div>
-      <div className="Search-people-chat">
+      <div className="hidden md:block Search-people-chat">
         <FormInputwithIcon
           name={"Search-People"}
           id={"Search-People"}

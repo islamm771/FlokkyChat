@@ -83,7 +83,7 @@
   -o-transition: width 0.3s ease-in-out;
 }
 .OnlineListContainer {
-  max-width: 25%;
+  max-width: 20%;
   flex: 0 0 22%;
   background: #fff;
   color: #000;
@@ -449,6 +449,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent;
+    color: #fff;
+    font-size: 20px;
 
   }
   .right-header-main-chat .icon {
@@ -503,11 +506,16 @@
   .OnlineListContainer {
     width: 100%;
   }
-  .images-actions-main-chat {
+  .images-actions-main-chat,
+  .icons-actions-main-chat-mic {
     display: none;
   }
   .open-list-chat-action-main-chat {
     display: block;
+  }
+  .open-list-chat-action-main-chat svg {
+    width: 25px;
+    height: 25px;
   }
   .input-send-messag-main-chat svg {
     display: none;
@@ -558,12 +566,12 @@
   .hashtag-main-chat .badge-main-chat{
     display: none;
   }
-.wrap-chat-main img{
-  width: 25px;height: 25px;
-}
-  .desc-name-online-list {
-    display: none;
+  .wrap-chat-main img{
+    width: 25px;height: 25px;
   }
+  /* .desc-name-online-list {
+    display: none;
+  } */
   .onlineListBadge {
     position: absolute;
     left: 10px !important;
@@ -1715,7 +1723,7 @@ select option {
 
 
 .btn-call {
-  background-color: #fff;
+  /* background-color: #fff; */
   width: 40px;
   height: 30px;
   text-align: center;
@@ -1725,7 +1733,7 @@ select option {
   font-size: 18px;
   font-weight: 500;
   /* color: #4e4e4e; */
-  color: #fd6729;
+  color: #fff;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;

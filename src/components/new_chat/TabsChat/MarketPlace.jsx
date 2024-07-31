@@ -4,7 +4,7 @@ import bfs from "../../../assests/chat/riyan.jpeg";
 import { FaVolumeUp } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
+import { toggleChatRoom, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
 import { IoFilterOutline } from "react-icons/io5";
 import { GoPlus } from "react-icons/go";
 

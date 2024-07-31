@@ -3,10 +3,12 @@ import { FaArrowsAltH, FaInfo, FaLink, FaRegStar, FaSearch } from "react-icons/f
 import { FaBell } from "react-icons/fa6";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
 import { IoInformationSharp } from "react-icons/io5"
-import { MdOutlineArchive } from "react-icons/md"
+import { MdAdminPanelSettings, MdOutlineArchive } from "react-icons/md"
 import { setIsMuteModel } from "../../../../app/feature/ListChatSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchInput } from "../../../../app/feature/outletSlice";
+import { setIsCartVisible, setIsFriendsVisible, setIsMessagesVisible, setIsNotificationsVisible, setIsSettingsVisible, setSearchInput } from "../../../../app/feature/outletSlice";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const Header = ({
   handleToggleOnlineList,
@@ -31,28 +33,41 @@ const Header = ({
 	};
   
   const dropDown_ChatOptions = useRef(null);
-  const dropDown_DownList = useRef(null);
+
+	const isMessagesVisible = useSelector(
+		(state) => state.outlet.isMessagesVisible
+	);
+	const isNotificationsVisible = useSelector(
+		(state) => state.outlet.isNotificationsVisible
+	);
+	const isSettingsVisible = useSelector(
+		(state) => state.outlet.isSettingsVisible
+	);
+
+
+  const notificationsDropRef = useRef(null)
+  const messagesDropRef = useRef(null)
+  const settingsDropRef = useRef(null)
+
+
+  const handleClickOutside = (event) => {
+    if (notificationsDropRef.current && !notificationsDropRef.current.contains(event.target)) {
+      dispatch(setIsNotificationsVisible({ value: false }));
+    }
+    if (messagesDropRef.current && !messagesDropRef.current.contains(event.target)) {
+      dispatch(setIsMessagesVisible({ value: false }));
+    }
+    if (settingsDropRef.current && !settingsDropRef.current.contains(event.target)) {
+      dispatch(setIsSettingsVisible({ value: false }));
+    }
+    if ( dropDown_ChatOptions.current && !dropDown_ChatOptions.current.contains(event.target) ) {
+      setIsChatOptions(false);
+    }
+  };
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        dropDown_DownList.current &&
-        !dropDown_DownList.current.contains(event.target)
-      ) {
-        setIsSetting(false);
-      }
-      if (
-        dropDown_ChatOptions.current &&
-        !dropDown_ChatOptions.current.contains(event.target)
-      ) {
-        setIsChatOptions(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropDown_DownList,dropDown_ChatOptions]);
+    document.addEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header>
@@ -62,181 +77,6 @@ const Header = ({
 
         <div className="hidden md:block lg:hidden" onClick={handleToggleOnlineList}>
           <FaArrowsAltH />
-        </div>
-        
-        <div className="header-chat-options" ref={dropDown_ChatOptions}>
-
-          <div onClick={ () => setIsChatOptions( prev => !prev ) }>
-            <HiMiniSquares2X2 />
-          </div>
-
-          <div
-            className="dropdown-navigation chat-option-dropdown !w-[250px] absolute z-[9999] top-[64px] right-[22px]"
-            style={{
-              opacity: `${isChatOptions ? "1" : "0"}`,
-              visibility: `${isChatOptions ? "visible" : "hidden"}`,
-              transform: `translate(0px, ${isChatOptions ? "0px" : "-40px"})`,
-              transition:
-                "transform 0.4s ease-in-out 0s, opacity 0.4s ease-in-out 0s, visibility 0.4s ease-in-out 0s",
-            }}
-            >
-            <p className="flex items-center cursor-pointer mb-3" onClick={() => dispatch( setIsMuteModel(true) )}>
-              {/* <FaSearch /> */}
-              <FaBell />
-              <p className="font-semibold">Mute</p>
-            </p>
-
-            <div className="wrap-chat-link mb-3 flex items-center cursor-pointer" onClick={handleTextCoppied}>
-              <FaLink color="#3e3f5e" />
-              <p className="txt-invite-via-link font-semibold">Invite via link</p>
-            </div>
-            <p className="flex items-center cursor-pointer mb-3" onClick={() => handleTabClick(3)}>
-              <MdOutlineArchive  />
-              <p className="font-semibold">Archived Chats</p>
-              </p>
-            <p className="flex items-center cursor-pointer mb-3" onClick={() => handleTabClick(1)}>
-              {/* <IoInformationSharp className="!m-0" size={30} onClick={() => handleTabClick(1)} /> */}
-              <FaInfo />
-              <p className="font-semibold">About</p>
-            </p>
-            <p className="flex items-center cursor-pointer" onClick={() => handleTabClick(2)}>
-              <FaRegStar />
-              <p className="font-semibold">Star Messages</p>
-              </p>
-          </div>
-
-        </div>
-        
-        <div className="header-settings-dropdown-wrapper mr-auto" ref={dropDown_DownList}>
-          <div
-            className="action-item dark header-settings-dropdown-trigger"
-            onClick={() => setIsSetting(!isSetting)}
-          >
-            <svg className="action-item-icon icon-settings">
-              <use xlinkHref="#svg-settings"></use>
-            </svg>
-          </div>
-
-          <div
-            className="dropdown-navigation header-settings-dropdown setHeight-online-list"
-            style={{
-              position: "absolute",
-              zIndex: "9999",
-              top: "64px",
-              right: "22px",
-              opacity: `${isSetting ? "1" : "0"}`,
-              visibility: `${isSetting ? "visible" : "hidden"}`,
-              transform: `translate(0px, ${isSetting ? "0px" : "-40px"})`,
-              transition:
-                "transform 0.4s ease-in-out 0s, opacity 0.4s ease-in-out 0s, visibility 0.4s ease-in-out 0s",
-            }}
-            >
-            <div className="dropdown-navigation-header">
-              <div className="user-status">
-                <div className="user-chat-profile user-status-avatar">
-                  <img src="/img/avatar/01.jpg" alt="Profile" />
-                </div>
-
-                <p className="user-status-title">
-                  <span className="bold">Hi Marina!</span>
-                </p>
-
-                <p className="user-status-text small">
-                  <a href="profile-timeline.html">@marinavalentine</a>
-                </p>
-              </div>
-            </div>
-
-            <p className="dropdown-navigation-category">My Profile</p>
-
-            <a className="dropdown-navigation-link" href="hub-profile-info.html">
-              Profile Info
-            </a>
-
-            <a className="dropdown-navigation-link" href="hub-profile-social.html">
-              Social &amp; Stream
-            </a>
-
-            <a
-              className="dropdown-navigation-link"
-              href="hub-profile-notifications.html"
-            >
-              Notifications
-            </a>
-
-            <a
-              className="dropdown-navigation-link"
-              href="hub-profile-messages.html"
-            >
-              Messages
-            </a>
-
-            <a
-              className="dropdown-navigation-link"
-              href="hub-profile-requests.html"
-            >
-              Friend Requests
-            </a>
-
-            <p className="dropdown-navigation-category">Account</p>
-
-            <a className="dropdown-navigation-link" href="hub-account-info.html">
-              Account Info
-            </a>
-
-            <a
-              className="dropdown-navigation-link"
-              href="hub-account-password.html"
-            >
-              Change Password
-            </a>
-
-            <a
-              className="dropdown-navigation-link"
-              href="hub-account-settings.html"
-            >
-              General Settings
-            </a>
-
-            <p className="dropdown-navigation-category">Groups</p>
-
-            <a
-              className="dropdown-navigation-link"
-              href="hub-group-management.html"
-            >
-              Manage Groups
-            </a>
-
-            <a
-              className="dropdown-navigation-link"
-              href="hub-group-invitations.html"
-            >
-              Invitations
-            </a>
-
-            <p className="dropdown-navigation-category">My Store</p>
-
-            <a className="dropdown-navigation-link" href="hub-store-account.html">
-              My Account <span className="highlighted">$250,32</span>
-            </a>
-
-            <a className="dropdown-navigation-link" href="hub-store-statement.html">
-              Sales Statement
-            </a>
-
-            <a className="dropdown-navigation-link" href="hub-store-items.html">
-              Manage Items
-            </a>
-
-            <a className="dropdown-navigation-link" href="hub-store-downloads.html">
-              Downloads
-            </a>
-
-            <p className="dropdown-navigation-button button small secondary">
-              Logout
-            </p>
-          </div>
-
         </div>
 
         <div className="header-actions search-bar"
@@ -301,6 +141,658 @@ const Header = ({
             <p className="p-2">
               Lorem ipsum dolor sit amet consectetur
               </p>
+          </div>
+        </div>
+
+        <div className="action-list-item-wrap ml-auto" ref={messagesDropRef}>
+            <div
+              className={`action-list-item header-dropdown-trigger ${
+                isMessagesVisible ? "active" : ""
+              }`}
+              
+              onClick={() => {
+                dispatch(setIsMessagesVisible({ value: !isMessagesVisible }));
+              }}
+            >
+              <Link>
+                <svg className="action-list-item-icon icon-messages">
+                  <use xlinkHref="#svg-messages"></use>
+                </svg>
+              </Link>
+            </div>
+
+            <div
+              className="dropdown-box header-dropdown"
+              style={{
+                position: "absolute",
+                zIndex: "9999",
+                top: "64px",
+                right: "6px",
+                opacity: `${isMessagesVisible ? "1" : "0"}`,
+                visibility: `${isMessagesVisible ? "visible" : "hidden"}`,
+                transform: `translate(0px, ${
+                  isMessagesVisible ? "0px" : "-40px"
+                })`,
+                transition:
+                  "transform 0.4s ease-in-out 0s, opacity 0.4s ease-in-out 0s, visibility 0.4s ease-in-out 0s",
+              }}
+            >
+              <div className="dropdown-box-header">
+                <p className="dropdown-box-header-title">Messages</p>
+
+                <div className="dropdown-box-header-actions">
+                  <p className="dropdown-box-header-action">Mark all as Read</p>
+
+                  <p className="dropdown-box-header-action">Settings</p>
+                </div>
+              </div>
+
+              <div className="dropdown-box-list medium" data-simplebar>
+                <a
+                  className="dropdown-box-list-item"
+                  href="hub-profile-messages.html"
+                >
+                  <div className="user-status">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <span className="bold">Bearded Wonder</span>
+                    </p>
+
+                    <p className="user-status-text">
+                      Great! Then will meet with them at the party...
+                    </p>
+
+                    <p className="user-status-timestamp floaty">29 mins ago</p>
+                  </div>
+                </a>
+
+                <a
+                  className="dropdown-box-list-item"
+                  href="hub-profile-messages.html"
+                >
+                  <div className="user-status">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                          <MdAdminPanelSettings
+                            color={"#d7006a"}
+                            size={16}
+                            className="admin-icon-inside-chat"
+                          />
+                          <img src="/img/avatar/03.jpg" alt="Profile" />
+                          <RiVerifiedBadgeFill
+                            color={"#36e9f7"}
+                            size={16}
+                            className="verify-icon-inside-chat"
+                          />
+                          <div className="badge-container-chats">
+                            <img src="/img/download.png" alt="Padge" />
+                            <p className="badge-number-chats">12</p>
+                          </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <span className="bold">Neko Bebop</span>
+                    </p>
+
+                    <p className="user-status-text">
+                      Awesome! I'll see you there!
+                    </p>
+
+                    <p className="user-status-timestamp floaty">54 mins ago</p>
+                  </div>
+                </a>
+
+                <a
+                  className="dropdown-box-list-item"
+                  href="hub-profile-messages.html"
+                >
+                  <div className="user-status">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                          <MdAdminPanelSettings
+                            color={"#d7006a"}
+                            size={16}
+                            className="admin-icon-inside-chat"
+                          />
+                          <img src="/img/avatar/03.jpg" alt="Profile" />
+                          <RiVerifiedBadgeFill
+                            color={"#36e9f7"}
+                            size={16}
+                            className="verify-icon-inside-chat"
+                          />
+                          <div className="badge-container-chats">
+                            <img src="/img/download.png" alt="Padge" />
+                            <p className="badge-number-chats">12</p>
+                          </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <span className="bold">Nick Grissom</span>
+                    </p>
+
+                    <p className="user-status-text">
+                      Can you stream that new game?
+                    </p>
+
+                    <p className="user-status-timestamp floaty">2 hours ago</p>
+                  </div>
+                </a>
+
+                <a
+                  className="dropdown-box-list-item"
+                  href="hub-profile-messages.html"
+                >
+                  <div className="user-status">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <span className="bold">Sarah Diamond</span>
+                    </p>
+
+                    <p className="user-status-text">
+                      I'm sending you the latest news of the release...
+                    </p>
+
+                    <p className="user-status-timestamp floaty">16 hours ago</p>
+                  </div>
+                </a>
+
+                <a
+                  className="dropdown-box-list-item"
+                  href="hub-profile-messages.html"
+                >
+                  <div className="user-status">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <span className="bold">James Murdock</span>
+                    </p>
+
+                    <p className="user-status-text">
+                      Great! Then will meet with them at the party...
+                    </p>
+
+                    <p className="user-status-timestamp floaty">7 days ago</p>
+                  </div>
+                </a>
+
+                <a
+                  className="dropdown-box-list-item"
+                  href="hub-profile-messages.html"
+                >
+                  <div className="user-status">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <span className="bold">The Green Goo</span>
+                    </p>
+
+                    <p className="user-status-text">
+                      Can you stream that new game?
+                    </p>
+
+                    <p className="user-status-timestamp floaty">10 days ago</p>
+                  </div>
+                </a>
+              </div>
+
+              <Link className="dropdown-box-button primary" to={"https://chat.flokky.app/"}>
+                View all Messages
+              </Link>
+            </div>
+        </div>
+
+        <div className="action-list-item-wrap" ref={notificationsDropRef}>
+            <div
+              className={`action-list-item header-dropdown-trigger ${
+                isNotificationsVisible ? "active" : ""
+              }`}
+              onClick={() => {
+                dispatch(
+                  setIsNotificationsVisible({ value: !isNotificationsVisible })
+                );
+              }}
+            >
+              <svg className="action-list-item-icon icon-notification">
+                <use xlinkHref="#svg-notification"></use>
+              </svg>
+            </div>
+
+            <div
+              className="dropdown-box header-dropdown"
+              style={{
+                position: "absolute",
+                zIndex: "9999",
+                top: "64px",
+                right: "6px",
+                opacity: `${isNotificationsVisible ? "1" : "0"}`,
+                visibility: `${isNotificationsVisible ? "visible" : "hidden"}`,
+                transform: `translate(0px, ${
+                  isNotificationsVisible ? "0px" : "-40px"
+                })`,
+                transition:
+                  "transform 0.4s ease-in-out 0s, opacity 0.4s ease-in-out 0s, visibility 0.4s ease-in-out 0s",
+              }}
+            >
+              <div className="dropdown-box-header">
+                <p className="dropdown-box-header-title">Notifications</p>
+
+                <div className="dropdown-box-header-actions">
+                  <p className="dropdown-box-header-action">Mark all as Read</p>
+
+                  <a href="https://main.flokky.app/user-dashboard" className="dropdown-box-header-action">Settings</a>
+                </div>
+              </div>
+
+              <div className="dropdown-box-list" data-simplebar>
+                <div className="dropdown-box-list-item unread">
+                  <div className="user-status notification">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <a className="bold" href="profile-timeline.html">
+                        Nick Grissom
+                      </a>{" "}
+                      posted a comment on your{" "}
+                      <a className="highlighted" href="profile-timeline.html">
+                        status update
+                      </a>
+                    </p>
+
+                    <p className="user-status-timestamp">2 minutes ago</p>
+
+                  </div>
+                </div>
+
+                <div className="dropdown-box-list-item">
+                  <div className="user-status notification">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <a className="bold" href="profile-timeline.html">
+                        Sarah Diamond
+                      </a>{" "}
+                      left a like{" "}
+                      <img
+                        className="reaction"
+                        src="img/reaction/like.png"
+                        alt="reaction-like"
+                      />{" "}
+                      reaction on your{" "}
+                      <a className="highlighted" href="profile-timeline.html">
+                        status update
+                      </a>
+                    </p>
+
+                    <p className="user-status-timestamp">17 minutes ago</p>
+
+                  </div>
+                </div>
+
+                <div className="dropdown-box-list-item">
+                  <div className="user-status notification">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <a className="bold" href="profile-timeline.html">
+                        Destroy Dex
+                      </a>{" "}
+                      posted a comment on your{" "}
+                      <a className="highlighted" href="profile-photos.html">
+                        photo
+                      </a>
+                    </p>
+
+                    <p className="user-status-timestamp">31 minutes ago</p>
+
+                  </div>
+                </div>
+
+                <div className="dropdown-box-list-item">
+                  <div className="user-status notification">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <a className="bold" href="profile-timeline.html">
+                        The Green Goo
+                      </a>{" "}
+                      left a love{" "}
+                      <img
+                        className="reaction"
+                        src="img/reaction/love.png"
+                        alt="reaction-love"
+                      />{" "}
+                      reaction on your{" "}
+                      <a className="highlighted" href="profile-timeline.html">
+                        status update
+                      </a>
+                    </p>
+
+                    <p className="user-status-timestamp">2 hours ago</p>
+
+                  </div>
+                </div>
+
+                <div className="dropdown-box-list-item">
+                  <div className="user-status notification">
+                    <div className="user-chat-profile user-status-avatar !top-[5px]">
+                        <MdAdminPanelSettings
+                          color={"#d7006a"}
+                          size={16}
+                          className="admin-icon-inside-chat"
+                        />
+                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <RiVerifiedBadgeFill
+                          color={"#36e9f7"}
+                          size={16}
+                          className="verify-icon-inside-chat"
+                        />
+                        <div className="badge-container-chats">
+                          <img src="/img/download.png" alt="Padge" />
+                          <p className="badge-number-chats">12</p>
+                        </div>
+                    </div>
+
+                    <p className="user-status-title">
+                      <a className="bold" href="profile-timeline.html">
+                        Neko Bebop
+                      </a>{" "}
+                      posted a comment on your{" "}
+                      <a className="highlighted" href="profile-timeline.html">
+                        status update
+                      </a>
+                    </p>
+
+                    <p className="user-status-timestamp">3 hours ago</p>
+
+                  </div>
+                </div>
+              </div>
+
+              <a
+                className="dropdown-box-button primary"
+                href="hub-profile-notifications.html"
+              >
+                View all Notifications
+              </a>
+            </div>
+        </div>
+        
+        <div className="header-chat-options relative" ref={dropDown_ChatOptions}>
+
+          <div onClick={ () => setIsChatOptions( prev => !prev ) }>
+            <HiMiniSquares2X2 />
+          </div>
+
+          <div
+            className="dropdown-navigation chat-option-dropdown !w-[250px] absolute z-[9999] top-[33px] -right-[15px]"
+            style={{
+              opacity: `${isChatOptions ? "1" : "0"}`,
+              visibility: `${isChatOptions ? "visible" : "hidden"}`,
+              transform: `translate(0px, ${isChatOptions ? "0px" : "-40px"})`,
+              transition:
+                "transform 0.4s ease-in-out 0s, opacity 0.4s ease-in-out 0s, visibility 0.4s ease-in-out 0s",
+            }}
+            >
+
+            <div className="wrap-chat-link mb-3 flex items-center cursor-pointer" onClick={handleTextCoppied}>
+              <FaLink color="#3e3f5e" />
+              <p className="txt-invite-via-link font-semibold">Invite via link</p>
+            </div>
+            <p className="flex items-center cursor-pointer mb-3" onClick={() => handleTabClick(1)}>
+              {/* <IoInformationSharp className="!m-0" size={30} onClick={() => handleTabClick(1)} /> */}
+              <FaInfo />
+              <p className="font-semibold">About</p>
+            </p>
+            <p className="flex items-center cursor-pointer mb-3" onClick={() => handleTabClick(2)}>
+              <FaRegStar />
+              <p className="font-semibold">Star Messages</p>
+            </p>
+            <p className="flex items-center cursor-pointer" onClick={() => handleTabClick(3)}>
+              <MdOutlineArchive  />
+              <p className="font-semibold">Archived Chats</p>
+            </p>
+          </div>
+
+        </div>
+        
+        <div className="action-item-wrap" ref={settingsDropRef}>
+          <div
+            className={`action-item dark header-settings-dropdown-trigger ${
+              isSettingsVisible ? "active" : ""
+            }`}
+            onClick={() => {
+              dispatch(setIsFriendsVisible({ value: false }));
+              dispatch(setIsMessagesVisible({ value: false }));
+              dispatch(setIsNotificationsVisible({ value: false }));
+              dispatch(setIsSettingsVisible({ value: !isSettingsVisible }));
+              dispatch(setIsCartVisible({ value: false }));
+            }}
+            >
+            <svg className="action-item-icon icon-settings">
+              <use xlinkHref="#svg-settings"></use>
+            </svg>
+          </div>
+
+          <div
+            className="dropdown-navigation header-settings-dropdown"
+            style={{
+              position: "absolute",
+              zIndex: "9999",
+              top: "64px",
+              right: "22px",
+              opacity: `${isSettingsVisible ? "1" : "0"}`,
+              visibility: `${isSettingsVisible ? "visible" : "hidden"}`,
+              transform: `translate(0px, ${
+                isSettingsVisible ? "0px" : "-40px"
+              })`,
+              transition:
+                "transform 0.4s ease-in-out 0s, opacity 0.4s ease-in-out 0s, visibility 0.4s ease-in-out 0s",
+            }}
+          >
+            <div className="dropdown-navigation-header">
+              <div className="user-status">
+                <div className="user-chat-profile user-status-avatar">
+                  <img src="/img/avatar/01.jpg" alt="Profile" />
+                </div>
+
+                <p className="user-status-title">
+                  <span className="bold">Hi Marina!</span>
+                </p>
+
+                <p className="user-status-text small">
+                  <a href="profile-timeline.html">@marinavalentine</a>
+                </p>
+              </div>
+            </div>
+
+            <p className="dropdown-navigation-category">My Profile</p>
+
+            <a
+              className="dropdown-navigation-link"
+              href="/user-dashboard"
+            >
+              Profile Info
+            </a>
+
+            <a className="dropdown-navigation-link" href="/affiliations">
+              Affiliations
+            </a>
+
+            <p className="dropdown-navigation-category">Account</p>
+
+            <a
+              className="dropdown-navigation-link"
+              href="hub-account-info.html"
+            >
+              Advertising
+            </a>
+
+            <a
+              className="dropdown-navigation-link"
+              href="hub-account-password.html"
+            >
+              Wallet
+            </a>
+
+            <a
+              className="dropdown-navigation-link"
+              href="hub-account-settings.html"
+            >
+              Privacy
+            </a>
+
+            <p className="dropdown-navigation-category">Groups</p>
+
+            <a
+              className="dropdown-navigation-link"
+              href="/user-dashboard"
+            >
+              Manage Groups
+            </a>
+
+            <p className="dropdown-navigation-category">Businesses</p>
+
+            <a
+              className="dropdown-navigation-link"
+              href="hub-store-account.html"
+            >
+              Manage Businesses
+            </a>
+
+            <p className="dropdown-navigation-button button small secondary">
+              Dark mood
+            </p>
+            <p className="dropdown-navigation-button button small secondary">
+              Logout
+            </p>
           </div>
         </div>
 

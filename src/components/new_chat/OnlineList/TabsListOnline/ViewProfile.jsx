@@ -14,7 +14,7 @@ const items = [
     label: 'Connections',
     children: (
       <div className="connection-desc">
-        <div className="businesses-card-flokkers-list grid !grid-cols-3 ">
+        <div className="businesses-card-flokkers-list grid !grid-cols-4 !gap-[10px]">
 
           <div className="fldkker">
             <img
@@ -49,7 +49,7 @@ const items = [
     label: 'Communities',
     children: (
       <div className="connection-desc">
-        <div className="businesses-card-flokkers-list grid !grid-cols-3 ">
+        <div className="businesses-card-flokkers-list grid !grid-cols-4 !gap-[10px]">
 
           <div className="fldkker">
             <img
@@ -84,17 +84,29 @@ const items = [
     label: 'Affiliation',
     children: (
       <div className="affili-desc">
-        <p>
-          <span>Institute: </span>The American University of Cairo
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Institute: 
+          </span>{" "}
+          The American University of Cairo
         </p>
-        <p>
-          <span>Years: </span>1992 - 1995
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Years: 
+          </span>{" "}
+          1992 - 1995
         </p>
-        <p>
-          <span>Major: </span>Digital Media
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Major: 
+          </span>{" "}
+          Digital Media
         </p>
-        <p>
-          <span>Faculty: </span>Graphic Design
+        <p className="text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Faculty: 
+          </span>{" "}
+          Graphic Design
         </p>
       </div>
     ),
@@ -104,24 +116,30 @@ const items = [
     label: 'Business',
     children: (
       <div className="bussiness-sec-desc">
-        <div className="businesses-images-section grid !grid-cols-3">
+        <div className="businesses-images-section grid !grid-cols-4 !gap-[10px]">
           <img className="w-full h-full" src="/img/avatar/13.jpg" alt="Business" />
           <img className="w-full h-full" src="/img/avatar/13.jpg" alt="Business" />
           <img className="w-full h-full" src="/img/avatar/13.jpg" alt="Business" />
-          <div className="more-businesses w-[152px] h-[152px]">
+          <div className="more-businesses h-full">
             <p className="w-full h-full bg-[#ff57221a] text-[#fd6729] flex items-center justify-center text-2xl font-semibold" >
-              +13 more
+              +13
             </p>
           </div>
         </div>
-        <p>
-          <span>Industries:</span> Business Administration,
-          Marketing, Advertising, +10 more...
-        </p>
-        <p>
-          <span>Skills:</span> Communication, Brand Strategy,
-          Presentation, Powerpoint, Adobe, Strategy, +10 more...
-        </p>
+        <div className="py-4">
+          <p className="mb-3 text-lg font-medium">
+            <span className="text-[20px] font-bold text-[#fd6729]">
+              Industries:
+            </span>{" "}
+            Business Administration, Marketing, Advertising, +10 more...
+          </p>
+          <p className="text-lg font-medium">
+            <span className="text-[20px] font-bold text-[#fd6729]">
+              Skills:
+            </span>{" "}
+            Communication, Brand Strategy, Presentation, Powerpoint, Adobe, Strategy, +10 more...
+          </p>
+        </div>
       </div>
     ),
   },
@@ -130,23 +148,41 @@ const items = [
     label: 'Personal',
     children: (
       <div className="perso-sec-desc">
-        <p>
-          <span>Residence: </span>Cairo - Egypt
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Residence: 
+          </span>{" "}
+          Cairo - Egypt
         </p>
-        <p>
-          <span>Nationality: </span>Egyptian
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Nationality: 
+          </span>{" "}
+          Egyptian
         </p>
-        <p>
-          <span>Age: </span>36
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Age: 
+          </span>{" "}
+          36
         </p>
-        <p>
-          <span>Status: </span>Single
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Status: 
+          </span>{" "}
+          Single
         </p>
-        <p>
-          <span>Birthday: </span>January 7th 1975
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Birthday: 
+          </span>{" "}
+          January 7th 1975
         </p>
-        <p>
-          <span>Gender: </span>Male
+        <p className="mb-3 text-lg font-medium">
+          <span className="text-[20px] font-bold text-[#fd6729]">
+            Gender: 
+          </span>{" "}
+          Male
         </p>
     </div>
     ),

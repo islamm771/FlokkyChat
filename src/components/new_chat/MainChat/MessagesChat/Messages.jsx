@@ -83,11 +83,11 @@ const Messages = ({
 									: "wrap-message-select-to-end"
 									}
 								${isSelectForward[index] ? `${isForward ? "active-selected" : ""}` : ""}`} >
-							<ForwardMessage
-								isForward={isForward}
-								handleCheckboxChange={handleCheckboxChange}
-								index={index}
-							/>
+								<ForwardMessage
+									isForward={isForward}
+									handleCheckboxChange={handleCheckboxChange}
+									index={index}
+								/>
 							<div
 								className={`${data.sendme ? "message-from" : "message-to"}`}
 								key={index}
@@ -95,8 +95,7 @@ const Messages = ({
 								<div className="img">
 									<img src={data.img} alt="" />
 								</div>
-								<div
-									className={`message ${
+								<div className={`message ${
 										data.sendme ? "flex-messages-from" : "flex-messages-to"
 									}`}
 								>

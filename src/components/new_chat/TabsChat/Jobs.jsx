@@ -4,7 +4,7 @@ import bfs from "../../../assests/chat/roseanna.jpeg";
 import { FaVolumeUp } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
+import { toggleChatRoom, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
 import { GoPlus } from "react-icons/go";
 import { IoFilterOutline } from "react-icons/io5";
 
