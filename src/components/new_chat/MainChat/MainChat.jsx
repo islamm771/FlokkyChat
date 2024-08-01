@@ -377,8 +377,7 @@ const MainChat = () => {
       />
 
       <div className="footer-Main-chat-page">
-        <div
-          className={`replay-message ${
+        <div className={`replay-message ${
             isReplyMessage
               ? "active-replay-message"
               : "disactive-replay-message"
@@ -507,12 +506,12 @@ const MainChat = () => {
         </div>
 
         <div className="input-send-messag-main-chat">
-          <input
+          {/* <input
             type="text"
             name="currentEmoji"
             placeholder="Type a message..."
-            // value={currentEmoji}
-          />
+          /> */}
+          <textarea className="h-[48px] !py-[12px] !border-none" name="" id="" placeholder="Type a message..."></textarea>
           <BsEmojiSmile onClick={handleOpenPickerEmoji} />
         </div>
 

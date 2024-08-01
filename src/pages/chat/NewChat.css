@@ -546,8 +546,8 @@
     display: block;
   }
   .open-list-chat-action-main-chat svg {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
   }
   .input-send-messag-main-chat svg {
     display: none;
@@ -940,10 +940,12 @@
   display: flex;
 }
 .content-write-message-txtaria {
-  width: 100%;
+  width: calc(100% - 50px);
+  flex: 1;
 }
 .content-write-message-txtaria textarea {
   border: none !important;
+  padding-top: 0 !important;
 }
 .content-buttons-options-message {
   border-top: 2px solid #eee;

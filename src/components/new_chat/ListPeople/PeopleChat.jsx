@@ -19,6 +19,7 @@ import {
   setSearchInput,
 } from "../../../app/feature/outletSlice";
 import { useEffect, useState } from "react";
+import Flokkancing from "../TabsChat/Flokkancing";
 const PeopleChat = () => {
   const dispatch = useDispatch();
   const isLargeHidden = useSelector((state) => state.outlet.isLargeHidden);
@@ -169,6 +170,7 @@ const PeopleChat = () => {
         {activeTab === 3 && <Jobs />}
         {activeTab === 4 && <MarketPlace />}
         {activeTab === 5 && <Fav />}
+        {activeTab === 6 && <Flokkancing />}
       </div>
       <footer className="footer-people-chat">
         <img src={footer_peple_chat} alt="" />

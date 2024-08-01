@@ -1382,9 +1382,16 @@ em-emoji-picker {
   background-color: #eee;
 }
 
+.input-send-messag-main-chat textarea::-webkit-scrollbar{
+  display: none;
+}
+
 
 
 @media (width <= 768px) {
+  .messages{
+    padding: 10px;
+  }
   .flex-messages-to{
     width: 85%;
   }
