@@ -247,6 +247,7 @@
 .boxx .box-content .room-info .name-room{
   margin-bottom: 5px;
   font-weight: 600;
+  font-size: 20px;
 }
 
 .boxx .box-content .room-info .numbers{
@@ -257,7 +258,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  line-height: 1.1;
+  line-height: 1;
 }
 
 .arrow {
