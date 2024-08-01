@@ -22,7 +22,7 @@ const initialState = {
 
   // New Chart
   isListActionPeopleChat: false,
-  isOnlineList: true,
+  isOnlineList: false,
   isWrapgroupPeopleChat: false,
   isCreateMessageOptionsModel: false,
   isMessageInfoModel: false,

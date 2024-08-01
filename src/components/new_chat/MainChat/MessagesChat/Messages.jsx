@@ -103,7 +103,7 @@ const Messages = ({
 										{data.sendme && <p className="name-message-sent">Ahmed</p>}
 										<div
 											onTouchStart={() => handleLongPressReactionsList(index)}
-											onTouchEnd={() => handleTouchEnd(index)}
+											// onTouchEnd={() => handleTouchEnd(index)}
 											// onMouseDown={() => handleLongPressReactionsList(index)}
 											// onMouseUp={() => handleTouchEnd(index)}
 											className={`message ${
@@ -180,12 +180,11 @@ const Messages = ({
 										</div>
 									</div>
 								</div>
-								<div 
-								className={` message-options flex items-center gap-1 transition-opacity duration-[0.5s]
+								<div className={`message-options hidden md:flex items-center gap-1 transition-opacity duration-[0.5s]
 									${ activeMessageOptionsIndex == index ? "opacity-100" : "opacity-0" }
 									${data.sendme ? "mt-8" : "mt-[1rem]"}`}
-								onMouseEnter={ () => handleShowMessageOptions(index) }
-								onMouseLeave={ () => handleShowMessageOptions(index) }
+									onMouseEnter={ () => handleShowMessageOptions(index) }
+									onMouseLeave={ () => handleShowMessageOptions(index) }
 								>
 									<span className="text-[#adafca] hover:text-[#fd6729] cursor-pointer" 
 									onClick={() => handleToggleReactionsList(index)}>

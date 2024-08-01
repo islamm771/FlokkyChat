@@ -3,7 +3,7 @@ import FormInputwithIcon from "../../ui/formInputWithSearchIcon/FormInputwithIco
 import bfs from "../../../assests/chat/johny.jpeg";
 import { FaVolumeUp } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
-import { toggleChatRoom, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
+import { toggleChatRoom, toggleContacts, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
 import { useDispatch } from "react-redux";
 import { GoPlus } from "react-icons/go";
 import { IoFilterOutline } from "react-icons/io5";
@@ -25,6 +25,10 @@ const Connections = () => {
     dispatch(toggleChatRoom());
   };
 
+  const handleToggleContacts = () => {
+    dispatch(toggleContacts());
+  };
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (listRef.current && !listRef.current.contains(event.target)) {
@@ -43,7 +47,7 @@ const Connections = () => {
       <div className="tab-heading flex items-center justify-between py-[15px] px-2">
         <h3 className="text-[25px]">Connections</h3>
         <div className="flex gap-3">
-          <button className="text-[#3e3f5e] w-fit" onClick={handleToggleChatList}>
+          <button className="text-[#3e3f5e] w-fit" onClick={handleToggleContacts}>
             <GoPlus className="inline" /> 
             <span className="hidden md:inline ml-1">New</span>
           </button>

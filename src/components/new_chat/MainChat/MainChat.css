@@ -965,6 +965,9 @@ margin-bottom: 5px;
   top: -26px;
   z-index: 5555555555;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .icon-send-froward svg {
   color: #fd6729;
@@ -1377,4 +1380,12 @@ em-emoji-picker {
 }
 .list-pin-message p:hover{
   background-color: #eee;
+}
+
+
+
+@media (width <= 768px) {
+  .flex-messages-to{
+    width: 85%;
+  }
 }

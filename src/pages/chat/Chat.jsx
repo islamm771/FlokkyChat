@@ -68,6 +68,24 @@ const Chat = () => {
     // Optionally: Snap back to the original position or some other logic
   };
 
+  const handleOutsideClose = (e) => {
+    if (divRef.current && !divRef.current.contains(e.target)) {
+      dispatch(toggleWrapgroupPeopleChat());
+    }
+  };
+
+  useEffect(() => {
+    if (isWrapgroupPeopleChat && window.innerWidth < 1670) {
+      document.addEventListener("mousedown", handleOutsideClose);
+    } else {
+      document.removeEventListener('mousedown', handleOutsideClose);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClose);
+    };
+  }, [isWrapgroupPeopleChat]);
+
   useEffect( () => {
     if(screen.width <= 768){
       if(isWrapgroupPeopleChat){

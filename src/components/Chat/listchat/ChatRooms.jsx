@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChatRoomFalse, toggleChatRoom } from "../../../app/feature/ListChatSlice";
 import { selectGlobal } from "../../../app/feature/ListChatSlice";
 import { useEffect, useRef } from "react"; // Import useEffect and useRef
+import FormInputwithIcon from "../../ui/formInputWithSearchIcon/FormInputwithIcon";
 
 const ChatRooms = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,10 @@ const ChatRooms = () => {
           <IoMdCloseCircle onClick={handleToggleChatList}/>
         </div>
         <hr />
-        <div className="joined">
+        <div className="search-input my-3">
+          <FormInputwithIcon label={"Search for communities..."} id={"comm-search"} name={"comm-search"} />
+        </div>
+        <div className="joined mb-4">
           <p className="joined-title">Joined</p>
           <div className="list-joined">
             <div className="boxes">
