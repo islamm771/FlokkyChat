@@ -250,6 +250,8 @@ const BigNavigation = () => {
 			</div>
 
 			<ul className="menu">
+				<p className="big-nav-title-secondary">Chat</p>
+				<div className="big-nav-secondary-pages"></div>
 				{location.pathname.includes("/marketplace") && (
 					<p className="big-nav-title-secondary">Marketplace</p>
 				)}
@@ -275,12 +277,13 @@ const BigNavigation = () => {
 					location.pathname.includes("/crea8")) && (
 					<div className="big-nav-secondary-pages"></div>
 				)}
-				<li
-					className={`menu-item ${location.pathname === "/" ? "active" : ""}`}
+
+				<li className={`menu-item`}
+					// className={`menu-item ${location.pathname === "/" ? "active" : ""}`}
 				>
 					<Link
 						className="menu-item-link"
-						to="/"
+						to="https://main.flokky.app/"
 						onClick={() => {
 							dispatch(setIsLargeHidden({ value: !isLargeHidden }));
 						}}
@@ -292,13 +295,12 @@ const BigNavigation = () => {
 					</Link>
 				</li>
 
-				<li
-					className={`menu-item ${
+				<li className={`menu-item ${
 						location.pathname.includes("/directory") ? "active" : ""
 					}`}
 				>
 					<Link
-						to={"/directory"}
+						to={"https://main.flokky.app/directory"}
 						className="menu-item-link"
 						onClick={() => {
 							dispatch(setIsLargeHidden({ value: !isLargeHidden }));
@@ -317,8 +319,7 @@ const BigNavigation = () => {
 					</Link>
 				</li>
 
-				<li
-					className={`menu-item menu-item-title`}
+				<li className={`menu-item menu-item-title`}
 					onClick={() => {
 						dispatch(setIsMyFlokkMenuOpen({ value: !isMyFlokkMenuOpen }));
 					}}
@@ -339,8 +340,7 @@ const BigNavigation = () => {
 
 				{isMyFlokkMenuOpen && <MyFlokkItems isMobile={false} />}
 
-				<li
-					className={`menu-item menu-item-title`}
+				<li className={`menu-item menu-item-title`}
 					onClick={() => {
 						dispatch(
 							setIsMySidekicksMenuOpen({ value: !isMySidekicksMenuOpen })
@@ -419,8 +419,7 @@ const BigNavigation = () => {
 						<MyMarketPlaceItems isMobile={false} />
 					)}
 
-				<li
-					className={`menu-item ${
+				<li className={`menu-item ${
 						location.pathname.includes("/reviews") ? "active" : ""
 					}`}
 				>

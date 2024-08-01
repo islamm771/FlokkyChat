@@ -20,7 +20,7 @@ const MyFlokkItems = ({ isMobile }) => {
 			>
 				<Link
 					className="menu-item-link"
-					to="/affiliations"
+					to="https://main.flokky.app/affiliations"
 					onClick={() => {
 						if (isMobile) {
 							dispatch(setIsOverlayVisible({ value: false }));
@@ -43,7 +43,7 @@ const MyFlokkItems = ({ isMobile }) => {
 				}`}
 			>
 				<Link
-					to={"/businesses"}
+					to={"https://main.flokky.app/businesses"}
 					className="menu-item-link"
 					onClick={() => {
 						if (isMobile) {

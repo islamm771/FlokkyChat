@@ -222,12 +222,12 @@ const MobileNavigation = () => {
 
 					{ isChatMenuOpen && <MyChatItems isMobile={true} /> }
 
-					<li
-						className={`menu-item ${location.pathname === "/" ? "" : ""}`}
+					<li className={`menu-item`}
+						// className={`menu-item ${location.pathname === "/" ? "active" : ""}`}
 					>
 						<Link
 							className="menu-item-link"
-							to="/"
+							to="https://main.flokky.app/"
 							onClick={() => {
 								dispatch(setIsOverlayVisible({ value: false }));
 								dispatch(setIsMobileNavOpen({ value: false }));
@@ -246,7 +246,7 @@ const MobileNavigation = () => {
 						}`}
 					>
 						<Link
-							to={"/directory"}
+							to={"https://main.flokky.app/directory"}
 							className="menu-item-link"
 							onClick={() => {
 								dispatch(setIsOverlayVisible({ value: false }));

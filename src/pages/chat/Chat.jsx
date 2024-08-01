@@ -29,6 +29,7 @@ import Mute from "../../components/Chat/Mute";
 const Chat = () => {
   const { isListActionPeopleChat, isOnlineList, isWrapgroupPeopleChat } =
     useSelector(selectGlobal);
+  const isMobileNavOpen = useSelector((state) => state.outlet.isMobileNavOpen);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -75,7 +76,7 @@ const Chat = () => {
   };
 
   useEffect(() => {
-    if (isWrapgroupPeopleChat && window.innerWidth < 1670) {
+    if (isWrapgroupPeopleChat && window.innerWidth < 1670 && !isMobileNavOpen) {
       document.addEventListener("mousedown", handleOutsideClose);
     } else {
       document.removeEventListener('mousedown', handleOutsideClose);
@@ -84,7 +85,7 @@ const Chat = () => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClose);
     };
-  }, [isWrapgroupPeopleChat]);
+  }, [isWrapgroupPeopleChat,isMobileNavOpen]);
 
   useEffect( () => {
     if(screen.width <= 768){
