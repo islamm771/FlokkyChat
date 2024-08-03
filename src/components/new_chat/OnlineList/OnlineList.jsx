@@ -96,6 +96,9 @@ const OnlineList = () => {
   };
 
   const handleTouchEnd = () => {
+    if(position != 0){
+      setPosition(divRef.current.clientWidth);
+    }
     // Optionally: Implement snapping back or other logic if needed
   };
 

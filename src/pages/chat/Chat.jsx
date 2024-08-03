@@ -62,10 +62,13 @@ const Chat = () => {
       dispatch(toggleWrapgroupPeopleChat());
     }
 
-    startX.current = currentX; // Update the start position
+    startX.current = currentX;
   };
 
   const handleTouchEnd = () => {
+    if(position != 0){
+      setPosition( -divRef.current.clientWidth )
+    }
     // Optionally: Snap back to the original position or some other logic
   };
 

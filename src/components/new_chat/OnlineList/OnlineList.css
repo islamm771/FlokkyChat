@@ -333,11 +333,11 @@
 
 @media screen and (max-width: 868px) {
   .box-online-chat-item-info {
-    top: 127px !important;
+    top: 60px !important;
     left: auto !important;
     width: 100% !important;
     z-index: 55555555555555;
-    height: calc(100% - 190px);
+    height: calc(100% - 120px);
   }
 }
 
