@@ -2,14 +2,30 @@ import { Route, Routes } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import "./App.css";
 import "../src/styles/css/styles.css";
-import MainPage from "./pages/PagesOutlet/Pages";
 import Chat from "./pages/chat/Chat";
-// import AOS from "aos";
-// import "aos/dist/aos.css";
-// AOS.init();
-
+import { useEffect, useRef } from "react";
 
 function App() {
+  const appRef = useRef(null);
+
+  const enterFullscreen = () => {
+    if (appRef.current.requestFullscreen) {
+      appRef.current.requestFullscreen();
+    } else if (appRef.current.mozRequestFullScreen) { // Firefox
+      appRef.current.mozRequestFullScreen();
+    } else if (appRef.current.webkitRequestFullscreen) { // Chrome, Safari and Opera
+      appRef.current.webkitRequestFullscreen();
+    } else if (appRef.current.msRequestFullscreen) { // IE/Edge
+      appRef.current.msRequestFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    if (screen.width <= 768) {
+      
+    }
+  }, []);
+
   return (
     <ConfigProvider
       theme={{
@@ -29,8 +45,11 @@ function App() {
         },
       }}
     >
-      <div className="App">
-          <Chat />
+      <div className="App" ref={appRef}>
+        <button className="block md:hidden" id="fullscreenButton" onClick={enterFullscreen}>
+          Enter Fullscreen
+        </button>
+        <Chat />
         {/* <Routes>
           <Route path="/" element={<Chat />} />
         </Routes> */}

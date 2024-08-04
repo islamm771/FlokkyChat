@@ -96,11 +96,6 @@ const OnlineList = () => {
       return newPosition;
     });
 
-    if (Math.min(Math.max(position + difference, 0), 600) >= divRef?.current?.clientWidth) {
-      setPosition(divRef.current.clientWidth);
-      handleToggleOnlineList();
-    }
-
     startX.current = currentX; // Update start position
   };
 

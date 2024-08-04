@@ -66,16 +66,6 @@ const Chat = () => {
       Math.min(Math.max(prevPosition - difference, -800), 0)
     );
 
-    const distance = Math.min(
-      Math.max(position - difference, -800),
-      0
-    );
-
-    if (Math.abs(distance) >= divRef?.current?.clientWidth) {
-      setPosition(-divRef.current.clientWidth);
-      dispatch(toggleWrapgroupPeopleChat());
-    }
-
     startX.current = currentX;
   };
 
