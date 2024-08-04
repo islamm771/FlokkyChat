@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import { FaCircle, FaHashtag, FaPen } from 'react-icons/fa';
 import { IoEllipsisVerticalSharp } from 'react-icons/io5';
 import { MdAdminPanelSettings } from 'react-icons/md';
@@ -11,48 +11,47 @@ const ImgOnlineList = () => {
     const BoxRef1 = useRef(null);
     const [isShowBoxOne, setIsShowBoxOne] = useState(false);
     const [isNote, setIsNote] = useState(false);
+
     const handleToggleNoteBox = () => {
         setIsNote(!isNote);
-      };
+    };
 
     const handleToggleShowBox = () => {
-    setIsShowBoxOne(!isShowBoxOne);
+        setIsShowBoxOne(!isShowBoxOne);
     };
+
     const handleToggleCloseBox = () => {
         setIsShowBoxOne(false);
     };
 
-    const handleClick = () =>{
-        if( screen.width <= 768 ){
-            handleToggleShowBox();
-        }
-    }
-
+    // const handleClick = () => {
+    //     if (screen.width <= 768) {
+    //         handleToggleShowBox();
+    //     }
+    // };
 
     const handleLeftClick = (event) => {
         if (event.button === 0) {
-            setIsShowBoxOne(true);
+            setIsShowBoxOne((prev) => !prev);
         }
     };
 
-    
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (BoxRef1.current && !BoxRef1.current.contains(event.target)) {
-        setIsShowBoxOne(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (BoxRef1.current && !BoxRef1.current.contains(event.target)) {
+                setIsShowBoxOne(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [BoxRef1]);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [BoxRef1]);
 
-  
     return (
-        <div className="img-onlineList" onClick={handleLeftClick}>
-            <div className="chat-item" onClick={handleClick} onDoubleClick={handleToggleShowBox}>
+        <div className="img-onlineList">
+            <div className="chat-item" onClick={handleLeftClick}>
                 <div className="user-list-item">
                     <div className="profile-image">
                         <div className="profile-image-chat">
@@ -93,12 +92,12 @@ const ImgOnlineList = () => {
             </div>
             <div
                 ref={BoxRef1}
-                className={`box-online-chat-item-info ${isShowBoxOne
+                className={`box-online-chat-item-info ${ isShowBoxOne
                         ? "box-online-chat-item-info-active"
-                        : ".box-online-chat-item-info-disactive"
-                    } `}
+                        : "box-online-chat-item-info-disactive"
+                    }`}
             >
-                <div className="closeBox" onClick={handleToggleShowBox}>
+                <div className="closeBox" onClick={handleToggleCloseBox}>
                     <RiCloseFill />
                 </div>
                 <div className="navigation-widget-info-wrap PositionListChat">
@@ -220,7 +219,7 @@ const ImgOnlineList = () => {
                                         type="text"
                                         name=""
                                         id=""
-                                        placeholder="Writa a note"
+                                        placeholder="Write a note"
                                     />
                                     <button className="btnSubmitNote">
                                         <TbMessageCircleShare />
@@ -232,7 +231,7 @@ const ImgOnlineList = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ImgOnlineList
+export default ImgOnlineList;
