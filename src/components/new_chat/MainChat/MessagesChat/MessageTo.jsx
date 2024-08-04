@@ -74,7 +74,6 @@ const MessageTo = ({
                       className="message message-Content-to"
                     //   onMouseEnter={() => handleShowMessageOptions(index)}
                     //   onMouseLeave={() => handleShowMessageOptions(index)}
-                      {...longPressEvent} onClick={handleClick}
                     >
                       <ListAction
                         activeIndex={activeIndex}
@@ -117,7 +116,9 @@ const MessageTo = ({
                         angry={angry}
                         sad={sad}
                       />
-                      <p className="max-w-[280px] md:max-w-[500px]">{data.message}</p>
+                      <p className="max-w-[280px] md:max-w-[500px]"
+                      {...longPressEvent} onClick={handleClick}
+                      >{data.message}</p>
                       <DisplayReact
                         data={data}
                         handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}

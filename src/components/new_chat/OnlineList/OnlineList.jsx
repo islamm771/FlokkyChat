@@ -71,9 +71,18 @@ const OnlineList = () => {
   const [position, setPosition] = useState(0); // Current position of the div
   const startX = useRef(0); // Initial touch position
   const divRef = useRef(null);
+
+  const disableScroll = () => {
+    document.body.style.overflow = 'hidden';
+  };
+
+  const enableScroll = () => {
+    document.body.style.overflow = 'auto';
+  };
   
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
+    disableScroll();
   };
 
   const handleTouchMove = (e) => {
@@ -102,7 +111,7 @@ const OnlineList = () => {
     }else{
       setPosition(0)
     }
-    // Optionally: Snap back to the original position or some other logic
+    enableScroll();
   };
 
   const handleOutsideClose = (e) => {

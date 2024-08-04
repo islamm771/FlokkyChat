@@ -7,50 +7,26 @@ import { setActiveMessage, toggleChatRoom, toggleContacts, toggleWrapgroupPeople
 import { useDispatch } from "react-redux";
 import { GoPlus } from "react-icons/go";
 import { IoFilterOutline } from "react-icons/io5";
+import PeopleHeaderChat from "./PeopleHeaderChat";
 
 const Connections = () => {
-  const [isListActionPeopleChat1, setIsListActionPeopleChat1] = useState(false);
-  const listRef = useRef();
-  const dispatch = useDispatch()
-
-  const handleToggleWrapgroupPeopleChat = () => {
-    dispatch(toggleWrapgroupPeopleChat());
-  };
-
-  const handleToggleListActionPeople1 = () => {
-    setIsListActionPeopleChat1(!isListActionPeopleChat1);
-  };
+  const dispatch = useDispatch();
+  const [activeChat, setActiveChat] = useState(1);
+  const [activeMenu, setActiveMenu] = useState(null);
+  
 
   const handleToggleChatList = () => {
     dispatch(toggleChatRoom());
   };
 
+  const handleLongPress = (id) => {
+    setActiveMenu(prev => (prev === id ? null : id));
+  };
+  
   const handleToggleContacts = () => {
     dispatch(toggleContacts());
   };
-
-  const handleChatClick = () => {
-    if (window.innerWidth < 918) {
-      dispatch(toggleWrapgroupPeopleChat());
-      dispatch(setActiveMessage(2))
-    }else{
-      dispatch(setActiveMessage(2))
-    }
-  }
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (listRef.current && !listRef.current.contains(event.target)) {
-        setIsListActionPeopleChat1(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [listRef]);
-
-
+  
   return (
     <div>
       <div className="tab-heading flex items-center justify-between py-[15px] px-2">
@@ -75,59 +51,7 @@ const Connections = () => {
         <div style={{ marginBottom: "5px" }}></div>
       </div>
       <div className="people-chat-list">
-      <div className="profile-header-chat"
-      onClick={ handleChatClick }
-      >
-          <div className="profile-header__avatar offline-profile-header-chat">
-            <img src={bfs} alt={`'s avatar`} />
-          </div>
-          <div className="profile-header__content">
-            <div
-              className="timeStamp-name"
-              onClick={
-                window.innerWidth < 490
-                  ? handleToggleListActionPeople1
-                  : undefined
-              }
-            >
-              <p className="name-peopla-chat">Devolpers Frontend</p>
-              <p className="message_Recieved-chat">Salem:How are you?</p>
-            </div>
-
-            <div className="message-people-count">
-              <div
-                className="wrap-list-toggle"
-                onClick={handleToggleWrapgroupPeopleChat}
-              >
-                <p className="timeStamp-chat-people">12:19 pm</p>
-                <div className="count-volume-chat-list">
-                  <FaVolumeUp className="icon-volume-chat" />
-                  <p className="count-people-chat-list">1</p>
-                </div>
-              </div>
-              <IoIosArrowDown
-                className="list-people-chat"
-                onClick={handleToggleListActionPeople1}
-              />
-            </div>
-          </div>
-          <div
-            ref={listRef}
-            className={`list-actoin-people-chat ${
-              isListActionPeopleChat1
-                ? "active-people-chat"
-                : "disActive-people-chat"
-            }`}
-          >
-            <div className="ul-chat-people">
-              <li>Archive chat</li>
-              <li>Mute notifications</li>
-              <li>Exit group</li>
-              <li>Pin chat</li>
-              <li>Make as unread</li>
-            </div>
-          </div>
-        </div>
+        <PeopleHeaderChat bfs={bfs} activeMessage={2} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={ activeMenu} onLongPress={handleLongPress} id={1} />
       </div>
     </div>
   );

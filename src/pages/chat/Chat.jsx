@@ -45,20 +45,34 @@ const Chat = () => {
   const startX = useRef(0); // To track the initial touch position
   const divRef = useRef(null); // Reference to the sliding div
 
+  
+  const disableScroll = () => {
+    document.body.style.overflow = 'hidden';
+  };
+
+  const enableScroll = () => {
+    document.body.style.overflow = 'auto';
+  };
+
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
+    disableScroll();
   };
 
   const handleTouchMove = (e) => {
     const currentX = e.touches[0].clientX;
     const difference = startX.current - currentX;
-    setPosition(prevPosition => Math.min(Math.max(prevPosition - difference, -800), 0)); // Clamp the position
+    setPosition((prevPosition) =>
+      Math.min(Math.max(prevPosition - difference, -800), 0)
+    );
 
-    const distance =  Math.min(Math.max(position - difference, -800), 0)
+    const distance = Math.min(
+      Math.max(position - difference, -800),
+      0
+    );
 
-    if( Math.abs(distance) >= divRef?.current?.clientWidth ){
-      setPosition(-divRef.current.clientWidth)
-      console.log(Math.abs(distance))
+    if (Math.abs(distance) >= divRef?.current?.clientWidth) {
+      setPosition(-divRef.current.clientWidth);
       dispatch(toggleWrapgroupPeopleChat());
     }
 
@@ -66,20 +80,15 @@ const Chat = () => {
   };
 
   const handleTouchEnd = () => {
-    if(position < -200){
-      setPosition( -divRef.current.clientWidth-50 )
+    if (position < -200) {
+      setPosition(-divRef.current.clientWidth - 50);
       dispatch(toggleWrapgroupPeopleChat());
-    }else{
-      setPosition(0)
+    } else {
+      setPosition(0);
     }
-    // Optionally: Snap back to the original position or some other logic
+    enableScroll();
   };
 
-  const handleOutsideClose = (e) => {
-    if (divRef.current && !divRef.current.contains(e.target)) {
-      dispatch(toggleWrapgroupPeopleChat());
-    }
-  };
 
   useEffect( () => {
     if(screen.width <= 768){

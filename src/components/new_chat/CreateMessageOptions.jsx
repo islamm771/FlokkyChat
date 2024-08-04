@@ -14,9 +14,24 @@ import {
 } from "../../app/feature/ListChatSlice";
 import { GrServices } from "react-icons/gr";
 import { IoMdContacts } from "react-icons/io";
+import { useState } from "react";
 
 const CreateMessageOptions = () => {
   const dispatch = useDispatch();
+  const [text, setText] = useState('');
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    const lines = value.split('\n');
+
+    // Allow input only if lines are 5 or less
+    if (lines.length <= 5) {
+      setText(value);
+    } else {
+      // If lines exceed 5, limit the text to the first 5 lines
+      setText(lines.slice(0, 5).join('\n'));
+    }
+  };
   const { isCreateMessageOptionsModel } = useSelector(selectGlobal);
   const handleToggleOpenMessageOptionModel = () => {
     dispatch(toggleCreateMessageOptionsModel());
@@ -51,8 +66,10 @@ const CreateMessageOptions = () => {
               name=""
               id=""
               placeholder="What's going on? #Hashtag.. @Mention.. Link.."
-              rows="8"
-            ></textarea>
+              rows="6"
+              value={text}
+              onChange={handleChange}
+            />
           </div>
         </div>
         <div className="content-buttons-options-message">

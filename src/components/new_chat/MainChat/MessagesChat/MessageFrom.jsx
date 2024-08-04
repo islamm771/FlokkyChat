@@ -83,7 +83,6 @@ const MessageFrom = ({
           )}
           <div
             className="message message-Content-from"
-            {...longPressEvent} onClick={handleClick}
           >
             <ListAction
               activeIndex={activeIndex}
@@ -127,7 +126,9 @@ const MessageFrom = ({
               angry={angry}
               sad={sad}
             />
-            <p className="max-w-[280px] md:max-w-[500px]">{data.message}</p>
+            <p className="max-w-[280px] md:max-w-[500px]"
+            {...longPressEvent} onClick={handleClick}
+            >{data.message}</p>
             <DisplayReact
               data={data}
               handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}
