@@ -21,6 +21,7 @@ import {
   toggleSellProducts,
   togglePinMessageChat,
   toggleVideoCall,
+  setCreateMessageOptions,
 } from "../../../app/feature/ListChatSlice";
 import { BsEmojiSmile } from "react-icons/bs";
 import camera from "../../../assests/chat/cam.svg";
@@ -58,6 +59,7 @@ const MainChat = () => {
   const ReactionsChatMain = useRef(null);
   const PinMessageTop = useRef(null);
   const reactionsRef = useRef(null);
+  const messageOptionsRef = useRef(null)
 
   const dispatch = useDispatch();
   const { isForward, isPinMessage,activeMessage } = useSelector(selectGlobal);
@@ -267,6 +269,9 @@ const MainChat = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      if(messageOptionsRef.current && !messageOptionsRef.current.contains(event.target)){
+        setActiveMessageOption(false)
+      }
       if (
         isPickerEmoju &&
         pickerRef.current &&
@@ -380,6 +385,7 @@ const MainChat = () => {
           clearLongPress={clearLongPress}
         />
       ) }
+
       { activeMessage == 2 && (
           <UserMessages
           isPinMessage={isPinMessage}
@@ -471,6 +477,7 @@ const MainChat = () => {
           clearLongPress={clearLongPress}
         />
       ) }
+      
       { activeMessage == 4 && (
           <JobMessages
           isPinMessage={isPinMessage}
@@ -560,11 +567,14 @@ const MainChat = () => {
             <FaPlusCircle size={20} color="#fd6729" />
           </div>
 
-          <div className={`flex flex-col bg-white gap-3 py-[5px] px-[10px] rounded-lg shadow-[0px_0px_7px_0px_#ddd] absolute bottom-[60px] left-[8px] transition-opacity duration-[0.5s]
+          <div ref={messageOptionsRef} className={`flex flex-col bg-white gap-3 py-[5px] px-[10px] rounded-lg shadow-[0px_0px_7px_0px_#ddd] absolute bottom-[60px] left-[8px] transition-opacity duration-[0.5s]
                 ${ activeMessageOption ? "opacity-100" : "opacity-0" } `}>
 
           <div className="icons-actions-main-chat icons-actions-main-chat-bg"
-            onClick={handleToggleOpenMessageOptionModel}
+            onClick={() => {
+              dispatch(setCreateMessageOptions("background"))
+              handleToggleOpenMessageOptionModel()
+            }}
           >
             <div className="text-icons-actions-bg">
               <p>Background</p>
@@ -572,7 +582,10 @@ const MainChat = () => {
             <img src={bg} alt="" />
           </div>
           <div className="icons-actions-main-chat icons-actions-main-chat-gif"
-            onClick={handleToggleOpenMessageOptionModel}
+            onClick={() => {
+              dispatch(setCreateMessageOptions("gif"))
+              handleToggleOpenMessageOptionModel()
+            }}
           >
             <div className="text-icons-actions-gif">
               <p>GIF</p>
@@ -613,7 +626,10 @@ const MainChat = () => {
             </div>
           </div>
           <div className="icons-actions-main-chat icons-actions-main-chat-poll"
-            onClick={handleToggleOpenMessageOptionModel}
+            onClick={() => {
+              dispatch(setCreateMessageOptions("poll"))
+              handleToggleOpenMessageOptionModel()
+            }}
           >
             <div className="text-icons-actions-poll">
               <p>Create Poll</p>
@@ -629,7 +645,10 @@ const MainChat = () => {
             <img src={sellProduct} alt="" />
           </div>
           <div className="icons-actions-main-chat icons-actions-main-chat-services"
-            onClick={handleToggleOpenMessageOptionModel}
+            onClick={() => {
+              dispatch(setCreateMessageOptions("services"))
+              handleToggleOpenMessageOptionModel()
+            }}
           >
             <div className="text-icons-actions-services">
               <p>Share Services</p>

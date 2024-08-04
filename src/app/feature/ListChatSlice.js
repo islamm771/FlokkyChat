@@ -33,6 +33,7 @@ const initialState = {
   isContactsModel: false,
   isSellProductsModel: false,
   isMuteModel:false,
+  createMessageOptions:"normal",
 
 
   // Messages
@@ -187,7 +188,9 @@ export const GlobalSlice = createSlice({
     setDeleteMessage: (state, action) => {
       state.deleteMessageData = action.payload;
     },
-
+    setCreateMessageOptions : (state,action) =>{
+      state.createMessageOptions = action.payload
+    },
     setIsMuteModel : (state,action) => {
       state.isMuteModel = action.payload
     }
@@ -244,6 +247,8 @@ export const {
   FalseSellProducts,
   togglePinMessageChat,
   setIsMuteModel,
+  setCreateMessageOptions,
+
 } = GlobalSlice.actions;
 
 export const selectGlobal = (state) => state.global;

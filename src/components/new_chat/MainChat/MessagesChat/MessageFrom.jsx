@@ -77,7 +77,9 @@ const MessageFrom = ({
       )  }
       <div className="message flex-messages-from">
         <div className="wrap-message-contnet">
-          <p className="name-message-sent">Ahmed</p>
+          { type != 'connection' && (
+            <p className="name-message-sent">Ahmed</p>
+          )}
           {type == 'job' && (
             <p className="font-semibold mb-[4px]">Maketing Manger | Position</p>
           )}

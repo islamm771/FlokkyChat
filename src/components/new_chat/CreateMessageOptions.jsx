@@ -15,10 +15,18 @@ import {
 import { GrServices } from "react-icons/gr";
 import { IoMdContacts } from "react-icons/io";
 import { useState } from "react";
+import CreatePoll from "./MessageOptions/CreatePoll";
+
+import "./CreateMessage.css"
 
 const CreateMessageOptions = () => {
   const dispatch = useDispatch();
+  const {createMessageOptions} = useSelector(selectGlobal)
   const [text, setText] = useState('');
+  const [postPullOptions, setPostPullOptions] = useState([
+    { id: 1, value: "" },
+    { id: 2, value: "" },
+  ]);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -197,6 +205,10 @@ const CreateMessageOptions = () => {
               </div>
             </div>
           </div>
+
+          { createMessageOptions == "poll" && <CreatePoll 
+            postPullOptions={postPullOptions} 
+            setPostPullOptions={setPostPullOptions} /> }
         </div>
         <div className="!hidden md:!flex send-message-content">
           <button>Send Message</button>
