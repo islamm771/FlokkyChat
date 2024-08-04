@@ -3,7 +3,7 @@ import FormInputwithIcon from "../../ui/formInputWithSearchIcon/FormInputwithIco
 import bfs from "../../../assests/chat/johny.jpeg";
 import { FaVolumeUp } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
-import { toggleChatRoom, toggleContacts, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
+import { setActiveMessage, toggleChatRoom, toggleContacts, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
 import { useDispatch } from "react-redux";
 import { GoPlus } from "react-icons/go";
 import { IoFilterOutline } from "react-icons/io5";
@@ -28,6 +28,15 @@ const Connections = () => {
   const handleToggleContacts = () => {
     dispatch(toggleContacts());
   };
+
+  const handleChatClick = () => {
+    if (window.innerWidth < 918) {
+      dispatch(toggleWrapgroupPeopleChat());
+      dispatch(setActiveMessage(2))
+    }else{
+      dispatch(setActiveMessage(2))
+    }
+  }
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -66,7 +75,9 @@ const Connections = () => {
         <div style={{ marginBottom: "5px" }}></div>
       </div>
       <div className="people-chat-list">
-      <div className="profile-header-chat">
+      <div className="profile-header-chat"
+      onClick={ handleChatClick }
+      >
           <div className="profile-header__avatar offline-profile-header-chat">
             <img src={bfs} alt={`'s avatar`} />
           </div>

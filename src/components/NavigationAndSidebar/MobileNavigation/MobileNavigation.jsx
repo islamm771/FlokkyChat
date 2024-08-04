@@ -199,29 +199,6 @@ const MobileNavigation = () => {
 					</div>
 
 
-					<li
-						className={`menu-item ${location.pathname === "/" ? "active" : ""}`}
-						onClick={() => {
-							dispatch(setIsChatMenuOpen({ value: !isChatMenuOpen }));
-						}}
-					>
-						<div className="menu-item-link menu-link-title">
-							<p className={`${location.pathname === "/" ? "text-white" : ""}`}>My Chats</p>
-							<svg
-								className="slider-control-icon icon-small-arrow"
-								style={{
-									transform: `rotate(${isChatMenuOpen ? "270" : "90"}deg)`,
-									cursor: "pointer",
-									fill: location.pathname === "/" ? "#fff" : "#adafca"
-								}}
-							>
-								<use xlinkHref="#svg-small-arrow"></use>
-							</svg>
-						</div>
-					</li>
-
-					{ isChatMenuOpen && <MyChatItems isMobile={true} /> }
-
 					<li className={`menu-item`}
 						// className={`menu-item ${location.pathname === "/" ? "active" : ""}`}
 					>

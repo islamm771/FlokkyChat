@@ -66,8 +66,11 @@ const Chat = () => {
   };
 
   const handleTouchEnd = () => {
-    if(position != 0){
-      setPosition( -divRef.current.clientWidth )
+    if(position < -200){
+      setPosition( -divRef.current.clientWidth-50 )
+      dispatch(toggleWrapgroupPeopleChat());
+    }else{
+      setPosition(0)
     }
     // Optionally: Snap back to the original position or some other logic
   };
@@ -77,18 +80,6 @@ const Chat = () => {
       dispatch(toggleWrapgroupPeopleChat());
     }
   };
-
-  useEffect(() => {
-    if (isWrapgroupPeopleChat && window.innerWidth < 1670 && !isMobileNavOpen) {
-      document.addEventListener("mousedown", handleOutsideClose);
-    } else {
-      document.removeEventListener('mousedown', handleOutsideClose);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClose);
-    };
-  }, [isWrapgroupPeopleChat,isMobileNavOpen]);
 
   useEffect( () => {
     if(screen.width <= 768){
@@ -100,6 +91,7 @@ const Chat = () => {
       }
     }
   } ,[isWrapgroupPeopleChat])
+
 
   return (
     <>

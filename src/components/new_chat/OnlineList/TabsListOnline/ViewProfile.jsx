@@ -206,7 +206,7 @@ const ViewProfile = ({ direction }) => {
             <div className="closeViewProfile" onClick={handleToggleOnlineList}>
               <IoMdClose />
             </div>
-            <div className="user-preview-info">
+            <div className="user-preview-info !px-[15px]">
               <div className="page-one-member page-member-desc">
                   <div className="mb-3">
                     <div className="user-status">

@@ -32,14 +32,20 @@ const initialState = {
   isPinMessage: false,
   isContactsModel: false,
   isSellProductsModel: false,
-
   isMuteModel:false,
+
+
+  // Messages
+  activeMessage:1,
 };
 
 export const GlobalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setActiveMessage : (state,action) => {
+      state.activeMessage = action.payload
+    },
     toggleChatList(state) {
       state.isOpenChatList = !state.isOpenChatList;
     },
@@ -189,6 +195,7 @@ export const GlobalSlice = createSlice({
 });
 
 export const {
+  setActiveMessage,
   toggleChatList,
   toggleNotification,
   toggleSearch,

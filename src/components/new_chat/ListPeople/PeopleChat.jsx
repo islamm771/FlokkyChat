@@ -73,15 +73,12 @@ const PeopleChat = () => {
       <header>
         <div className="header-people-chat">
           {isMobileView ? (
-            <div className="mobilemenu-trigger navigation-widget-mobile-trigger"
-              onClick={handleMobileMenuClick}
-            >
-              <div className="burger-icon inverted">
-                <div className="burger-icon-bar"></div>
-                <div className="burger-icon-bar"></div>
-                <div className="burger-icon-bar"></div>
-              </div>
-            </div>
+            <div className="sidemenu-trigger navigation-widget-trigger cursor-pointer"
+            onClick={handleMobileMenuClick} >
+            <svg className="icon-grid">
+              <use xlinkHref="#svg-grid"></use>
+            </svg>
+          </div>
           ) : (
             <div className="sidemenu-trigger navigation-widget-trigger cursor-pointer"
               onClick={handleSideMenuClick} >

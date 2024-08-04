@@ -11,6 +11,7 @@ import logo from "../../../assests/chat/logo.svg";
 import "./Group.css";
 import { Tooltip } from "antd";
 import { BsShop } from "react-icons/bs";
+import UserProfileImage from "../../user-profile-image/UserProfileImage";
 
 const Grouping = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const Grouping = () => {
 						</div>
           </div>
         </div> */}
-        <div className="profile-image">
+        {/* <div className="profile-image">
           <div className="profile-image-chat">
             <img src="/img/avatar/01.jpg" alt="Profile" />
             <RiVerifiedBadgeFill
@@ -70,6 +71,10 @@ const Grouping = () => {
               <FaCircle/>
             </div>
           </div>
+        </div> */}
+
+        <div className="flex items-center justify-center">
+          <UserProfileImage />
         </div>
         <ul className="menu small" style={{ paddingLeft: "0" }}>
           <li

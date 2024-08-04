@@ -48,7 +48,9 @@ import { toast } from "react-toastify";
 import { IoMdContacts } from "react-icons/io";
 import { setActiveTabOnline } from "../../../app/feature/TabOnlineList";
 import Header from "./Header/Header/Header";
-import Messages from "./MessagesChat/Messages";
+import UserMessages from "./MessagesChat/UserMessages";
+import GroupMessages from "./MessagesChat/GroupMessages";
+import JobMessages from "./MessagesChat/JobMessages";
 
 const MainChat = () => {
   const reactionsRefList = useRef(null);
@@ -58,7 +60,7 @@ const MainChat = () => {
   const reactionsRef = useRef(null);
 
   const dispatch = useDispatch();
-  const { isForward, isPinMessage } = useSelector(selectGlobal);
+  const { isForward, isPinMessage,activeMessage } = useSelector(selectGlobal);
 
   const [isListActionMessage, setIsListActionMessage] = useState(false);
   const [isSelectForward, setSelectForward] = useState(false);
@@ -332,49 +334,189 @@ const MainChat = () => {
         handleToggleVideoCall={handleToggleVideoCall}
         handleToggleOnlineList={handleToggleOnlineList}
       />
-      <Messages
-        isPinMessage={isPinMessage}
-        PinMessageTop={PinMessageTop}
-        isPinMessageTop={isPinMessageTop}
-        handleTogglePinMessage={handleTogglePinMessage}
-        handleTogglePinMessageTop={handleTogglePinMessageTop}
-        isForward={isForward}
-        isSelectForward={isSelectForward}
-        handleCheckboxChange={handleCheckboxChange}
-        activeIndex={activeIndex}
-        reactionsRefList={reactionsRefList}
-        isListActionMessage={isListActionMessage}
-        showFullList={showFullList}
-        handleViewProfile={handleViewProfile}
-        handleToggleFullList={handleToggleFullList}
-        handleToggleDeleteMessage={handleToggleDeleteMessage}
-        handleToggleMessageInfo={handleToggleMessageInfo}
-        handleToggleReactionsList={handleToggleReactionsList}
-        handleOpenReplyMessage={handleOpenReplyMessage}
-        handleToggleReportMessage={handleToggleReportMessage}
-        handleForwardMessage={handleForwardMessage}
-        handleTogglePin={handleTogglePin}
-        isPin={isPin}
-        handleToggleStar={handleToggleStar}
-        isStar={isStar}
-        handleMessageCopy={handleMessageCopy}
-        HanldeCloseTemporay={HanldeCloseTemporay}
-        handleToggleAction={handleToggleAction}
-        ReactionsChatMain={ReactionsChatMain}
-        activeReactionsIndex={activeReactionsIndex}
-        like={like}
-        love={love}
-        care={care}
-        funny={funny}
-        haha={haha}
-        wow={wow}
-        angry={angry}
-        sad={sad}
-        handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}
-        handleLongPressReactionsList={handleLongPressReactionsList}
-        handleTouchEnd={handleTouchEnd}
-        clearLongPress={clearLongPress}
-      />
+
+      { activeMessage == 1 && (
+          <GroupMessages
+          isPinMessage={isPinMessage}
+          PinMessageTop={PinMessageTop}
+          isPinMessageTop={isPinMessageTop}
+          handleTogglePinMessage={handleTogglePinMessage}
+          handleTogglePinMessageTop={handleTogglePinMessageTop}
+          isForward={isForward}
+          isSelectForward={isSelectForward}
+          handleCheckboxChange={handleCheckboxChange}
+          activeIndex={activeIndex}
+          reactionsRefList={reactionsRefList}
+          isListActionMessage={isListActionMessage}
+          showFullList={showFullList}
+          handleViewProfile={handleViewProfile}
+          handleToggleFullList={handleToggleFullList}
+          handleToggleDeleteMessage={handleToggleDeleteMessage}
+          handleToggleMessageInfo={handleToggleMessageInfo}
+          handleToggleReactionsList={handleToggleReactionsList}
+          handleOpenReplyMessage={handleOpenReplyMessage}
+          handleToggleReportMessage={handleToggleReportMessage}
+          handleForwardMessage={handleForwardMessage}
+          handleTogglePin={handleTogglePin}
+          isPin={isPin}
+          handleToggleStar={handleToggleStar}
+          isStar={isStar}
+          handleMessageCopy={handleMessageCopy}
+          HanldeCloseTemporay={HanldeCloseTemporay}
+          handleToggleAction={handleToggleAction}
+          ReactionsChatMain={ReactionsChatMain}
+          activeReactionsIndex={activeReactionsIndex}
+          like={like}
+          love={love}
+          care={care}
+          funny={funny}
+          haha={haha}
+          wow={wow}
+          angry={angry}
+          sad={sad}
+          handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}
+          handleLongPressReactionsList={handleLongPressReactionsList}
+          handleTouchEnd={handleTouchEnd}
+          clearLongPress={clearLongPress}
+        />
+      ) }
+      { activeMessage == 2 && (
+          <UserMessages
+          isPinMessage={isPinMessage}
+          PinMessageTop={PinMessageTop}
+          isPinMessageTop={isPinMessageTop}
+          handleTogglePinMessage={handleTogglePinMessage}
+          handleTogglePinMessageTop={handleTogglePinMessageTop}
+          isForward={isForward}
+          isSelectForward={isSelectForward}
+          handleCheckboxChange={handleCheckboxChange}
+          activeIndex={activeIndex}
+          reactionsRefList={reactionsRefList}
+          isListActionMessage={isListActionMessage}
+          showFullList={showFullList}
+          handleViewProfile={handleViewProfile}
+          handleToggleFullList={handleToggleFullList}
+          handleToggleDeleteMessage={handleToggleDeleteMessage}
+          handleToggleMessageInfo={handleToggleMessageInfo}
+          handleToggleReactionsList={handleToggleReactionsList}
+          handleOpenReplyMessage={handleOpenReplyMessage}
+          handleToggleReportMessage={handleToggleReportMessage}
+          handleForwardMessage={handleForwardMessage}
+          handleTogglePin={handleTogglePin}
+          isPin={isPin}
+          handleToggleStar={handleToggleStar}
+          isStar={isStar}
+          handleMessageCopy={handleMessageCopy}
+          HanldeCloseTemporay={HanldeCloseTemporay}
+          handleToggleAction={handleToggleAction}
+          ReactionsChatMain={ReactionsChatMain}
+          activeReactionsIndex={activeReactionsIndex}
+          like={like}
+          love={love}
+          care={care}
+          funny={funny}
+          haha={haha}
+          wow={wow}
+          angry={angry}
+          sad={sad}
+          handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}
+          handleLongPressReactionsList={handleLongPressReactionsList}
+          handleTouchEnd={handleTouchEnd}
+          clearLongPress={clearLongPress}
+        />
+      ) }
+
+      { activeMessage == 3 && (
+          <JobMessages
+          isPinMessage={isPinMessage}
+          PinMessageTop={PinMessageTop}
+          isPinMessageTop={isPinMessageTop}
+          handleTogglePinMessage={handleTogglePinMessage}
+          handleTogglePinMessageTop={handleTogglePinMessageTop}
+          isForward={isForward}
+          isSelectForward={isSelectForward}
+          handleCheckboxChange={handleCheckboxChange}
+          activeIndex={activeIndex}
+          reactionsRefList={reactionsRefList}
+          isListActionMessage={isListActionMessage}
+          showFullList={showFullList}
+          handleViewProfile={handleViewProfile}
+          handleToggleFullList={handleToggleFullList}
+          handleToggleDeleteMessage={handleToggleDeleteMessage}
+          handleToggleMessageInfo={handleToggleMessageInfo}
+          handleToggleReactionsList={handleToggleReactionsList}
+          handleOpenReplyMessage={handleOpenReplyMessage}
+          handleToggleReportMessage={handleToggleReportMessage}
+          handleForwardMessage={handleForwardMessage}
+          handleTogglePin={handleTogglePin}
+          isPin={isPin}
+          handleToggleStar={handleToggleStar}
+          isStar={isStar}
+          handleMessageCopy={handleMessageCopy}
+          HanldeCloseTemporay={HanldeCloseTemporay}
+          handleToggleAction={handleToggleAction}
+          ReactionsChatMain={ReactionsChatMain}
+          activeReactionsIndex={activeReactionsIndex}
+          like={like}
+          love={love}
+          care={care}
+          funny={funny}
+          haha={haha}
+          wow={wow}
+          angry={angry}
+          sad={sad}
+          handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}
+          handleLongPressReactionsList={handleLongPressReactionsList}
+          handleTouchEnd={handleTouchEnd}
+          clearLongPress={clearLongPress}
+        />
+      ) }
+      { activeMessage == 4 && (
+          <JobMessages
+          isPinMessage={isPinMessage}
+          PinMessageTop={PinMessageTop}
+          isPinMessageTop={isPinMessageTop}
+          handleTogglePinMessage={handleTogglePinMessage}
+          handleTogglePinMessageTop={handleTogglePinMessageTop}
+          isForward={isForward}
+          isSelectForward={isSelectForward}
+          handleCheckboxChange={handleCheckboxChange}
+          activeIndex={activeIndex}
+          reactionsRefList={reactionsRefList}
+          isListActionMessage={isListActionMessage}
+          showFullList={showFullList}
+          handleViewProfile={handleViewProfile}
+          handleToggleFullList={handleToggleFullList}
+          handleToggleDeleteMessage={handleToggleDeleteMessage}
+          handleToggleMessageInfo={handleToggleMessageInfo}
+          handleToggleReactionsList={handleToggleReactionsList}
+          handleOpenReplyMessage={handleOpenReplyMessage}
+          handleToggleReportMessage={handleToggleReportMessage}
+          handleForwardMessage={handleForwardMessage}
+          handleTogglePin={handleTogglePin}
+          isPin={isPin}
+          handleToggleStar={handleToggleStar}
+          isStar={isStar}
+          handleMessageCopy={handleMessageCopy}
+          HanldeCloseTemporay={HanldeCloseTemporay}
+          handleToggleAction={handleToggleAction}
+          ReactionsChatMain={ReactionsChatMain}
+          activeReactionsIndex={activeReactionsIndex}
+          like={like}
+          love={love}
+          care={care}
+          funny={funny}
+          haha={haha}
+          wow={wow}
+          angry={angry}
+          sad={sad}
+          handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}
+          handleLongPressReactionsList={handleLongPressReactionsList}
+          handleTouchEnd={handleTouchEnd}
+          clearLongPress={clearLongPress}
+        />
+      ) }
+      
 
       <div className="footer-Main-chat-page">
         <div className={`replay-message ${

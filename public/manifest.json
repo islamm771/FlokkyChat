@@ -1,0 +1,16 @@
+{
+    "name": "My App",
+    "short_name": "App",
+    "start_url": ".",
+    "display": "fullscreen",
+    "background_color": "#ffffff",
+    "description": "My React App",
+    "icons": [
+      {
+        "src": "icon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

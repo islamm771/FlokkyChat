@@ -96,10 +96,13 @@ const OnlineList = () => {
   };
 
   const handleTouchEnd = () => {
-    if(position != 0){
-      setPosition(divRef.current.clientWidth);
+    if(position > 200){
+      setPosition(divRef.current.clientWidth + 50 )
+      handleToggleOnlineList();
+    }else{
+      setPosition(0)
     }
-    // Optionally: Implement snapping back or other logic if needed
+    // Optionally: Snap back to the original position or some other logic
   };
 
   const handleOutsideClose = (e) => {

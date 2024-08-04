@@ -38,8 +38,9 @@ const CreateMessageOptions = () => {
       }`}
     >
       <div className="createMessageModel">
-        <div className="header-createMessageModel">
+        <div className="header-createMessageModel !justify-between mb-[15px] md:!justify-start md:mb-0">
           <IoArrowBack onClick={handleToggleOpenMessageOptionModel} />
+          <button className="w-fit bg-[#fd6729] text-white py-[5px] px-[15px] block md:hidden">Send Message</button>
         </div>
         <div className="content-write-message">
           <div className="img-writer-message">
@@ -180,7 +181,7 @@ const CreateMessageOptions = () => {
             </div>
           </div>
         </div>
-        <div className="send-message-content">
+        <div className="!hidden md:!flex send-message-content">
           <button>Send Message</button>
         </div>
       </div>

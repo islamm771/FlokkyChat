@@ -10,7 +10,7 @@ import { MdEmojiEmotions } from "react-icons/md";
 import { FaReply } from "react-icons/fa6";
 import { useState } from "react";
 
-const Messages = ({
+const UserMessages = ({
 	isPinMessage,
 	PinMessageTop,
 	isPinMessageTop,
@@ -92,15 +92,15 @@ const Messages = ({
 								className={`${data.sendme ? "message-from" : "message-to"}`}
 								key={index}
 							>
-								<div className="img">
+								{/* <div className="img">
 									<img src={data.img} alt="" />
-								</div>
+								</div> */}
 								<div className={`message ${
 										data.sendme ? "flex-messages-from" : "flex-messages-to"
 									}`}
 								>
 									<div className="wrap-message-contnet">
-										{data.sendme && <p className="name-message-sent">Ahmed</p>}
+										{/* {data.sendme && <p className="name-message-sent">Ahmed</p>} */}
 										<div
 											onTouchStart={() => handleLongPressReactionsList(index)}
 											// onTouchEnd={() => handleTouchEnd(index)}
@@ -203,4 +203,4 @@ const Messages = ({
 	);
 };
 
-export default Messages;
+export default UserMessages;

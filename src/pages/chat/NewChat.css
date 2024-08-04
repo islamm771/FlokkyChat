@@ -420,19 +420,19 @@
 
   .OnlineListContainerHidden {
     right: -100%;
-    transition: left .1s ease-in-out;
-    -webkit-transition: left .1s ease-in-out;
-    -moz-transition: left .1s ease-in-out;
-    -ms-transition: left .1s ease-in-out;
-    -o-transition: left .1s ease-in-out;
+    transition: left .3s ease-in-out;
+    -webkit-transition: left .3s ease-in-out;
+    -moz-transition: left .3s ease-in-out;
+    -ms-transition: left .3s ease-in-out;
+    -o-transition: left .3s ease-in-out;
   }
   .OnlineListContainer,
   .OnlineListContainerHidden {
-    transition: left .1s ease-in-out;
-    -webkit-transition: left .1s ease-in-out;
-    -moz-transition: left .1s ease-in-out;
-    -ms-transition: left .1s ease-in-out;
-    -o-transition: left .1s ease-in-out;
+    transition: left .3s ease-in-out;
+    -webkit-transition: left .3s ease-in-out;
+    -moz-transition: left .3s ease-in-out;
+    -ms-transition: left .3s ease-in-out;
+    -o-transition: left .3s ease-in-out;
   }
   .header-OnlineList-page {
     justify-content: space-between;
@@ -466,11 +466,11 @@
     overflow: hidden;
     position: fixed;
     top: 0;
-    transition: left .1s ease-in-out;
-    -webkit-transition: left .1s ease-in-out;
-    -moz-transition: left .1s ease-in-out;
-    -ms-transition: left .1s ease-in-out;
-    -o-transition: left .1s ease-in-out;
+    transition: left .3s ease-in-out;
+    -webkit-transition: left .3s ease-in-out;
+    -moz-transition: left .3s ease-in-out;
+    -ms-transition: left .3s ease-in-out;
+    -o-transition: left .3s ease-in-out;
     z-index: 555555555555555555555;
   }
 
@@ -582,12 +582,12 @@
     width: 100% !important;
   }
   .PeopleChatContainer {
-    /* width: 87%; */
-    width: 100%;
+    width: 87%;
+    /* width: 100%; */
   }
   .GroupingContainer {
     width: 80px;
-    display: none;
+    /* display: none; */
   }
   .desc-main-chat {
     display: none;
@@ -600,7 +600,8 @@
     display: none;
   }
   .reactions-chat-main-to{
-    left: -15px;
+    left: unset;
+    right: 0;
   }
   .wrap-chat-main{
     width: 280px;
@@ -636,11 +637,11 @@
   .GroupingContainer {
     width: 20%;
     min-width: 40px;
-    display: none;
+    /* display: none; */
   }
   .PeopleChatContainer {
-    /* width: 80%; */
-    width: 100%;
+    width: 80%;
+    /* width: 100%; */
     min-width: 90px;
   }
 }

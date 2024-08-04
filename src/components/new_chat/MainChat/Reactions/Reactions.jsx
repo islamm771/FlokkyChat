@@ -22,10 +22,10 @@ const Reactions = ({
         <div
           ref={ReactionsChatMain}
           className={`${
-            data.sendme ? "reactions-chat-main-to" : "reactions-chat-main-from"
+            data.sendme ? "reactions-chat-main-from" : "reactions-chat-main-to"
           }
         ${
-          activeReactionsIndex
+          activeReactionsIndex >= 0
             ? "active-reactions-chat-main"
             : "disactive-reactions-chat-main"
         }`}

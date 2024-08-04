@@ -6,7 +6,7 @@ import bfs1 from "../../../assests/chat/black.jpeg";
 import bfs2 from "../../../assests/chat/duke.jpeg";
 import { FaVolumeUp } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
-import { toggleChatRoom, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
+import { setActiveMessage, toggleChatRoom, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
 import { useDispatch } from "react-redux";
 import { GoPlus } from "react-icons/go";
 
@@ -91,6 +91,9 @@ const Communities = () => {
   const handleToggleWrapgroupPeopleChat = () => {
     if (window.innerWidth < 918) {
       dispatch(toggleWrapgroupPeopleChat());
+      dispatch(setActiveMessage(1))
+    }else{
+      dispatch(setActiveMessage(1))
     }
   };
   const handleToggleChatList = () => {
@@ -123,7 +126,8 @@ const Communities = () => {
         <div style={{ marginBottom: "5px" }}></div>
       </div>
       <div className="people-chat-list">
-        <div className="profile-header-chat">
+        <div className="profile-header-chat"
+        onClick={handleToggleWrapgroupPeopleChat}>
           <div className="profile-header__avatar online-profile-header-chat">
             <img src={bfs} alt={`'s avatar`} />
           </div>
@@ -175,7 +179,8 @@ const Communities = () => {
           </div>
         </div>
 
-        <div className="profile-header-chat">
+        <div className="profile-header-chat"
+        onClick={handleToggleWrapgroupPeopleChat}>
           <div className="profile-header__avatar offline-profile-header-chat">
             <img src={bfs1} alt={`'s avatar`} />
           </div>

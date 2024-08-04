@@ -4,7 +4,7 @@ import bfs from "../../../assests/chat/roseanna.jpeg";
 import { FaVolumeUp } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { toggleChatRoom, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
+import { setActiveMessage, toggleChatRoom, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
 import { GoPlus } from "react-icons/go";
 import { IoFilterOutline } from "react-icons/io5";
 
@@ -24,6 +24,15 @@ const Flokkancing = () => {
   const handleToggleChatList = () => {
     dispatch(toggleChatRoom());
   };
+
+  const handleChatClick = () => {
+    if (window.innerWidth < 918) {
+      dispatch(toggleWrapgroupPeopleChat());
+      dispatch(setActiveMessage(3))
+    }else{
+      dispatch(setActiveMessage(3))
+    }
+  }
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -61,7 +70,8 @@ const Flokkancing = () => {
         <div style={{ marginBottom: "5px" }}></div>
       </div>
       <div className="people-chat-list" >
-      <div className="profile-header-chat">
+      <div className="profile-header-chat"
+      onClick={handleChatClick}>
           <div className="profile-header__avatar online-profile-header-chat">
             <img src={bfs} alt={`'s avatar`} />
           </div>

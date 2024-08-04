@@ -4,14 +4,19 @@ import { IoArrowBack } from "react-icons/io5";
 import { LuPhone } from "react-icons/lu";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import UserProfileImage from "../../../../user-profile-image/UserProfileImage";
+import { useSelector } from "react-redux";
+import { selectGlobal } from "../../../../../app/feature/ListChatSlice";
+
+import img from "../../../../../assests/chat/bf4.jpg"
 
 const Header = ({
   handleToggleListPeople,
   handleToggleWrapgroupPeopleChat,
-  bfs4,
   handleToggleVideoCall,
   handleToggleOnlineList
 }) => {
+  const { activeMessage } = useSelector(selectGlobal);
   return (
     <div className="header-Main-chat-page">
       <div className="right-header-main-chat">
@@ -22,24 +27,11 @@ const Header = ({
           {/* <FaArrowsAltH /> */}
           <IoArrowBack />
         </div>
-        <div className="info-main-chat">
-          <div className="profile-header__avatar online-profile-header-chat border-header-profile-chat"
-            onClick={handleToggleOnlineList} >
-            <img src={bfs4} alt={`'s avatar`} />
-          </div>
-          <div className="info-username-hashtag">
-            <p className="username-main-chat">Marketing</p>
-            <p className="hashtag-main-chat">
-              #Technology
-              <RiVerifiedBadgeFill color={"#36e9f7"} size={16} />
-              <MdAdminPanelSettings color={"#d7006a"} size={16} />
-              <div className="badge-main-chat">
-                <img src="/img/download.png" alt="Padge" />
-                <p className="badge-number-mainchat">12</p>
-              </div>
-            </p>
-          </div>
-        </div>
+        { activeMessage == 1 && (<CommunityHeader handleToggleOnlineList={handleToggleOnlineList} />) }
+        { activeMessage == 2 && (<ConnectionHeader handleToggleOnlineList={handleToggleOnlineList} />) }
+        { activeMessage == 3 && (<JobHeader handleToggleOnlineList={handleToggleOnlineList} />) }
+        { activeMessage == 4 && (<JobHeader handleToggleOnlineList={handleToggleOnlineList} />) }
+        
       </div>
       <div className="left-header-main-chat">
         {/* <div className="desc-main-chat">
@@ -64,3 +56,64 @@ const Header = ({
 };
 
 export default Header;
+
+
+
+
+const CommunityHeader = ({handleToggleOnlineList}) => {
+  return(
+    <div className="info-main-chat">
+      <div className="profile-header__avatar online-profile-header-chat border-header-profile-chat"
+        onClick={handleToggleOnlineList} >
+        <img src={img} alt={`'s avatar`} />
+      </div>
+      <div className="info-username-hashtag">
+        <p className="username-main-chat">Marketing</p>
+        <p className="hashtag-main-chat">
+          #Technology
+          <RiVerifiedBadgeFill color={"#36e9f7"} size={16} />
+          <MdAdminPanelSettings color={"#d7006a"} size={16} />
+          <div className="badge-main-chat">
+            <img src="/img/download.png" alt="Padge" />
+            <p className="badge-number-mainchat">12</p>
+          </div>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+const ConnectionHeader = ({handleToggleOnlineList}) => {
+  return(
+    <div className="info-main-chat">
+      <div className=""
+        onClick={handleToggleOnlineList} >
+        <UserProfileImage />
+      </div>
+      <div className="info-username-hashtag pl-5">
+        <p className="username-main-chat mb-1">Neko Bebop</p>
+        <p className="hashtag-main-chat">
+          Marketing Manager - Brandmarks
+        </p>
+      </div>
+    </div>
+  )
+}
+
+const JobHeader = ({handleToggleOnlineList}) => {
+  return(
+    <div className="info-main-chat">
+      <div className=""
+        onClick={handleToggleOnlineList} >
+        <UserProfileImage />
+      </div>
+      <div className="info-username-hashtag pl-5">
+        <p className="username-main-chat mb-1">Neko Bebop</p>
+        <p className="hashtag-main-chat">
+          {/* Marketing Manager - Brandmarks */}
+          Maketing Manger | Position
+        </p>
+      </div>
+    </div>
+  )
+}

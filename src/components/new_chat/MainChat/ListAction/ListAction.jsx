@@ -8,9 +8,12 @@ import {
   MdDeleteOutline,
   MdInfoOutline,
   MdOutlineAddReaction,
+  MdOutlineMessage,
 } from "react-icons/md";
-import { RiShareForwardLine, RiUnpinLine } from "react-icons/ri";
+import { RiReplyLine, RiShareForwardLine, RiUnpinLine } from "react-icons/ri";
 import { TiPinOutline } from "react-icons/ti";
+import { useSelector } from "react-redux";
+import { selectGlobal } from "../../../../app/feature/ListChatSlice";
 
 const ListAction = ({
   activeIndex,
@@ -34,6 +37,7 @@ const ListAction = ({
   handleMessageCopy,
   HanldeCloseTemporay,
 }) => {
+  const { activeMessage } = useSelector(selectGlobal);
   return (
     <>
       {" "}
@@ -76,6 +80,20 @@ const ListAction = ({
                   <IoFlagOutline />
                 </li>
               )}
+              {
+                activeMessage == 1 && data.sendme && (
+                  <>
+                  <li>
+                    <p>Message Ahmed</p>
+                    <MdOutlineMessage />
+                  </li>
+                  <li>
+                    <p>Reply Privately</p>
+                    <RiReplyLine />
+                  </li>
+                  </>
+                )
+              }
               <li onClick={handleForwardMessage}>
                 <p>Forward</p>
                 <RiShareForwardLine />
