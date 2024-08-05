@@ -334,13 +334,22 @@ const MainChat = () => {
   const [selectedVideos, setSelectedVideos] = useState([]);
   const [selectedAudio , setSelectedAudio] = useState(null);
 
-  // useEffect(() => {
-  //   if (!selectedAudio || selectedVideos.length === 0 || selectedImages.length === 0) {
-  //     setAnotherMessage(false);
-  //   } 
-  // }, [selectedAudio, selectedImages, selectedVideos]);
+  const [value, setValue] = useState('');
+  const txtAreaRef = useRef(null)
 
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
 
+  useEffect( ()=>{
+    if(txtAreaRef.current){
+      txtAreaRef.current.style.height = "48px";
+      txtAreaRef.current.style.height = txtAreaRef.current.scrollHeight + "px";
+      txtAreaRef.current.style.height = `${Math.min(txtAreaRef.current.scrollHeight, 136)}px`;
+    }
+  } ,[value])
+
+  console.log(selectedVideos)
 
   return (
     <div>
@@ -564,39 +573,78 @@ const MainChat = () => {
           </div>
         </div>
 
-        <div className={`absolute left-0 w-full p-2 bg-white z-10 ${anotherMessage ? "bottom-[60px] opacity-100 visible" : 
+        <div className={`absolute left-0 w-full p-2 bg-white ${anotherMessage ? "bottom-[60px] opacity-100 visible" : 
           "bottom-0 opacity-0 invisible"}`}>
           <button
             className="w-fit absolute right-2 z-10"
             onClick={() => {
               setAnotherMessage(false)
+              setSelectedImages([])
+              setSelectedVideos([])
+              setSelectedAudio(null)
             }}
           >
             <MdClose />
           </button>
-          <div className="img-preview-container">
-            { selectedImages.map((img, imgIndex) => (
-              <div className="img-preview-item" key={imgIndex}>
-                <img
-                  src={URL.createObjectURL(img)}
-                  alt={img?.name}
-                  loading="lazy"
-                />
 
-                <button
-                  className="img-preview-close"
-                  onClick={() => {
-                    setSelectedImages(selectedImages.filter((_, index) => index !== imgIndex));
-                    if(selectedImages.length == 1){
-                      setAnotherMessage(false)
-                    }
-                  }}
-                >
-                  <MdClose />
-                </button>
+          { selectedImages.length > 0 && (
+              <div className="img-preview-container">
+                { selectedImages.map((img, imgIndex) => (
+                  <div className="img-preview-item" key={imgIndex}>
+                    <img
+                      src={URL.createObjectURL(img)}
+                      alt={img?.name}
+                      loading="lazy"
+                    />
+
+                    <button
+                      className="img-preview-close"
+                      onClick={() => {
+                        setSelectedImages(selectedImages.filter((_, index) => index !== imgIndex));
+                        if(selectedImages.length == 1){
+                          setAnotherMessage(false)
+                        }
+                      }}
+                    >
+                      <MdClose />
+                    </button>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+          )}
+
+          { selectedVideos.length > 0 && (
+            <div className="img-preview-container">
+              { selectedVideos.map((vid, vidIndex) => (
+                <div className="img-preview-item" key={vidIndex}>
+                  <video src={URL.createObjectURL(vid)} />
+
+                  <button
+                    className="img-preview-close"
+                    onClick={() => {
+                      setSelectedVideos(selectedVideos.filter((_, index) => index !== vidIndex));
+                      if(selectedVideos.length == 1){
+                        setAnotherMessage(false)
+                      }
+                    }}
+                  >
+                    <MdClose />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          { selectedAudio && (
+            <div className="">
+              <h4 className="mb-4">1 Audio Selected</h4>
+              <p>{selectedAudio.name}</p>
+            </div>
+          )
+
+          }
+
+
         </div>
         <div className="images-actions-main-chat">
 
@@ -613,6 +661,9 @@ const MainChat = () => {
                 if (file) {
                   setSelectedImages(Array.from(e.target.files));
                   setAnotherMessage(true)
+                  setActiveMessageOption(false)
+                  setSelectedVideos([])
+                  setSelectedAudio(null)
                 } else {
                   // setAnotherMessage(false)
                 }
@@ -621,112 +672,141 @@ const MainChat = () => {
               <img src={camera} alt="" />
             </div>
           </div>
-          <div className="cursor-pointer"
-            onClick={() => setActiveMessageOption( prev => !prev )}
-          >
-            <FaPlusCircle size={20} color="#fd6729" />
-          </div>
 
-          <div ref={messageOptionsRef} className={`flex flex-col bg-white gap-3 py-[5px] px-[10px] rounded-lg shadow-[0px_0px_7px_0px_#ddd] absolute bottom-[60px] left-[8px] transition-opacity duration-[0.5s]
-                ${ activeMessageOption ? "opacity-100 visible" : "opacity-0 invisible" } `}>
+          <span className="message-options-wrapper" ref={messageOptionsRef}>
+            <div className="cursor-pointer"
+              onClick={() => setActiveMessageOption( prev => !prev )}
+            >
+              <FaPlusCircle size={20} color="#fd6729" />
+            </div>
 
-          <div className="icons-actions-main-chat icons-actions-main-chat-bg"
-            onClick={() => {
-              dispatch(setCreateMessageOptions("background"))
-              handleToggleOpenMessageOptionModel()
-            }}
-          >
-            <div className="text-icons-actions-bg">
-              <p>Background</p>
-            </div>
-            <img src={bg} alt="" />
-          </div>
-          <div className="icons-actions-main-chat icons-actions-main-chat-gif"
-            onClick={() => {
-              dispatch(setCreateMessageOptions("gif"))
-              handleToggleOpenMessageOptionModel()
-            }}
-          >
-            <div className="text-icons-actions-gif">
-              <p>GIF</p>
-            </div>
-            <img src={gif} alt="" />
-          </div>
-          <div className="icons-actions-main-chat icons-actions-main-chat-audio">
-            <div className="text-icons-actions-audio">
-              <p>Audio Upload</p>
-            </div>
-            <div className="box-camera-chat">
-              <input 
-              type="file" 
-              accept="audio/*"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                className="feather feather-mic"
+            <div className={`flex flex-col bg-white gap-3 py-[5px] px-[10px] rounded-lg shadow-[0px_0px_7px_0px_#ddd] absolute bottom-[60px] left-[8px] z-20 transition-opacity duration-[0.5s]
+                  ${ activeMessageOption ? "opacity-100 visible" : "opacity-0 invisible" } `}>
+
+              <div className="icons-actions-main-chat icons-actions-main-chat-bg"
+                onClick={() => {
+                  dispatch(setCreateMessageOptions("background"))
+                  handleToggleOpenMessageOptionModel()
+                }}
               >
-                <path
-                  fill="#3f51b5"
-                  d="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z"
-                ></path>
-              </svg>
+                <div className="text-icons-actions-bg">
+                  <p>Background</p>
+                </div>
+                <img src={bg} alt="" />
+              </div>
+              <div className="icons-actions-main-chat icons-actions-main-chat-gif"
+                onClick={() => {
+                  dispatch(setCreateMessageOptions("gif"))
+                  handleToggleOpenMessageOptionModel()
+                }}
+              >
+                <div className="text-icons-actions-gif">
+                  <p>GIF</p>
+                </div>
+                <img src={gif} alt="" />
+              </div>
+              <div className="icons-actions-main-chat icons-actions-main-chat-audio">
+                <div className="text-icons-actions-audio">
+                  <p>Audio Upload</p>
+                </div>
+                <div className="box-camera-chat">
+                  <input 
+                  type="file" 
+                  accept="audio/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setSelectedAudio(e.target.files[0]);
+                      setAnotherMessage(true)
+                      setActiveMessageOption(false)
+                      setSelectedVideos([])
+                      setSelectedImages([])
+                    } else {
+                    }
+                  }}
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    className="feather feather-mic"
+                  >
+                    <path
+                      fill="#3f51b5"
+                      d="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div className="icons-actions-main-chat icons-actions-main-chat-video">
+                <div className="text-icons-actions-video">
+                  <p>Upload Video</p>
+                </div>
+                <div className="box-camera-chat">
+                  <input 
+                  type="file" 
+                  multiple
+                  accept="video/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setSelectedVideos( Array.from(e.target.files) );
+                      setAnotherMessage(true)
+                      setActiveMessageOption(false)
+                      setSelectedAudio(null)
+                      setSelectedImages([])
+                    } else {
+                    }
+                  }}/>
+                  <img src={video} alt="" />
+                </div>
+              </div>
+              <div className="icons-actions-main-chat icons-actions-main-chat-poll"
+                onClick={() => {
+                  dispatch(setCreateMessageOptions("poll"))
+                  handleToggleOpenMessageOptionModel()
+                }}
+              >
+                <div className="text-icons-actions-poll">
+                  <p>Create Poll</p>
+                </div>
+                <img src={poll} alt="" />
+              </div>
+              <div className="icons-actions-main-chat icons-actions-main-chat-product"
+                onClick={handleToggleSellProduct}
+              >
+                <div className="text-icons-actions-product">
+                  <p>Sell product</p>
+                </div>
+                <img src={sellProduct} alt="" />
+              </div>
+              <div className="icons-actions-main-chat icons-actions-main-chat-services"
+                onClick={() => {
+                  // dispatch(setCreateMessageOptions("services"))
+                  handleToggleOpenMessageOptionModel()
+                }}
+              >
+                <div className="text-icons-actions-services">
+                  <p>Share Services</p>
+                </div>
+                <GrServices />
+              </div>
+              <div className="icons-actions-main-chat icons-actions-main-chat-contacts"
+                onClick={handleToggleContacts}
+              >
+                <div className="text-icons-actions-contacts">
+                  <p>Contacts</p>
+                </div>
+                <IoMdContacts />
+              </div>
             </div>
-          </div>
-          <div className="icons-actions-main-chat icons-actions-main-chat-video">
-            <div className="text-icons-actions-video">
-              <p>Upload Video</p>
-            </div>
-            <div className="box-camera-chat">
-              <input type="file" accept="video/*" />
-              <img src={video} alt="" />
-            </div>
-          </div>
-          <div className="icons-actions-main-chat icons-actions-main-chat-poll"
-            onClick={() => {
-              dispatch(setCreateMessageOptions("poll"))
-              handleToggleOpenMessageOptionModel()
-            }}
-          >
-            <div className="text-icons-actions-poll">
-              <p>Create Poll</p>
-            </div>
-            <img src={poll} alt="" />
-          </div>
-          <div className="icons-actions-main-chat icons-actions-main-chat-product"
-            onClick={handleToggleSellProduct}
-          >
-            <div className="text-icons-actions-product">
-              <p>Sell product</p>
-            </div>
-            <img src={sellProduct} alt="" />
-          </div>
-          <div className="icons-actions-main-chat icons-actions-main-chat-services"
-            onClick={() => {
-              dispatch(setCreateMessageOptions("services"))
-              handleToggleOpenMessageOptionModel()
-            }}
-          >
-            <div className="text-icons-actions-services">
-              <p>Share Services</p>
-            </div>
-            <GrServices />
-          </div>
-          <div className="icons-actions-main-chat icons-actions-main-chat-contacts"
-            onClick={handleToggleContacts}
-          >
-            <div className="text-icons-actions-contacts">
-              <p>Contacts</p>
-            </div>
-            <IoMdContacts />
-          </div>
-          </div>
+          </span>
+
         </div>
 
         <div className="input-send-messag-main-chat">
@@ -735,7 +815,12 @@ const MainChat = () => {
             name="currentEmoji"
             placeholder="Type a message..."
           /> */}
-          <textarea className="h-[48px] !py-[12px] !border-none" name="" id="" placeholder="Type a message..."></textarea>
+          <textarea 
+          className="!py-[12px] !border-none"
+          ref={txtAreaRef}
+          value={value}
+          onChange={handleChange}
+          placeholder="Type a message..."></textarea>
           <BsEmojiSmile onClick={handleOpenPickerEmoji} />
         </div>
 

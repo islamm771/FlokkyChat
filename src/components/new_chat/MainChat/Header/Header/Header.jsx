@@ -5,10 +5,11 @@ import { LuPhone } from "react-icons/lu";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import UserProfileImage from "../../../../user-profile-image/UserProfileImage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectGlobal } from "../../../../../app/feature/ListChatSlice";
 
 import img from "../../../../../assests/chat/bf4.jpg"
+import { setActiveTabOnline } from "../../../../../app/feature/TabOnlineList";
 
 const Header = ({
   handleToggleListPeople,
@@ -61,10 +62,14 @@ export default Header;
 
 
 const CommunityHeader = ({handleToggleOnlineList}) => {
+  const dispatch = useDispatch()
   return(
     <div className="info-main-chat">
       <div className="profile-header__avatar online-profile-header-chat border-header-profile-chat"
-        onClick={handleToggleOnlineList} >
+        onClick={ () => {
+          dispatch(setActiveTabOnline(1));
+          handleToggleOnlineList()
+          }} >
         <img src={img} alt={`'s avatar`} />
       </div>
       <div className="info-username-hashtag">
