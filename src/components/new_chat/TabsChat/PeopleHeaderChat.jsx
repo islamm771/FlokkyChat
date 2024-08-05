@@ -46,13 +46,16 @@ const PeopleHeaderChat = ({ id, bfs,activeMessage ,activeChat,setActiveChat,acti
   return (
     <div className={`profile-header-chat ${activeChat == id ? "active-people-chat" : ""}`}
       {...longPressEvent}
-      onClick={handleChatClick}
     >
-      <div className="profile-header__avatar online-profile-header-chat">
+      <div className="profile-header__avatar online-profile-header-chat"
+      onClick={handleChatClick}
+      >
         <img src={bfs} alt="avatar" />
       </div>
       <div className="profile-header__content">
-        <div className="timeStamp-name">
+        <div className="timeStamp-name"
+        onClick={handleChatClick}
+        >
           <p className="name-peopla-chat">Developers Frontend</p>
           <p className="message_Recieved-chat">Salem: How are you?</p>
         </div>
