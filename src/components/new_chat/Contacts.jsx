@@ -25,52 +25,48 @@ const Contacts = () => {
     };
   }, [dispatch]);
   return (
-    <>
-    {isContactsModel&&(
-      <div className={`overlay-forward`}>
-        <div className={`ForwardMessage-Model`} ref={SendCodeRef}>
-          <div className="header-forward">
-            <h5>Contacts</h5>
-          </div>
-          <div className="Search-people-chat">
-        <FormInputwithIcon
-          name={"Search-People"}
-          id={"Search-People"}
-          label={"Search Contacts"}
-        />
-        <div style={{ marginBottom: "5px" }}></div>
-      </div>
-          <div className="wrap-forward-model">
-            <div className="content-info-forw">
-              <input type="checkbox" name="" id="" onChange={()=>setSelected(!selected)}/>
-              <div className="info">
-                <img src={tony} alt="" className="people-img" />
-                <div className="info-forw">
-                  <div className="admin-for">
-                    <p>Tony Stark </p>
-                  </div>
-                  <p className="online">
-                    <FaCircle /> Online
-                  </p>
+    <div className={`overlay-forward ${isContactsModel ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+      <div className={`ForwardMessage-Model ${isContactsModel ? "active": ""}`} ref={SendCodeRef}>
+        <div className="header-forward">
+          <h5>Contacts</h5>
+        </div>
+        <div className="Search-people-chat">
+      <FormInputwithIcon
+        name={"Search-People"}
+        id={"Search-People"}
+        label={"Search Contacts"}
+      />
+      <div style={{ marginBottom: "5px" }}></div>
+    </div>
+        <div className="wrap-forward-model">
+          <div className="content-info-forw">
+            <input type="checkbox" name="" id="" onChange={()=>setSelected(!selected)}/>
+            <div className="info">
+              <img src={tony} alt="" className="people-img" />
+              <div className="info-forw">
+                <div className="admin-for">
+                  <p>Tony Stark </p>
                 </div>
+                <p className="online">
+                  <FaCircle /> Online
+                </p>
               </div>
             </div>
-            
           </div>
-          {selected&&(
-          <div className="send-forward">
-            <div className="name-send-to-forward">
-                <p>Tony Starc</p>
-            </div>
-            <div className="icon-send-froward">
-                <FaPaperPlane/>
-            </div>
-          </div>
-          )}
+          
         </div>
+        {selected&&(
+        <div className="send-forward">
+          <div className="name-send-to-forward">
+              <p>Tony Starc</p>
+          </div>
+          <div className="icon-send-froward">
+              <FaPaperPlane/>
+          </div>
+        </div>
+        )}
       </div>
-    )}
-    </>
+    </div>
   );
 };
 

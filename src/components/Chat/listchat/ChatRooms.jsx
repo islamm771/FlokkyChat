@@ -30,7 +30,7 @@ const ChatRooms = () => {
   }, [dispatch]);
   return (
     <div className={`overlay ${isChatRoom? "active-chat": "disactive-chat"}`}>
-      <div ref={chatRoomRef} className={`chatRoom`}>
+      <div ref={chatRoomRef} className={`chatRoom ${isChatRoom? "active": ""}`}>
         <div className="header-chatRoom">
           <h5>Chat Rooms</h5>
           <IoMdCloseCircle onClick={handleToggleChatList}/>
