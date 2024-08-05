@@ -38,24 +38,29 @@ const SellProducts = () => {
 
   return (
     <div
-      className={`overlay ${
+      className={`overlay overflow-hidden ${
         isSellProductsModel ? "active-chat" : "disactive-chat"
       } `}
     >
-      <div ref={chatRoomRef} className={`new-chat`}>
+      <div ref={chatRoomRef} className={`new-chat ${
+        isSellProductsModel ? "new-chat-active" : ""
+        }`}>
         <div className="tab-new-chat">
-          <ul>
+          {/* <ul>
             <li className="active tabs-enter">
               <MdProductionQuantityLimits /> New Product
             </li>
-          </ul>
+          </ul> */}
+          <div className="header-Report">
+              <h5>Create New Product</h5>
+          </div>
         </div>
         <form>
           <div className="wrap-new-chat">
-            <div className="header-Report">
+            {/* <div className="header-Report">
               <h5>Create New Product</h5>
-            </div>
-            <hr />
+            </div> */}
+            {/* <hr /> */}
             <div className="wrap-inputs-Report">
               <div className="inpt-newchat">
                 <p>Product Name</p>

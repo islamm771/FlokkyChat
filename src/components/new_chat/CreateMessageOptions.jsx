@@ -8,6 +8,7 @@ import sellProduct from "../../assests/chat/pub-product.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectGlobal,
+  setCreateMessageOptions,
   toggleContacts,
   toggleCreateMessageOptionsModel,
   toggleSellProducts
@@ -18,15 +19,23 @@ import { useState } from "react";
 import CreatePoll from "./MessageOptions/CreatePoll";
 
 import "./CreateMessage.css"
+import ImagesPreview from "./MessageOptions/ImagePreview";
+import VideoPreview from "./MessageOptions/VideoPreview";
+import GifPreview from "./MessageOptions/GifPreview";
+import AudioPreview from "./MessageOptions/AudioPreview";
 
 const CreateMessageOptions = () => {
   const dispatch = useDispatch();
   const {createMessageOptions} = useSelector(selectGlobal)
   const [text, setText] = useState('');
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedVideos, setSelectedVideos] = useState([]);
+  const [selectedAudio , setSelectedAudio] = useState(null)
   const [postPullOptions, setPostPullOptions] = useState([
     { id: 1, value: "" },
     { id: 2, value: "" },
   ]);
+  const [selectedGif, setSelectedGif] = useState(null);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -81,12 +90,39 @@ const CreateMessageOptions = () => {
           </div>
         </div>
         <div className="content-buttons-options-message">
+
+        { createMessageOptions == "image" && <ImagesPreview 
+            images={selectedImages}
+            setImages={setSelectedImages} /> }
+
+        { createMessageOptions == "video" && <VideoPreview 
+            videos={selectedVideos}
+            setVideos={setSelectedVideos} /> }
+
+        { createMessageOptions == "gif" && <GifPreview 
+            selectedGif={selectedGif}
+            setSelectedGif={setSelectedGif} /> }
+
+        { createMessageOptions == "audio" && <AudioPreview 
+          audio={selectedAudio}
+          setAudio={setSelectedAudio}/> }
+
           <div className="images-actions-main-chat-message">
             <div className="icons-actions-main-chat icons-actions-main-chat-camera flex-icons-action-chat">
               <div className="box-camera-chat w-important-message-chat">
                 <input
                   type="file"
+                  multiple
                   accept="image/x-png, image/gif, image/jpeg"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setSelectedImages(e.target.files);
+                      dispatch(setCreateMessageOptions("image"));
+                    } else {
+                      dispatch(setCreateMessageOptions("normal"))
+                    }
+                  }}
                 />
                 <div className="wrapp-img-create-message">
                   <img src={camera} alt="" />
@@ -96,7 +132,9 @@ const CreateMessageOptions = () => {
                 <p>Upload Images</p>
               </div>
             </div>
-            <div className="icons-actions-main-chat icons-actions-main-chat-poll flex-icons-action-chat">
+            <div className="icons-actions-main-chat icons-actions-main-chat-poll flex-icons-action-chat"
+            onClick={() => dispatch(setCreateMessageOptions("poll"))}
+            >
               <div className="wrapp-img-create-message">
                 <img src={poll} alt="" />
               </div>
@@ -106,7 +144,18 @@ const CreateMessageOptions = () => {
             </div>
             <div className="icons-actions-main-chat icons-actions-main-chat-video flex-icons-action-chat">
               <div className="box-camera-chat w-important-message-chat">
-                <input type="file" accept="video/*" />
+                <input type="file"
+                accept="video/*"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    setSelectedVideos(e.target.files);
+                    dispatch(setCreateMessageOptions("video"))
+                  } else {
+                    dispatch(setCreateMessageOptions("normal"))
+                  }
+                }}
+                />
                 <div className="wrapp-img-create-message">
                   <img src={video} alt="" />
                 </div>
@@ -123,7 +172,8 @@ const CreateMessageOptions = () => {
                 <p>Background</p>
               </div>
             </div>
-            <div className="icons-actions-main-chat icons-actions-main-chat-gif flex-icons-action-chat">
+            <div className="icons-actions-main-chat icons-actions-main-chat-gif flex-icons-action-chat"
+            onClick={() => dispatch(setCreateMessageOptions("gif"))}>
               <div className="wrapp-img-create-message bg-message-special-chat">
                 <img src={gif} alt="" />
               </div>
@@ -180,7 +230,18 @@ const CreateMessageOptions = () => {
             </div>
             <div className="icons-actions-main-chat icons-actions-main-chat-audio flex-icons-action-chat">
               <div className="box-camera-chat w-important-message-chat">
-                <input type="file" accept="audio/*" />
+                <input 
+                type="file" 
+                accept="audio/*"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    setSelectedAudio(e.target.files[0]);
+                    dispatch(setCreateMessageOptions("audio"))
+                  } else {
+                    dispatch(setCreateMessageOptions("normal"))
+                  }
+                }}/>
                 <div className="wrapp-img-create-message bg-message-special-chat">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -205,6 +266,7 @@ const CreateMessageOptions = () => {
               </div>
             </div>
           </div>
+
 
           { createMessageOptions == "poll" && <CreatePoll 
             postPullOptions={postPullOptions} 

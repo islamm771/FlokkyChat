@@ -29,7 +29,7 @@ import video from "../../../assests/chat/video.svg";
 import poll from "../../../assests/chat/poll.svg";
 import bg from "../../../assests/chat/bg.svg";
 import gif from "../../../assests/chat/gificon.svg";
-import { MdOutlineClose } from "react-icons/md";
+import { MdClose, MdOutlineClose } from "react-icons/md";
 import like from "../../../assests/chat/like.webp";
 import { GrServices } from "react-icons/gr";
 import { useEffect, useRef, useState } from "react";
@@ -329,6 +329,18 @@ const MainChat = () => {
   ]);
 
 
+  const [anotherMessage,setAnotherMessage] = useState(false)
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedVideos, setSelectedVideos] = useState([]);
+  const [selectedAudio , setSelectedAudio] = useState(null);
+
+  // useEffect(() => {
+  //   if (!selectedAudio || selectedVideos.length === 0 || selectedImages.length === 0) {
+  //     setAnotherMessage(false);
+  //   } 
+  // }, [selectedAudio, selectedImages, selectedVideos]);
+
+
 
   return (
     <div>
@@ -551,13 +563,61 @@ const MainChat = () => {
             <IoCloseCircleOutline />
           </div>
         </div>
+
+        <div className={`absolute left-0 w-full p-2 bg-white z-10 ${anotherMessage ? "bottom-[60px] opacity-100 visible" : 
+          "bottom-0 opacity-0 invisible"}`}>
+          <button
+            className="w-fit absolute right-2 z-10"
+            onClick={() => {
+              setAnotherMessage(false)
+            }}
+          >
+            <MdClose />
+          </button>
+          <div className="img-preview-container">
+            { selectedImages.map((img, imgIndex) => (
+              <div className="img-preview-item" key={imgIndex}>
+                <img
+                  src={URL.createObjectURL(img)}
+                  alt={img?.name}
+                  loading="lazy"
+                />
+
+                <button
+                  className="img-preview-close"
+                  onClick={() => {
+                    setSelectedImages(selectedImages.filter((_, index) => index !== imgIndex));
+                    if(selectedImages.length == 1){
+                      setAnotherMessage(false)
+                    }
+                  }}
+                >
+                  <MdClose />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="images-actions-main-chat">
+
           <div className="icons-actions-main-chat icons-actions-main-chat-camera">
             <div className="text-icons-actions-camera">
               <p>Upload Images</p>
             </div>
             <div className="box-camera-chat">
-              <input type="file" accept="image/x-png, image/gif, image/jpeg" />
+              <input type="file" 
+              multiple
+              accept="image/x-png, image/gif, image/jpeg"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  setSelectedImages(Array.from(e.target.files));
+                  setAnotherMessage(true)
+                } else {
+                  // setAnotherMessage(false)
+                }
+              }}
+              />
               <img src={camera} alt="" />
             </div>
           </div>
@@ -568,7 +628,7 @@ const MainChat = () => {
           </div>
 
           <div ref={messageOptionsRef} className={`flex flex-col bg-white gap-3 py-[5px] px-[10px] rounded-lg shadow-[0px_0px_7px_0px_#ddd] absolute bottom-[60px] left-[8px] transition-opacity duration-[0.5s]
-                ${ activeMessageOption ? "opacity-100" : "opacity-0" } `}>
+                ${ activeMessageOption ? "opacity-100 visible" : "opacity-0 invisible" } `}>
 
           <div className="icons-actions-main-chat icons-actions-main-chat-bg"
             onClick={() => {
@@ -597,7 +657,10 @@ const MainChat = () => {
               <p>Audio Upload</p>
             </div>
             <div className="box-camera-chat">
-              <input type="file" accept="audio/*" />
+              <input 
+              type="file" 
+              accept="audio/*"
+              />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
