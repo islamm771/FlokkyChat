@@ -113,11 +113,10 @@ const Contacts = () => {
   };
 
   const handleTouchMove = (e) => {
+    e.preventDefault(); // Prevents the default touchmove behavior
     const touchY = e.touches[0].clientY;
     const diffY = touchY - startY;
-    if(diffY < 0){
-      setPosition(0)
-    }else{
+    if (diffY > 0) {
       setPosition(diffY);
     }
   };
