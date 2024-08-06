@@ -11,7 +11,9 @@ import {
   setCreateMessageOptions,
   toggleContacts,
   toggleCreateMessageOptionsModel,
-  toggleSellProducts
+  toggleSellProducts,
+  toggleShareService,
+  toggleShareVacancy
 } from "../../app/feature/ListChatSlice";
 import { GrServices } from "react-icons/gr";
 import { IoMdContacts } from "react-icons/io";
@@ -23,6 +25,8 @@ import ImagesPreview from "./MessageOptions/ImagePreview";
 import VideoPreview from "./MessageOptions/VideoPreview";
 import GifPreview from "./MessageOptions/GifPreview";
 import AudioPreview from "./MessageOptions/AudioPreview";
+import { BsShareFill } from "react-icons/bs";
+import { PiBagSimpleFill } from "react-icons/pi";
 
 const CreateMessageOptions = () => {
   const dispatch = useDispatch();
@@ -59,6 +63,14 @@ const CreateMessageOptions = () => {
 
   const handleToggleSellProduct = () => {
     dispatch(toggleSellProducts());
+  };
+
+  const handleToggleShareService = () => {
+    dispatch(toggleShareService());
+  };
+
+  const handleToggleShareVacancy = () => {
+    dispatch(toggleShareVacancy())
   };
 
   return (
@@ -125,7 +137,7 @@ const CreateMessageOptions = () => {
                       }
                     }}
                   />
-                  <div className="wrapp-img-create-message">
+                  <div className="wrapp-img-create-message bg-message-special-chat">
                     <img src={camera} alt="" />
                   </div>
                 </div>
@@ -136,7 +148,7 @@ const CreateMessageOptions = () => {
               <div className="icons-actions-main-chat icons-actions-main-chat-poll flex-icons-action-chat"
               onClick={() => dispatch(setCreateMessageOptions("poll"))}
               >
-                <div className="wrapp-img-create-message">
+                <div className="wrapp-img-create-message bg-message-special-chat">
                   <img src={poll} alt="" />
                 </div>
                 <div className="text-icons-actions-poll-message">
@@ -157,7 +169,7 @@ const CreateMessageOptions = () => {
                     }
                   }}
                   />
-                  <div className="wrapp-img-create-message">
+                   <div className="wrapp-img-create-message bg-message-special-chat">
                     <img src={video} alt="" />
                   </div>
                 </div>
@@ -210,15 +222,24 @@ const CreateMessageOptions = () => {
                   <img src={sellProduct} alt="" />
                 </div>
                 <div className="text-icons-actions-mic-meassage">
-                  <p>Sell product</p>
+                  <p>Publish Listing</p>
                 </div>
               </div>
-              <div className="icons-actions-main-chat icons-actions-main-chat-mic flex-icons-action-chat">
+              <div className="icons-actions-main-chat icons-actions-main-chat-mic flex-icons-action-chat" onClick={handleToggleShareService}>
                 <div className="wrapp-img-create-message bg-message-special-chat">
                   <GrServices />
+                  {/* <BsShareFill className="!w-[21px] !h-[21px]" /> */}
                 </div>
                 <div className="text-icons-actions-mic-meassage">
-                  <p>Add Services</p>
+                  <p>Share Service</p>
+                </div>
+              </div>
+              <div className="icons-actions-main-chat icons-actions-main-chat-mic flex-icons-action-chat" onClick={handleToggleShareVacancy}>
+                <div className="wrapp-img-create-message bg-message-special-chat">
+                  <PiBagSimpleFill />
+                </div>
+                <div className="text-icons-actions-mic-meassage">
+                  <p>Share Vacancy</p>
                 </div>
               </div>
               <div className="icons-actions-main-chat icons-actions-main-chat-mic flex-icons-action-chat" onClick={handleToggleContacts}>

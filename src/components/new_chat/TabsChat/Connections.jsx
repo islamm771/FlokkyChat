@@ -1,6 +1,6 @@
 import { IoIosArrowDown } from "react-icons/io";
 import FormInputwithIcon from "../../ui/formInputWithSearchIcon/FormInputwithIcon";
-import bfs from "../../../assests/chat/johny.jpeg";
+// import bfs from "../../../assests/chat/johny.jpeg";
 import { FaVolumeUp } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 import { setActiveMessage, toggleChatRoom, toggleContacts, toggleWrapgroupPeopleChat } from "../../../app/feature/ListChatSlice";
@@ -42,16 +42,24 @@ const Connections = () => {
             </button>
         </div>
       </div>
-      <div className="hidden md:block Search-people-chat">
+      {/* <div className="hidden md:block Search-people-chat">
         <FormInputwithIcon
           name={"Search-People"}
           id={"Search-People"}
           label={"Search Connections"}
         />
         <div style={{ marginBottom: "5px" }}></div>
-      </div>
+      </div> */}
       <div className="people-chat-list">
-        <PeopleHeaderChat bfs={bfs} activeMessage={2} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={ activeMenu} onLongPress={handleLongPress} id={1} />
+        <PeopleHeaderChat
+        id={1}
+        name="Neko Bebop" 
+        bfs={"/img/avatar/01.jpg"} 
+        activeMessage={2} 
+        activeChat={activeChat} 
+        setActiveChat={setActiveChat} 
+        activeMenu={ activeMenu} 
+        onLongPress={handleLongPress} />
       </div>
     </div>
   );

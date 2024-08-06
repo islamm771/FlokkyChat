@@ -71,14 +71,14 @@ const MessageFrom = ({
     />
     <div className="message-from">
       { type != 'connection' && (
-        <div className="img" onClick={handleViewProfile}>
+        <div className="user-img" onClick={handleViewProfile}>
           <img src={data.img} alt="" />
         </div>
       )  }
       <div className="message flex-messages-from">
         <div className="wrap-message-contnet">
           { type != 'connection' && (
-            <p className="name-message-sent">Ahmed</p>
+            <p className="name-message-sent" onClick={handleViewProfile}>Ahmed</p>
           )}
           {type == 'job' && (
             <p className="font-semibold mb-[4px]">Maketing Manger | Position</p>

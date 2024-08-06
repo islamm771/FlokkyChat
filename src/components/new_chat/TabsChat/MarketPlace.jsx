@@ -53,14 +53,14 @@ const MarketPlace = () => {
             </button>
         </div>
       </div>
-      <div className="hidden md:block Search-people-chat">
+      {/* <div className="hidden md:block Search-people-chat">
         <FormInputwithIcon
           name={"Search-People"}
           id={"Search-People"}
           label={"Search MarketPlace"}
         />
         <div style={{ marginBottom: "5px" }}></div>
-      </div>
+      </div> */}
       <div className="people-chat-list">
       <div className="profile-header-chat">
           <div className="profile-header__avatar offline-profile-header-chat">

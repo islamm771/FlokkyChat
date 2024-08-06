@@ -5,7 +5,7 @@ import useLongPress from '../../../hooks/useLongPress';
 import { FaVolumeUp } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
 
-const PeopleHeaderChat = ({ id, bfs,activeMessage ,activeChat,setActiveChat,activeMenu, onLongPress }) => {
+const PeopleHeaderChat = ({ name,id, bfs,activeMessage ,activeChat,setActiveChat,activeMenu, onLongPress }) => {
   const dispatch = useDispatch();
   const listRef = useRef();
 
@@ -56,7 +56,7 @@ const PeopleHeaderChat = ({ id, bfs,activeMessage ,activeChat,setActiveChat,acti
         <div className="timeStamp-name"
         onClick={handleChatClick}
         >
-          <p className="name-peopla-chat">Developers Frontend</p>
+          <p className="name-peopla-chat">{name}</p>
           <p className="message_Recieved-chat">Salem: How are you?</p>
         </div>
         <div className="message-people-count">
@@ -70,13 +70,27 @@ const PeopleHeaderChat = ({ id, bfs,activeMessage ,activeChat,setActiveChat,acti
               <p className="count-people-chat-list">1</p>
             </div>
           </div>
-          <IoIosArrowDown
-            className="list-people-chat"
-            onClick={() => onLongPress(id)}
-          />
+          <div className="list-people-chat" ref={listRef}>
+            <IoIosArrowDown
+              onClick={() => onLongPress(id)}
+            />
+            <div
+              className={`list-actoin-people-chat ${
+                activeMenu === id ? "active-people-chat" : "disActive-people-chat"
+              }`}
+            >
+              <div className="ul-chat-people">
+                <li>Archive chat</li>
+                <li>Mute notifications</li>
+                <li>Exit group</li>
+                <li>Pin chat</li>
+                <li>Make as unread</li>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div
+      {/* <div
         ref={listRef}
         className={`list-actoin-people-chat ${
           activeMenu === id ? "active-people-chat" : "disActive-people-chat"
@@ -89,7 +103,7 @@ const PeopleHeaderChat = ({ id, bfs,activeMessage ,activeChat,setActiveChat,acti
           <li>Pin chat</li>
           <li>Make as unread</li>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -7,22 +7,103 @@ import {
 } from "../../app/feature/ListChatSlice";
 import { selectGlobal } from "../../app/feature/ListChatSlice";
 import { useEffect, useRef } from "react";
-import { MdProductionQuantityLimits } from "react-icons/md";
+import { BsCameraFill } from "react-icons/bs";
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid'; // Import uuid library
+import { FaTimes } from "react-icons/fa";
+import FormInput from "../ui/formInput/FormInput";
+import Select from "../ui/select/Select";
+
+
+
+const countries = [
+  { value: "Afghanistan" },
+  { value: "Albania" },
+  { value: "Algeria" },
+  { value: "Andorra" },
+  { value: "Angola" },
+];
+
+const cities = [
+  { value: "Kabul" },
+  { value: "Tirana" },
+  { value: "Algiers" },
+  { value: "Andorra la Vella" },
+  { value: "Luanda" },
+];
+
+const categories = [
+  { value: "Category 1" },
+  { value: "Category 2" },
+  { value: "Category 3" },
+];
+
+const conditions = [
+  { value: "Condition 1" },
+  { value: "Condition 2" },
+  { value: "Condition 3" },
+];
+
+const currencies = [
+  { value: "USD" },
+  { value: "EUR" },
+  { value: "EGP" },
+  { value: "SAR" },
+  { value: "AED" },
+];
 
 const SellProducts = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
   const dispatch = useDispatch();
   const { isSellProductsModel } = useSelector(selectGlobal);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [isDragOver, setIsDragOver] = useState(false);
+  
   const chatRoomRef = useRef(null);
 
   const handleToggleSellProducts = () => {
     dispatch(toggleSellProducts());
   };
 
-  const handleImageChange = (event) => {
-    const image = event.target.files[0];
-    setSelectedImage(image);
+  const handleImageUpload = (event) => {
+    const files = Array.from(event.target.files);
+    const newImages = files.map(file => ({
+      id: uuidv4(), // Generate unique ID
+      url: URL.createObjectURL(file)
+    }));
+    setSelectedImages(prevImages => [...prevImages, ...newImages]);
   };
+
+  const handleRemoveImage = (id) => {
+    setSelectedImages(prevImages => prevImages.filter(image => image.id !== id));
+  };
+
+  // const handleOnDragEnd = (result) => {
+  //   if (!result.destination) return;
+  //   const items = Array.from(selectedImages);
+  //   const [reorderedItem] = items.splice(result.source.index, 1);
+  //   items.splice(result.destination.index, 0, reorderedItem);
+  //   setSelectedImages(items);
+  // };
+
+  // const handleDrop = (event) => {
+  //   event.preventDefault();
+  //   const files = Array.from(event.dataTransfer.files);
+  //   const newImages = files.map(file => ({
+  //     id: uuidv4(),
+  //     url: URL.createObjectURL(file)
+  //   }));
+  //   setSelectedImages(prevImages => [...prevImages, ...newImages]);
+  //   setIsDragOver(false);
+  // };
+
+  // const handleDragOver = (event) => {
+  //   event.preventDefault();
+  //   setIsDragOver(true);
+  // };
+
+  // const handleDragLeave = () =>{
+  //   setIsDragOver(false);
+  // }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,128 +126,120 @@ const SellProducts = () => {
       <div ref={chatRoomRef} className={`new-chat ${
         isSellProductsModel ? "new-chat-active" : ""
         }`}>
-        <div className="tab-new-chat">
-          {/* <ul>
-            <li className="active tabs-enter">
-              <MdProductionQuantityLimits /> New Product
-            </li>
-          </ul> */}
-          <div className="header-Report">
-              <h5>Create New Product</h5>
-          </div>
-        </div>
-        <form>
-          <div className="wrap-new-chat">
-            {/* <div className="header-Report">
-              <h5>Create New Product</h5>
-            </div> */}
-            {/* <hr /> */}
-            <div className="wrap-inputs-Report">
-              <div className="inpt-newchat">
-                <p>Product Name</p>
-                <input type="text" placeholder="Product Name" />
-              </div>
-              <div className="inpt-newchat">
-                <p>Country</p>
-                <select name="" id="">
-                  <option value="">Select Country</option>
-                  <option value="">Country1</option>
-                  <option value="">Country2</option>
-                  <option value="">Country3</option>
-                </select>
-              </div>
-              <div className="inpt-newchat">
-                <p>City</p>
-                <select name="" id="">
-                  <option value="">Select City</option>
-                  <option value="">City1</option>
-                  <option value="">City2</option>
-                  <option value="">City3</option>
-                </select>
-              </div>
-              <div className="inpt-newchat">
-                <p>Category</p>
-                <select name="" id="">
-                  <option value="">Select Category</option>
-                  <option value="">Category1</option>
-                  <option value="">Category2</option>
-                  <option value="">Category3</option>
-                </select>
-              </div>
-              <div className="inpt-newchat">
-                <p>Currency</p>
-                <select name="" id="">
-                  <option value="">Select Currency</option>
-                  <option value="">Currency1</option>
-                  <option value="">Currency2</option>
-                  <option value="">Currency3</option>
-                </select>
-              </div>
-              <div className="inpt-newchat">
-                <p>Price</p>
-                <input type="text" placeholder="Price" />
-              </div>
-              <div className="inpt-newchat">
-                <p>Condition</p>
-                <select name="" id="">
-                  <option value="">Select Condition</option>
-                  <option value="">New</option>
-                  <option value="">Used</option>
-                </select>
-              </div>
-              <div className="inpt-newchat">
-                <p>Stock</p>
-                <input type="number" placeholder="Stock" />
-              </div>
-              <div className="inpt-newchat">
-                <p>Description</p>
-                <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="10"
-                  placeholder="Room Description"
-                ></textarea>
-              </div>
-              <div className="inpt-newchat">
-                <p>Images</p>
-                <div className="wrap-images-sell-product">
-                  {selectedImage ? (
-                    <div className="selected-image">
-                      <img
-                        src={URL.createObjectURL(selectedImage)}
-                        alt="Selected"
-                      />
-                      <p onClick={()=>setSelectedImage(null)} className="Clear-Selected-Image">X</p>
-                    </div>
-                  ) : (
-                    <>
-                      <IoCloudUploadOutline />
-                      <p className="txt-image-input">Upload Image</p>
-                      <input
-                        type="file"
-                        name=""
-                        id=""
-                        onChange={handleImageChange}
-                      />
-                    </>
-                  )}
+        <div className="sell-product-container">
+          <div className="flex items-center justify-between mb-8">
+              <h2 className="sell-product-title !mb-0">Add a Listing to Classifieds</h2>
+              <button className="w-fit p-2 text-[#adafca]" onClick={handleToggleSellProducts}><FaTimes /></button>
+            </div>
+
+          <form action="">
+            <div className="wrap-new-chat">
+              <div className="sell-product-form px-[20px] py-[15px]">
+                <label
+                  className={`sell-upload-product-img ${isDragOver ? "scale-125 !text-[#fd6729] !border-[#fd6729]" : ""}`}
+                  htmlFor="upload-product-img"
+                  // onDrop={handleDrop}
+                  // onDragOver={handleDragOver}
+                  // onDragLeave={handleDragLeave}
+                >
+                  <input
+                    type="file"
+                    id="upload-product-img"
+                    style={{ display: "none" }}
+                    multiple
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                  />
+                  <BsCameraFill />
+                  <p>Product image</p>
+                </label>
+
+                { selectedImages.length > 0 && (
+                  <div
+                  className="progress-stat-bar"
+                  style={{
+                    width: "100%",
+                    height: "4px",
+                    position: "relative",
+                    marginBottom: 22,
+                    paddingRight: 35,
+                  }}
+                >
+                  <div
+                    className="bar"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      backgroundColor: "#ddd",
+                    }}
+                  ></div>
+                  <div
+                    className="colored-bar"
+                    style={{
+                      width: `50%`,
+                      height: "100%",
+                      position: "absolute",
+                      top: 0,
+                      background: "linear-gradient(90deg, #fd6729, orange)",
+                    }}
+                  ></div>
+
+                  <p className="absolute top-[-5px] right-0 text-[14px]">50%</p>
+                  </div>
+                ) }
+
+                { selectedImages.length > 0 && (
+                  <div className="grid !grid-cols-2 md:!grid-cols-4">
+                    {selectedImages.map((image, index) => (
+                      <div className="thumbnail relative" key={index}>
+                        <img
+                          className="w-full h-full object-cover"
+                          src={image.url}
+                          alt={`Thumbnail ${index}`}
+                        />
+                        <button
+                          type="button"
+                          className="absolute top-[5px] right-[5px] bg-[#00000040] text-white w-[25px] h-[25px] flex items-center justify-center rounded-[50%]"
+                          onClick={() => handleRemoveImage(image.id)}
+                        >
+                          <FaTimes />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) }
+
+                <FormInput label="Product name" name="product-name" type="text" />
+
+                <div className="sell-product-form-item">
+                  <Select defaultValue={"Country"} optionsArray={countries} />
+                  <Select defaultValue={"City"} optionsArray={cities} />
                 </div>
+
+                <div className="sell-product-form-item">
+                  <Select defaultValue={"Category"} optionsArray={categories} />
+                  <Select defaultValue={"Condition"} optionsArray={conditions} />
+                </div>
+
+                <div className="sell-product-form-item">
+                  <Select defaultValue={"Currency"} optionsArray={currencies} />
+                  <FormInput label="Price" name="price" type="number" />
+                </div>
+
+                <FormInput
+                  label="Description"
+                  name="desc"
+                  type="text"
+                  className="sell-product-textarea"
+                />
               </div>
             </div>
-          </div>
-          <div className="btn-newChat">
-            <button
-              type="button"
-              onClick={handleToggleSellProducts}
-              className="closeReport"
-            >
-              Close
-            </button>
-            <button className="SubmitReport">Save Product</button>
-          </div>
-        </form>
-        <div></div>
+            <div className="flex gap-[15px] mt-[3rem]">
+              <button className="button white">Cancel</button>
+              <button className="button primary">Sell product</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

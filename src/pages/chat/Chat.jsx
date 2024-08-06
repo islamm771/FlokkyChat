@@ -25,6 +25,8 @@ import Contacts from "../../components/new_chat/Contacts";
 import SellProducts from "../../components/new_chat/SellProducts";
 import VideoCall from "../../components/Chat/mainchat/VideoCall";
 import Mute from "../../components/Chat/Mute";
+import ShareService from "../../components/new_chat/ShareService";
+import ShareVacancy from "../../components/new_chat/ShareVacancy";
 
 const Chat = () => {
   const { isListActionPeopleChat, isOnlineList, isWrapgroupPeopleChat } =
@@ -163,6 +165,8 @@ const Chat = () => {
       <PinMessage />
       <Contacts />
       <SellProducts />
+      <ShareService />
+      <ShareVacancy />
     </>
   );
 };

@@ -76,14 +76,14 @@ const Fav = () => {
           </button>
         </div>
       </div>
-      <div className="hidden md:block Search-people-chat">
+      {/* <div className="hidden md:block Search-people-chat">
         <FormInputwithIcon
           name={"Search-People"}
           id={"Search-People"}
           label={"Search Fav"}
         />
         <div style={{ marginBottom: "5px" }}></div>
-      </div>
+      </div> */}
       <div className="people-chat-list">
         <div className="communities-list">
           <p className="text-[18px] font-bold my-2 px-2">Communities</p>

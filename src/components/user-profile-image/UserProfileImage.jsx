@@ -2,12 +2,12 @@ import React from 'react'
 import { MdAdminPanelSettings } from 'react-icons/md'
 import { RiVerifiedBadgeFill } from 'react-icons/ri'
 
-const UserProfileImage = () => {
+const UserProfileImage = ({src}) => {
   return (
     <div className="after:content-[''] border-solid border-[1px] border-[#ff6728] after:bg-[#1df377] after:w-[9px] after:h-[9px] after:absolute after:top-0 after:-left-2 after:rounded-full relative w-[45px] h-[45px] rounded-full">
         <div className="relative w-full h-full rounded-full p-[1px] bg-white">
             <img
-                src="/img/avatar/01.jpg"
+                src={src ? src : "/img/avatar/01.jpg"}
                 alt="Profile"
                 className="w-full h-full rounded-full"
             />

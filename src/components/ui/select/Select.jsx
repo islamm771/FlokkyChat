@@ -1,31 +1,31 @@
 import React from "react";
 import "./select.css";
 import { useDispatch } from "react-redux";
-import {
-	setSelectedAlumaniUniversity,
-	setSelectedCollege,
-} from "../../../app/feature/ListChatSlice";
+// import {
+// 	setSelectedAlumaniUniversity,
+// 	setSelectedCollege,
+// } from "../../../app/feature/ListChatSlice";
 
 const Select = ({ optionsArray, defaultValue, setValue, selectName, date }) => {
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
 	const updateValue = (value) => {
 		if (selectName === "university") {
-			dispatch(setSelectedAlumaniUniversity({ university: value }));
+			// dispatch(setSelectedAlumaniUniversity({ university: value }));
 		}
 		if (selectName === "college") {
-			dispatch(setSelectedCollege({ college: value }));
+			// dispatch(setSelectedCollege({ college: value }));
 		}
 	};
 	return (
-		<div class="form-item form-item-css">
+		<div className="form-item form-item-css">
 			<div
-				class="form-select form-select-css"
+				className="form-select form-select-css"
 				style={{ display: `${date === "yes" ? "flex" : ""}` }}
 			>
 				{date === "yes" && (
 					<svg
-						class="form-input-icon icon-events"
+						className="form-input-icon icon-events"
 						style={{ position: "absolute", top: "12px", left: "8px" }}
 					>
 						<use xlinkHref="#svg-events"></use>
@@ -56,7 +56,7 @@ const Select = ({ optionsArray, defaultValue, setValue, selectName, date }) => {
 						</option>
 					))}
 				</select>
-				<svg class="form-select-icon icon-small-arrow">
+				<svg className="form-select-icon icon-small-arrow">
 					<use xlinkHref="#svg-small-arrow"></use>
 				</svg>
 			</div>

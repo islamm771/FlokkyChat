@@ -38,18 +38,18 @@ const Communities = () => {
           </button>
         </div>
       </div>
-      <div className="hidden md:block Search-people-chat">
+      {/* <div className="hidden md:block Search-people-chat">
         <FormInputwithIcon
           name={"Search-People"}
           id={"Search-People"}
           label={"Search Communities"}
         />
         <div style={{ marginBottom: "5px" }}></div>
-      </div>
+      </div> */}
       <div className="people-chat-list">
-        <PeopleHeaderChat bfs={bfs} activeMessage={1} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={ activeMenu} onLongPress={handleLongPress} id={1} />
-        <PeopleHeaderChat bfs={bfs1} activeMessage={1} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={ activeMenu} onLongPress={handleLongPress} id={2} />
-        <PeopleHeaderChat bfs={bfs2} activeMessage={1} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={activeMenu} onLongPress={handleLongPress} id={3} />
+        <PeopleHeaderChat name={"Marketing"} bfs={bfs} activeMessage={1} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={ activeMenu} onLongPress={handleLongPress} id={1} />
+        <PeopleHeaderChat name={"Marketing"} bfs={bfs1} activeMessage={1} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={ activeMenu} onLongPress={handleLongPress} id={2} />
+        <PeopleHeaderChat name={"Marketing"} bfs={bfs2} activeMessage={1} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={activeMenu} onLongPress={handleLongPress} id={3} />
       </div>
     </div>
   );

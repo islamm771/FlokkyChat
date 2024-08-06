@@ -59,8 +59,6 @@ const Header = ({
 export default Header;
 
 
-
-
 const CommunityHeader = ({handleToggleOnlineList}) => {
   const dispatch = useDispatch()
   return(
@@ -72,7 +70,11 @@ const CommunityHeader = ({handleToggleOnlineList}) => {
           }} >
         <img src={img} alt={`'s avatar`} />
       </div>
-      <div className="info-username-hashtag">
+      <div className="info-username-hashtag"
+        onClick={ () => {
+          dispatch(setActiveTabOnline(1));
+          handleToggleOnlineList()
+          }}>
         <p className="username-main-chat">Marketing</p>
         <p className="hashtag-main-chat">
           #Technology
@@ -89,13 +91,22 @@ const CommunityHeader = ({handleToggleOnlineList}) => {
 }
 
 const ConnectionHeader = ({handleToggleOnlineList}) => {
+  const dispatch = useDispatch()
   return(
     <div className="info-main-chat">
       <div className=""
-        onClick={handleToggleOnlineList} >
+        onClick={ () => {
+          dispatch(setActiveTabOnline(1));
+          handleToggleOnlineList()
+          }} >
         <UserProfileImage />
       </div>
-      <div className="info-username-hashtag pl-5">
+      <div className="info-username-hashtag pl-5"
+      onClick={ () => {
+        dispatch(setActiveTabOnline(1));
+        handleToggleOnlineList()
+        }} 
+      >
         <p className="username-main-chat mb-1">Neko Bebop</p>
         <p className="hashtag-main-chat">
           Marketing Manager - Brandmarks
@@ -106,14 +117,22 @@ const ConnectionHeader = ({handleToggleOnlineList}) => {
 }
 
 const JobHeader = ({handleToggleOnlineList}) => {
+  const dispatch = useDispatch()
   return(
     <div className="info-main-chat">
       <div className=""
-        onClick={handleToggleOnlineList} >
-        <UserProfileImage />
+        onClick={ () => {
+          dispatch(setActiveTabOnline(1));
+          handleToggleOnlineList()
+          }} >
+        <UserProfileImage src={"/img/avatar/35.jpeg"} />
       </div>
-      <div className="info-username-hashtag pl-5">
-        <p className="username-main-chat mb-1">Neko Bebop</p>
+      <div className="info-username-hashtag pl-5"
+      onClick={ () => {
+        dispatch(setActiveTabOnline(1));
+        handleToggleOnlineList()
+        }} >
+        <p className="username-main-chat mb-1">Ahmed Ali</p>
         <p className="hashtag-main-chat">
           {/* Marketing Manager - Brandmarks */}
           Maketing Manger | Position

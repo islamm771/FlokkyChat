@@ -40,6 +40,7 @@
   color: #fff;
   font-weight: 900;
   font-size: 18px;
+  cursor: pointer;
 }
 .hashtag-main-chat {
   color: #fff;
@@ -255,8 +256,12 @@ color: #0c133b;
   flex-direction: row-reverse;
 }
 
-.message-from img,
-.message-to img {
+.message-from .user-img {
+  cursor: pointer;
+}
+
+.message-from .user-img img, 
+.message-to .user-img img  {
   height: 35px;
   width: 35px;
   border-radius: 100%;
@@ -369,9 +374,10 @@ margin-bottom: 5px;
   color: #fff !important;
 }
 .display-react {
+  position: absolute;
   display: flex;
   align-items: center;
-  background-color: #fbe2d7;
+  background-color: #fff;
   max-width: 100px;
   padding: 2px 4px;
   position: absolute;
@@ -444,6 +450,7 @@ margin-bottom: 5px;
 .name-message-sent {
   font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
 }
 .list-action-main-chat {
   width: 160px;
@@ -866,7 +873,8 @@ margin-bottom: 5px;
   height: auto;
   transform: translate(-50%, -50%);
   z-index: 5555555;
-  padding: 10px 5px;
+  /* padding: 10px 5px; */
+  padding: 20px;
   background: #fff;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -915,14 +923,21 @@ margin-bottom: 5px;
   -o-transform: translate(-50%, -50%);
 }
 .header-forward {
-  text-align: center;
-  border-bottom: 1px solid #5555;
-  padding: 7px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.header-forward h5{
+  font-size: 1.5rem;
+  color: #3e3f5e;
+  font-weight: 700;
 }
 
 .content-info-forw {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   padding: 5px 10px;
   margin-bottom: 5px;

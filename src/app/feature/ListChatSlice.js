@@ -32,6 +32,8 @@ const initialState = {
   isPinMessage: false,
   isContactsModel: false,
   isSellProductsModel: false,
+  isShareServiceModal:false,
+  isShareVacancyModal:false,
   isMuteModel:false,
   createMessageOptions:"normal",
 
@@ -64,6 +66,18 @@ export const GlobalSlice = createSlice({
     },
     FalseSellProducts(state) {
       state.isSellProductsModel = false;
+    },
+    toggleShareService (state) {
+      state.isShareServiceModal = !state.isShareServiceModal;
+    },
+    FalseShareService(state){
+      state.isShareServiceModal = false;
+    },
+    toggleShareVacancy (state) {
+      state.isShareVacancyModal = !state.isShareVacancyModal;
+    },
+    FalseShareVacancy(state){
+      state.isShareVacancyModal = false;
     },
     toggleContacts(state) {
       state.isContactsModel = !state.isContactsModel;
@@ -245,6 +259,10 @@ export const {
   FalseContacts,
   toggleSellProducts,
   FalseSellProducts,
+  toggleShareService,
+  FalseShareService,
+  toggleShareVacancy,
+  FalseShareVacancy,
   togglePinMessageChat,
   setIsMuteModel,
   setCreateMessageOptions,

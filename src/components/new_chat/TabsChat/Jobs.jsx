@@ -1,5 +1,5 @@
 import FormInputwithIcon from "../../ui/formInputWithSearchIcon/FormInputwithIcon";
-import bfs from "../../../assests/chat/roseanna.jpeg";
+import bfs from "../../../assests/chat/tony.jpeg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleChatRoom } from "../../../app/feature/ListChatSlice";
@@ -35,16 +35,16 @@ const Jobs = () => {
             </button>
         </div>
       </div>
-      <div className="hidden md:block Search-people-chat">
+      {/* <div className="hidden md:block Search-people-chat">
         <FormInputwithIcon
           name={"Search-People"}
           id={"Search-People"}
           label={"Search Jobs"}
         />
         <div style={{ marginBottom: "5px" }}></div>
-      </div>
+      </div> */}
       <div className="people-chat-list" >
-      <PeopleHeaderChat bfs={bfs} activeMessage={4} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={ activeMenu} onLongPress={handleLongPress} id={1} />
+      <PeopleHeaderChat name={"Ahmed Ali"} bfs={bfs} activeMessage={4} activeChat={activeChat} setActiveChat={setActiveChat} activeMenu={ activeMenu} onLongPress={handleLongPress} id={1} />
 
       </div>
     </div>

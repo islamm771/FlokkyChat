@@ -2,6 +2,10 @@
 	margin: 15px 0 !important;
 	/* margin-right: 12px !important; */
 }
+.form-select{
+	border: 0 !important;
+    padding: 0 !important;
+}
 
 @media screen and (max-width: 560px) {
 	.form-item-css {
