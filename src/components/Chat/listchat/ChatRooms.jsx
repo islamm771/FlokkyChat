@@ -60,7 +60,9 @@ const ChatRooms = () => {
     e.preventDefault(); // Prevents the default touchmove behavior
     const touchY = e.touches[0].clientY;
     const diffY = touchY - startY;
-    if (diffY > 0) {
+    if(diffY < 0){
+      setPosition(0)
+    }else{
       setPosition(diffY);
     }
   };
@@ -80,6 +82,21 @@ const ChatRooms = () => {
       setPosition(0)
     }
   } ,[isChatRoom])
+
+  const scrollDivRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setPosition(0)
+    };
+
+    const scrollDiv = scrollDivRef.current;
+    scrollDiv.addEventListener('scroll', handleScroll);
+
+    return () => {
+      scrollDiv.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div ref={chatRoomRef} className={`overlay overflow-hidden ${isChatRoom? "active-chat": "disactive-chat"}`}>
@@ -102,7 +119,7 @@ const ChatRooms = () => {
         <div className="search-input my-3">
           <FormInputwithIcon label={"Search for communities..."} id={"comm-search"} name={"comm-search"} />
         </div>
-        <div className="wrap-new-chat pr-[20px]">
+        <div className="wrap-new-chat pr-[20px]" ref={scrollDivRef}>
           <div className="joined mb-4">
             <p className="joined-title">Joined</p>
             <div className="list-joined">

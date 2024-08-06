@@ -80,7 +80,7 @@
 }
 
 .footer-Main-chat-page {
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0;
   background-color: #fff;
