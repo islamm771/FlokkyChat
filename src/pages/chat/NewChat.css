@@ -432,7 +432,7 @@
   }
 
   .OnlineListContainer {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     height: 100%;
@@ -486,7 +486,7 @@
     height: 100%;
     left: 0;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     top: 0;
     transition: left .15s;
     -webkit-transition: left .15s;
