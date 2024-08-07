@@ -74,10 +74,12 @@ const OnlineList = () => {
 
   const disableScroll = () => {
     document.body.style.overflow = 'hidden';
+    document.body.style.overscrollBehavior = 'none';
   };
 
   const enableScroll = () => {
     document.body.style.overflow = 'auto';
+    document.body.style.overscrollBehavior = 'auto';
   };
   
   const handleTouchStart = (e) => {

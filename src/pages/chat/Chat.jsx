@@ -47,14 +47,16 @@ const Chat = () => {
   const startX = useRef(0); // To track the initial touch position
   const divRef = useRef(null); // Reference to the sliding div
 
-  
   const disableScroll = () => {
     document.body.style.overflow = 'hidden';
+    document.body.style.overscrollBehavior = 'none';
   };
 
   const enableScroll = () => {
     document.body.style.overflow = 'auto';
+    document.body.style.overscrollBehavior = 'auto';
   };
+  
 
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;

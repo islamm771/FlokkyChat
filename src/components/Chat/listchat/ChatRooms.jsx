@@ -37,6 +37,14 @@ const ChatRooms = () => {
 
   const [isSliding,setIsSliding] = useState(false)
 
+  const disableScroll = () => {
+    document.body.style.overscrollBehavior = 'none';
+  };
+
+  const enableScroll = () => {
+    document.body.style.overscrollBehavior = 'auto';
+  };
+
   const handlers = useSwipeable({
     onSwiping: ({ dir, deltaY }) => {
       if (dir === 'Up') {
@@ -54,6 +62,7 @@ const ChatRooms = () => {
   const handleTouchStart = (e) => {
     setStartY(e.touches[0].clientY);
     setIsSliding(true)
+    disableScroll();
   };
 
   const handleTouchMove = (e) => {
@@ -74,6 +83,7 @@ const ChatRooms = () => {
       setPosition(0);
     }
     setIsSliding(false)
+    enableScroll();
   };
 
   useEffect( () => {
