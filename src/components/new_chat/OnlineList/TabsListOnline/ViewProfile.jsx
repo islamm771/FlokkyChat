@@ -3,8 +3,8 @@ import { FaPlus } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { MdAdminPanelSettings, MdLocationOn } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
-import { useDispatch } from "react-redux";
-import { toggleListOnlineListChat } from "../../../../app/feature/ListChatSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGlobal, toggleListOnlineListChat } from "../../../../app/feature/ListChatSlice";
 
 import { Tabs } from 'antd';
 import { setActiveTabOnline } from "../../../../app/feature/TabOnlineList";
@@ -190,14 +190,17 @@ const items = [
   },
 ];
 
-
-
 const ViewProfile = ({ direction }) => {
   const [isFriend, setIsFriend] = useState(false);
+  const { activeMessage } = useSelector(selectGlobal);
   const dispatch = useDispatch();
-  const handleToggleOnlineList=()=>{
-    dispatch( setActiveTabOnline(1) )
-    // dispatch(toggleListOnlineListChat());
+
+  const handleToggleOnlineList = () => {
+    if(activeMessage == 1) {
+      dispatch( setActiveTabOnline(1) )
+    }else{
+      dispatch(toggleListOnlineListChat());
+    }
   }
 
   return (
