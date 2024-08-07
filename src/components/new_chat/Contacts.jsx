@@ -203,7 +203,7 @@ const Contacts = () => {
           />
           <div style={{ marginBottom: "5px" }}></div>
         </div>
-        <div className="wrap-new-chat !pr-[20px]" ref={scrollDivRef}>
+        <div className="wrap-new-chat pb-[15px] md:pb-0 !pr-[20px]" ref={scrollDivRef}>
           {renderContacts}
         </div>
         {selected && (

@@ -118,7 +118,7 @@ const ChatRooms = () => {
         <div className="search-input my-3">
           <FormInputwithIcon label={"Search for communities..."} id={"comm-search"} name={"comm-search"} />
         </div>
-        <div className="wrap-new-chat pr-[20px]" ref={scrollDivRef}>
+        <div className="wrap-new-chat pb-[15px] md:pb-0 pr-[20px]" ref={scrollDivRef}>
           <div className="joined mb-4">
             <p className="joined-title">Joined</p>
             <div className="list-joined">
