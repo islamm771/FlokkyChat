@@ -93,6 +93,14 @@ const Contacts = () => {
 
   const [isSliding,setIsSliding] = useState(false)
 
+  const disableScroll = () => {
+    document.body.style.overscrollBehavior = 'none';
+  };
+
+  const enableScroll = () => {
+    document.body.style.overscrollBehavior = 'auto';
+  };
+
   const handlers = useSwipeable({
     onSwiping: ({ dir, deltaY }) => {
       if (dir === 'Up') {
@@ -110,6 +118,7 @@ const Contacts = () => {
   const handleTouchStart = (e) => {
     setStartY(e.touches[0].clientY);
     setIsSliding(true)
+    disableScroll();
   };
 
   const handleTouchMove = (e) => {
@@ -130,6 +139,7 @@ const Contacts = () => {
       setPosition(0);
     }
     setIsSliding(false)
+    enableScroll();
   };
 
   useEffect( () => {
@@ -153,6 +163,7 @@ const Contacts = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dispatch]);
+  
 
 
   const scrollDivRef = useRef(null);
