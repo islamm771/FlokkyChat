@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -57,25 +57,31 @@ const BigNavigation = () => {
 		};
 	}, []);
 
+	const bigNavigationRef = useRef();
+
+
+	// useEffect( ()=>{
+	// 	document.addEventListener("mousedown" , function(event){
+	// 		if(bigNavigationRef.current && !bigNavigationRef.current.contains(event.target)){
+	// 			dispatch(setIsLargeHidden({ value: true }));
+	// 		}
+	// 	})
+	// } )
+
 	return (
 		<nav
 			id="navigation-widget"
-			className={`navigation-widget navigation-widget-desktop sidebar menu-big left ${
-				isLargeHidden ? "hidden" : "active delayed"
+			className={`navigation-widget navigation-widget-desktop sidebar menu-big left !transition !ease-in-out !duration-[0.35s] ${
+				isLargeHidden
+					? // ? "hidden -translate-x-full"
+					  "!-translate-x-full"
+					: // : "active delayed delay-[0.35s]"
+					  "!delay-[0.25s]"
 			}`}
 			data-simplebar
+			ref={bigNavigationRef}
 		>
-			<div
-					className="navigation-widget-close-button"
-					onClick={() => {
-						dispatch(setIsLargeHidden({ value: !isLargeHidden }));
-					}}
-				>
-					<svg className="navigation-widget-close-button-icon icon-back-arrow">
-						<use xlinkHref="#svg-back-arrow"></use>
-					</svg>
-			</div>
-			{/* {location.pathname.includes("/marketplace") ||
+			{location.pathname.includes("/marketplace") ||
 			location.pathname.includes("/chat") ||
 			location.pathname.includes("/careers") ||
 			location.pathname.includes("/crea8") ? (
@@ -115,59 +121,60 @@ const BigNavigation = () => {
 			) : (
 				<>
 					<figure className="navigation-widget-cover liquid">
-						<img src="img/cover/01.jpg" alt="cover-01" />
-						<span>back</span>
+						<img src="/img/cover/01.jpg" alt="cover-01" />
 					</figure>
 
 					<div className="user-short-description">
-						<div className="image-profile-big user-short-description-avatar user-avatar medium">
-							<img src="/img/avatar/01.jpg" alt="" />
-							<RiVerifiedBadgeFill
-								color={"#36e9f7"}
-								size={24}
-								className="verify-icon-big"
-							/>
-							<MdAdminPanelSettings
-								color={"#d7006a"}
-								size={24}
-								className="admin-icon-big"
-							/>
-						</div>
+						<Link to={"/user-profile-page"}>
+							<div className="image-profile-big user-short-description-avatar user-avatar medium">
+								<img src="/img/avatar/01.jpg" alt="" />
+								<RiVerifiedBadgeFill
+									color={"#36e9f7"}
+									size={24}
+									className="verify-icon-big"
+								/>
+								<MdAdminPanelSettings
+									color={"#d7006a"}
+									size={24}
+									className="admin-icon-big"
+								/>
+							</div>
+						</Link>
 
 						<p className="user-short-description-title user-name-big">
-							<a href="">Marina Valentine</a>
+							<Link to="/user-profile-page">Marina Valentine</Link>
 						</p>
 
 						<p className="user-short-description-text">
-							<a href="">Marketing Manager</a>
+							<Link to="/user-profile-page">Marketing Manager</Link>
 						</p>
 						<p className="user-short-description-text">
-							<a href="">Brandmarks</a>
+							<Link to="/user-profile-page">Brandmarks</Link>
 						</p>
 					</div>
 
 					<div className="badge-list small">
 						<div className="badge-item">
-							<img src="img/badge/gold-s.png" alt="badge-gold-s" />
+							<img src="/img/badge/gold-s.png" alt="badge-gold-s" />
 						</div>
 
 						<div className="badge-item">
-							<img src="img/badge/age-s.png" alt="badge-age-s" />
+							<img src="/img/badge/age-s.png" alt="badge-age-s" />
 						</div>
 
 						<div className="badge-item">
 							<img
-								src="img/badge/caffeinated-s.png"
+								src="/img/badge/caffeinated-s.png"
 								alt="badge-caffeinated-s"
 							/>
 						</div>
 
 						<div className="badge-item">
-							<img src="img/badge/warrior-s.png" alt="badge-warrior-s" />
+							<img src="/img/badge/warrior-s.png" alt="badge-warrior-s" />
 						</div>
 
 						<a className="badge-item" href="profile-badges.html">
-							<img src="img/badge/blank-s.png" alt="badge-blank-s" />
+							<img src="/img/badge/blank-s.png" alt="badge-blank-s" />
 							<p className="badge-item-text">+9</p>
 						</a>
 					</div>
@@ -192,66 +199,9 @@ const BigNavigation = () => {
 						</div>
 					</div>
 				</>
-			)} */}
-
-			<div className="navigation-widget-info-wrap">
-				<div className="navigation-widget-info">
-					<div className="user-avatar">
-						<div className="after:content-[''] border-solid border-[1px] border-[#ff6728] after:bg-[#1df377] after:w-[9px] after:h-[9px] after:absolute after:top-0 after:-left-2 after:rounded-full relative w-[45px] h-[45px] rounded-full">
-							<div className="relative w-full h-full rounded-full p-[1px] bg-white">
-							<img
-								src="/img/avatar/01.jpg"
-								alt="Profile"
-								className="w-full h-full rounded-full"
-							/>
-							<RiVerifiedBadgeFill
-								className="absolute -bottom-1 -right-2"
-								color={"#36e9f7"}
-								size={16}
-							/>
-							{/* <MdAdminPanelSettings
-								className="absolute -top-1 -right-2"
-								color={"#d7006a"}
-								size={16}
-							/> */}
-							<div className="relative w-[16px] h-[16px] -top-[10px] -left-3 custom-badge">
-								<img
-								src="/img/download.png"
-								alt="Padge"
-								className="absolute w-full h-full"
-								/>
-								<p className="absolute text-[10px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-10 font-bold">
-								12
-								</p>
-							</div>
-							</div>
-						</div>
-					</div>
-
-					<p className="navigation-widget-info-title navTitle">
-						<div
-							style={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "start",
-								gap: "5px",
-							}}
-						>
-							Marina Valentine{" "}
-							<MdAdminPanelSettings size={20} color={"#d7006a"} />
-						</div>
-					</p>
-
-					<p className="navigation-widget-info-text navInfo">
-						Marketing Manager
-					</p>
-					<p className="navigation-widget-info-text navInfo">Brandmarks</p>
-				</div>
-			</div>
+			)}
 
 			<ul className="menu">
-				<p className="big-nav-title-secondary">Chat</p>
-				<div className="big-nav-secondary-pages"></div>
 				{location.pathname.includes("/marketplace") && (
 					<p className="big-nav-title-secondary">Marketplace</p>
 				)}
@@ -277,13 +227,12 @@ const BigNavigation = () => {
 					location.pathname.includes("/crea8")) && (
 					<div className="big-nav-secondary-pages"></div>
 				)}
-
-				<li className={`menu-item`}
-					// className={`menu-item ${location.pathname === "/" ? "active" : ""}`}
+				<li
+					className={`menu-item ${location.pathname === "/" ? "active" : ""}`}
 				>
 					<Link
 						className="menu-item-link"
-						to="https://main.flokky.app/"
+						to="/"
 						onClick={() => {
 							dispatch(setIsLargeHidden({ value: !isLargeHidden }));
 						}}
@@ -295,12 +244,13 @@ const BigNavigation = () => {
 					</Link>
 				</li>
 
-				<li className={`menu-item ${
+				<li
+					className={`menu-item ${
 						location.pathname.includes("/directory") ? "active" : ""
 					}`}
 				>
 					<Link
-						to={"https://main.flokky.app/directory"}
+						to={"/directory"}
 						className="menu-item-link"
 						onClick={() => {
 							dispatch(setIsLargeHidden({ value: !isLargeHidden }));
@@ -319,7 +269,8 @@ const BigNavigation = () => {
 					</Link>
 				</li>
 
-				<li className={`menu-item menu-item-title`}
+				<li
+					className={`menu-item menu-item-title`}
 					onClick={() => {
 						dispatch(setIsMyFlokkMenuOpen({ value: !isMyFlokkMenuOpen }));
 					}}
@@ -340,7 +291,8 @@ const BigNavigation = () => {
 
 				{isMyFlokkMenuOpen && <MyFlokkItems isMobile={false} />}
 
-				<li className={`menu-item menu-item-title`}
+				<li
+					className={`menu-item menu-item-title`}
 					onClick={() => {
 						dispatch(
 							setIsMySidekicksMenuOpen({ value: !isMySidekicksMenuOpen })
@@ -419,7 +371,8 @@ const BigNavigation = () => {
 						<MyMarketPlaceItems isMobile={false} />
 					)}
 
-				<li className={`menu-item ${
+				<li
+					className={`menu-item ${
 						location.pathname.includes("/reviews") ? "active" : ""
 					}`}
 				>

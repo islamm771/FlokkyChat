@@ -1,0 +1,45 @@
+.inputForm {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	/* margin-bottom: 15px; */
+}
+
+/* .inputForm label {
+	left: 40px !important;
+}
+
+.inputForm img,
+.inputForm svg {
+	left: 15px !important;
+	width: 16px;
+	position: absolute;
+}
+
+.inputForm input {
+	padding-left: 35px !important;
+} */
+
+
+.form-textbox{
+	position: relative;
+}
+
+.form-textbox label{
+	color: #adafca;
+    font-size: 1rem;
+    font-weight: 600;
+    position: absolute;
+    top: 19px;
+    left: 20px;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.form-textbox.active label{
+	background-color: #fff;
+	padding: 0 6px;
+	font-size: 0.75rem;
+	top: -6px;
+	left: 12px;
+}

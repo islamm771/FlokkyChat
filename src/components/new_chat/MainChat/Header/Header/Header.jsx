@@ -94,16 +94,16 @@ const ConnectionHeader = ({handleToggleOnlineList}) => {
   const dispatch = useDispatch()
   return(
     <div className="info-main-chat">
-      <div className=""
+      <div className="cursor-pointer"
         onClick={ () => {
-          dispatch(setActiveTabOnline(1));
+          dispatch(setActiveTabOnline(5));
           handleToggleOnlineList()
           }} >
         <UserProfileImage />
       </div>
       <div className="info-username-hashtag pl-5"
       onClick={ () => {
-        dispatch(setActiveTabOnline(1));
+        dispatch(setActiveTabOnline(5));
         handleToggleOnlineList()
         }} 
       >
@@ -120,16 +120,16 @@ const JobHeader = ({handleToggleOnlineList}) => {
   const dispatch = useDispatch()
   return(
     <div className="info-main-chat">
-      <div className=""
+      <div className="cursor-pointer"
         onClick={ () => {
-          dispatch(setActiveTabOnline(1));
+          dispatch(setActiveTabOnline(5));
           handleToggleOnlineList()
           }} >
         <UserProfileImage src={"/img/avatar/35.jpeg"} />
       </div>
       <div className="info-username-hashtag pl-5"
       onClick={ () => {
-        dispatch(setActiveTabOnline(1));
+        dispatch(setActiveTabOnline(5));
         handleToggleOnlineList()
         }} >
         <p className="username-main-chat mb-1">Ahmed Ali</p>

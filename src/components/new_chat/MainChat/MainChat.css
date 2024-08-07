@@ -710,7 +710,8 @@ margin-bottom: 5px;
   height: auto;
   transform: translate(-50%, -50%);
   z-index: 5555555;
-  padding: 10px 5px;
+  /* padding: 10px 5px; */
+  padding: 20px 24px;
   background: #fff;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -725,12 +726,16 @@ margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 28px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+.header-Report h5{
+  font-size: 1.5rem;
+  color: #3e3f5e;
+  font-weight: 700;
 }
 .header-Report svg {
   cursor: pointer;
-  color: #fd6729;
+  color: #adafca;
 }
 
 .overlay {
@@ -750,11 +755,11 @@ margin-bottom: 5px;
 }
 
 .wrap-inputs-Report {
-  height: 100%;
-  /* display: flex;
+  /* height: 100%;
+  display: flex;
   justify-content: space-between;
-  align-items: center; */
-  padding: 0px 20px;
+  align-items: center;
+  padding: 0px 20px; */
 }
 .inpt-Report {
   display: flex;
@@ -774,7 +779,7 @@ margin-bottom: 5px;
   padding: 0 18px;
 }
 .wrap-inputs-Report textarea {
-  display: block;
+  /* display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
@@ -785,11 +790,11 @@ margin-bottom: 5px;
   background-clip: padding-box;
   border: 1px solid #d1d3e2 !important;
   border-radius: 0.35rem;
-  height: 190px;
   -webkit-border-radius: 0.35rem;
   -moz-border-radius: 0.35rem;
   -ms-border-radius: 0.35rem;
-  -o-border-radius: 0.35rem;
+  -o-border-radius: 0.35rem; */
+  height: 190px;
 }
 .btn-Report {
   display: flex;

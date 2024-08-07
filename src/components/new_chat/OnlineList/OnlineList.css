@@ -244,6 +244,26 @@
   align-items: center;
   gap: 15px;
 }
+
+.user-list-item .badge-container-nav{
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  bottom: -7px;
+  left: -3px;
+}
+.user-list-item .badge-container-nav img{
+  position: relative; 
+  top: unset;
+  left: unset;
+}
+.user-list-item .badge-container-nav .badge-number-nav{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 5;
+}
+
 .chat-name-text {
   font-size: 16px;
   font-weight: 600;
@@ -933,7 +953,7 @@
 .ViewProfile {
   animation: tabAnimation 0.4s ease-in-out;
   -webkit-animation: tabAnimation 0.4s ease-in-out;
-  margin-left: 6px;
+  /* padding:0 15px; */
   padding-top: 15px;
 }
 .ViewProfile.reverse {
@@ -967,11 +987,11 @@
 }
 .closeViewProfile {
   position: absolute;
-  right: 2px;
+  right: 15px;
   font-size: 23px;
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
   color: #fd6729;
   z-index: 5555555555;
 }

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { toggleListOnlineListChat } from "../../../../app/feature/ListChatSlice";
 
 import { Tabs } from 'antd';
+import { setActiveTabOnline } from "../../../../app/feature/TabOnlineList";
 
 const items = [
   {
@@ -195,7 +196,8 @@ const ViewProfile = ({ direction }) => {
   const [isFriend, setIsFriend] = useState(false);
   const dispatch = useDispatch();
   const handleToggleOnlineList=()=>{
-    dispatch(toggleListOnlineListChat())
+    dispatch( setActiveTabOnline(1) )
+    // dispatch(toggleListOnlineListChat());
   }
 
   return (
@@ -208,15 +210,15 @@ const ViewProfile = ({ direction }) => {
             </div>
             <div className="user-preview-info !px-[15px]">
               <div className="page-one-member page-member-desc">
-                  <div className="mb-3">
-                    <div className="user-status">
+                  <div className="pt-[5px] mb-[15px]">
+                    <div className="user-status !pt-0">
                       <div className="user-chat-profile user-status-avatar user-small-avatar-results-dir">
                         <MdAdminPanelSettings
                           color={"#d7006a"}
                           size={16}
                           className="admin-icon-inside-chat"
                         />
-                        <img src="/img/avatar/03.jpg" alt="Profile" />
+                        <img src="/img/avatar/35.jpeg" alt="Profile" />
                         <RiVerifiedBadgeFill
                           color={"#36e9f7"}
                           size={16}
@@ -228,8 +230,8 @@ const ViewProfile = ({ direction }) => {
                         </div>
                       </div>
 
-                      <p className="user-status-title user-small-text-results-dir page-two-member-name">
-                        <span className="bold">NekoBebop</span>
+                      <p className="user-status-title user-small-text-results-dir page-two-member-name !text-[16px]">
+                        <span className="bold">Ahmed Ali</span>
                       </p>
 
                       <p

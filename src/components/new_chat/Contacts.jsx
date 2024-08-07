@@ -195,7 +195,7 @@ const Contacts = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       >
-        <div className='block md:hidden drawer-heading'>
+        <div className='drawer-heading block md:hidden'>
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
         </div>
         <div className="header-forward">
@@ -204,7 +204,6 @@ const Contacts = () => {
             onClick={() => dispatch(FalseContacts())}>
             <FaTimes />
           </button>
-
         </div>
         <div className="Search-people-chat">
           <FormInputwithIcon

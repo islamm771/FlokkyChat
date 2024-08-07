@@ -1,36 +1,121 @@
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { FalseMessageInfo, selectGlobal, toggleMessageInfo } from "../../app/feature/ListChatSlice";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSwipeable } from "react-swipeable";
 
 const MessageInfo = () => {
   const MessageInfoRef = useRef(null);
-    const {isMessageInfoModel} = useSelector(selectGlobal);
-    const dispatch = useDispatch()
-    const handleToggleMessageInfo=()=>{
-        dispatch(toggleMessageInfo())
+  const {isMessageInfoModel} = useSelector(selectGlobal);
+  const dispatch = useDispatch()
+  const handleToggleMessageInfo = () => {
+      dispatch(toggleMessageInfo())
+  }
+
+  const [position, setPosition] = useState(0);
+  const [startY, setStartY] = useState(0);
+
+  const [isSliding,setIsSliding] = useState(false)
+
+  const disableScroll = () => {
+    document.body.style.overscrollBehavior = 'none';
+  };
+
+  const enableScroll = () => {
+    document.body.style.overscrollBehavior = 'auto';
+  };
+
+  const handlers = useSwipeable({
+    onSwiping: ({ dir, deltaY }) => {
+      if (dir === 'Up') {
+        setPosition((prev) => Math.max(prev - deltaY, -window.innerHeight));
+      } else if (dir === 'Down') {
+        setPosition((prev) => Math.min(prev + deltaY, 0));
+      }
+    },
+    // onSwipedUp: () => dispatch(toggleContacts()),
+    // onSwipedDown: () => dispatch(FalseMessageInfo()),
+    preventDefaultTouchmoveEvent: true,
+    trackTouch: true,
+  });
+
+  const handleTouchStart = (e) => {
+    setStartY(e.touches[0].clientY);
+    setIsSliding(true)
+    disableScroll();
+  };
+
+  const handleTouchMove = (e) => {
+    const touchY = e.touches[0].clientY;
+    const diffY = touchY - startY;
+    if(diffY < 0){
+      setPosition(0)
+    }else{
+      setPosition(diffY);
     }
-    useEffect(() => {
-      const handleClickOutsideReactions = (event) => {
-        if (
-          MessageInfoRef.current &&
-          !MessageInfoRef.current.contains(event.target)
-        ) {
-          dispatch(FalseMessageInfo())
-        }
-      };
+  };
+
+  const handleTouchEnd = () => {
+    if (position > 100) {
+      setPosition(800);
+      dispatch(FalseMessageInfo());
+    } else {
+      setPosition(0);
+    }
+    setIsSliding(false)
+    enableScroll();
+  };
+
+  useEffect( () => {
+    if(isMessageInfoModel){
+      setPosition(0)
+    }
+  } ,[isMessageInfoModel])
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (MessageInfoRef.current && MessageInfoRef.current == event.target) {
+        dispatch(FalseMessageInfo());
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dispatch]);
   
-      document.addEventListener("mousedown", handleClickOutsideReactions);
-  
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutsideReactions);
-      };
-    }, [MessageInfoRef, dispatch]);
+
+
+  const scrollDivRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setPosition(0)
+    };
+
+    const scrollDiv = scrollDivRef.current;
+    scrollDiv.addEventListener('scroll', handleScroll);
+
+    return () => {
+      scrollDiv.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={`Overlay-MessageInfo ${isMessageInfoModel?"Overlay-MessageInfoActive":"Overlay-MessageInfoDisActive"}`}>
-      <div  ref={MessageInfoRef} className="messageInfoModel">
+    <div ref={MessageInfoRef} className={`Overlay-MessageInfo ${isMessageInfoModel?"Overlay-MessageInfoActive":"Overlay-MessageInfoDisActive"}`}>
+      <div className={`messageInfoModel ${isMessageInfoModel ? "active" : ""}`}
+        {...handlers}
+        style={ screen.width <= 768 ? { transform: `translateY(${position}px)`,
+        transition: isSliding ? "none" : "" } : {} }
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className='drawer-heading block md:hidden'>
+          <span className='w-[100px] h-[5px] bg-[#ddd] block my-[15px] mx-auto rounded-3xl'></span>
+        </div>
         <div className="header-messageInfo">
-          <div className="close-btn-message-info" onClick={handleToggleMessageInfo}>
+          <div className="hidden md:block close-btn-message-info" onClick={handleToggleMessageInfo}>
             <IoClose />
           </div>
           <div className="txt-meesage-info">
@@ -61,7 +146,7 @@ const MessageInfo = () => {
             </p>
           </div>
         </div>
-        <div className="reading_delivering-Message">
+        <div className="reading_delivering-Message" ref={scrollDivRef}>
           <div className="wrap-reading-delivering">
             <div className="reading_list">
               <p>Read by</p>

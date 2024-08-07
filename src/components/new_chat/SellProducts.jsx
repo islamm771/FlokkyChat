@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid'; // Import uuid library
 import { FaTimes } from "react-icons/fa";
 import FormInput from "../ui/formInput/FormInput";
 import Select from "../ui/select/Select";
+import { useSwipeable } from "react-swipeable";
 
 
 
@@ -105,9 +106,69 @@ const SellProducts = () => {
   //   setIsDragOver(false);
   // }
 
+  const [position, setPosition] = useState(0);
+  const [startY, setStartY] = useState(0);
+
+  const [isSliding,setIsSliding] = useState(false)
+
+  const disableScroll = () => {
+    document.body.style.overscrollBehavior = 'none';
+  };
+
+  const enableScroll = () => {
+    document.body.style.overscrollBehavior = 'auto';
+  };
+
+  const handlers = useSwipeable({
+    onSwiping: ({ dir, deltaY }) => {
+      if (dir === 'Up') {
+        setPosition((prev) => Math.max(prev - deltaY, -window.innerHeight));
+      } else if (dir === 'Down') {
+        setPosition((prev) => Math.min(prev + deltaY, 0));
+      }
+    },
+    // onSwipedUp: () => dispatch(toggleContacts()),
+    // onSwipedDown: () => dispatch(FalseContacts()),
+    preventDefaultTouchmoveEvent: true,
+    trackTouch: true,
+  });
+
+  const handleTouchStart = (e) => {
+    setStartY(e.touches[0].clientY);
+    setIsSliding(true)
+    disableScroll();
+  };
+
+  const handleTouchMove = (e) => {
+    const touchY = e.touches[0].clientY;
+    const diffY = touchY - startY;
+    if(diffY < 0){
+      setPosition(0)
+    }else{
+      setPosition(diffY);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (position > 100) {
+      setPosition(800);
+      dispatch(FalseSellProducts());
+    } else {
+      setPosition(0);
+    }
+    setIsSliding(false)
+    enableScroll();
+  };
+
+  useEffect( () => {
+    if(isSellProductsModel){
+      setPosition(0)
+    }
+  } ,[isSellProductsModel])
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (chatRoomRef.current && !chatRoomRef.current.contains(event.target)) {
+      if (chatRoomRef.current && chatRoomRef.current == event.target) {
         dispatch(FalseSellProducts());
       }
     };
@@ -116,24 +177,53 @@ const SellProducts = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dispatch]);
+  
+
+
+  const scrollDivRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setPosition(0)
+    };
+
+    const scrollDiv = scrollDivRef.current;
+    scrollDiv.addEventListener('scroll', handleScroll);
+
+    return () => {
+      scrollDiv.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   return (
     <div
+      ref={chatRoomRef}
       className={`overlay overflow-hidden ${
         isSellProductsModel ? "active-chat" : "disactive-chat"
       } `}
     >
-      <div ref={chatRoomRef} className={`new-chat ${
+      <div className={`new-chat ${
         isSellProductsModel ? "new-chat-active" : ""
-        }`}>
+        }`}
+        {...handlers}
+        style={ screen.width <= 768 ? { transform: `translateY(${position}px)`,
+        transition: isSliding ? "none" : "" } : {} }
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        >
+        <div className='drawer-heading block md:hidden'>
+          <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
+        </div>
         <div className="sell-product-container">
           <div className="flex items-center justify-between mb-8">
               <h2 className="sell-product-title !mb-0">Add a Listing to Classifieds</h2>
-              <button className="w-fit p-2 text-[#adafca]" onClick={handleToggleSellProducts}><FaTimes /></button>
+              <button className="hidden md:block w-fit p-2 text-[#adafca]" onClick={handleToggleSellProducts}><FaTimes /></button>
             </div>
 
           <form action="">
-            <div className="wrap-new-chat">
+            <div className="wrap-new-chat" ref={scrollDivRef}>
               <div className="sell-product-form px-[20px] py-[15px]">
                 <label
                   className={`sell-upload-product-img ${isDragOver ? "scale-125 !text-[#fd6729] !border-[#fd6729]" : ""}`}
