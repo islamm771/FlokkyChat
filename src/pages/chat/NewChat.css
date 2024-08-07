@@ -1622,10 +1622,9 @@
     width: 100%;
   }
   .chatRoom{
+    position: fixed;
     top: unset;
     left: 0;
-    /* left: 50%;
-    transform: translateX(-50%); */
     bottom: -100%;
     width: 100%;
     max-height: 80%;

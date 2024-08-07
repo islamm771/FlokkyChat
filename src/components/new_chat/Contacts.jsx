@@ -87,12 +87,11 @@ const Contacts = () => {
     </React.Fragment>
   ));
 
-
   const [position, setPosition] = useState(0);
   const [startY, setStartY] = useState(0);
-
-  const [isSliding,setIsSliding] = useState(false)
-
+  const [isSliding, setIsSliding] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  
   const handlers = useSwipeable({
     onSwiping: ({ dir, deltaY }) => {
       if (dir === 'Up') {
@@ -101,28 +100,28 @@ const Contacts = () => {
         setPosition((prev) => Math.min(prev + deltaY, 0));
       }
     },
-    // onSwipedUp: () => dispatch(toggleContacts()),
-    // onSwipedDown: () => dispatch(FalseContacts()),
     preventDefaultTouchmoveEvent: true,
     trackTouch: true,
   });
-
+  
   const handleTouchStart = (e) => {
     setStartY(e.touches[0].clientY);
-    setIsSliding(true)
+    setIsSliding(true);
   };
-
+  
   const handleTouchMove = (e) => {
-    e.preventDefault(); // Prevents the default touchmove behavior
+    if (isScrolling) return; // Prevent touch movement if scrolling
+  
     const touchY = e.touches[0].clientY;
     const diffY = touchY - startY;
-    if(diffY < 0){
-      setPosition(0)
-    }else{
+  
+    if (diffY < 0) {
+      setPosition(0);
+    } else {
       setPosition(diffY);
     }
   };
-
+  
   const handleTouchEnd = () => {
     if (position > 100) {
       setPosition(800);
@@ -130,30 +129,50 @@ const Contacts = () => {
     } else {
       setPosition(0);
     }
-    setIsSliding(false)
+    setIsSliding(false);
   };
-
-  useEffect( () => {
-    if(isContactsModel){
-      setPosition(0)
+  
+  useEffect(() => {
+    if (isContactsModel) {
+      setPosition(0);
     }
-  } ,[isContactsModel])
-
+  }, [isContactsModel]);
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (SendCodeRef.current && SendCodeRef.current == event.target) {
+      if (SendCodeRef.current && SendCodeRef.current === event.target) {
         dispatch(FalseContacts());
       }
       if (contactListRef.current && !contactListRef.current.contains(event.target)) {
-        setActiveList(-1)
+        setActiveList(-1);
       }
-
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dispatch]);
+  
+  const scrollDivRef = useRef(null);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(true);
+      // Use a timeout to reset the isScrolling flag after scrolling stops
+      clearTimeout(window.scrollTimeout);
+      window.scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 100); // Adjust this delay as needed
+    };
+  
+    const scrollDiv = scrollDivRef.current;
+    scrollDiv.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      scrollDiv.removeEventListener('scroll', handleScroll);
+      clearTimeout(window.scrollTimeout);
+    };
+  }, []);
 
 
 
@@ -188,7 +207,7 @@ const Contacts = () => {
           />
           <div style={{ marginBottom: "5px" }}></div>
         </div>
-        <div className="wrap-new-chat !pr-[20px]">
+        <div className="wrap-new-chat !pr-[20px]" ref={scrollDivRef}>
           {renderContacts}
         </div>
         {selected && (
