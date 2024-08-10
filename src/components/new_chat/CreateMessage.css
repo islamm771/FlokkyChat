@@ -539,6 +539,8 @@ font-size: 16px;
 	align-items: center;
 	justify-content: space-between;
 	gap: 25px;
+	padding: 20px 24px;
+	border:1px solid #eee;
 }
 
 .bg-colors-container .bg-colors-content {
@@ -567,7 +569,7 @@ font-size: 16px;
 	transform: translate(-50%, -50%);
 	width: 25px;
 	height: 25px;
-	background-image: url("../../../assests/icons/check.png");
+	background-image: url("../../assests/icons/check.png");
 	background-size: contain;
 	background-position: center;
 	opacity: 0;
@@ -648,26 +650,30 @@ font-size: 16px;
 }
 
 /* active bg UI */
-
-.quick-post .quick-post-body .form-textarea.with-bg textarea {
+.quick-post-body .form-textarea.with-bg {
+	border-radius: 12px 12px 0 0;
+}
+.quick-post-body .form-textarea.with-bg textarea {
 	padding: 35px 30px;
 	min-height: 250px;
 	text-align: center;
 	font-size: 22px;
 	color: #fff;
+	background-color: initial;
+    border: none !important;
+    border-radius: 0;
 }
 
-.quick-post .quick-post-body .form-textarea.with-bg textarea::placeholder {
+.quick-post-body .form-textarea.with-bg textarea::placeholder {
 	color: #fff;
 	font-weight: 700;
 	font-size: 22px;
 }
 
-.quick-post
-	.quick-post-body
-	.form-textarea.with-bg
-	.post-form-textarea-footer
-	.post-emoji-btn {
+.quick-post-body
+.form-textarea.with-bg
+.post-form-textarea-footer
+.post-emoji-btn {
 	width: 30px;
 	height: 30px;
 	background: rgba(0, 0, 0, 0.4);
@@ -677,22 +683,20 @@ font-size: 16px;
 	border-radius: 50%;
 }
 
-.quick-post
-	.quick-post-body
-	.form-textarea.with-bg
-	.post-form-textarea-footer
-	.post-emoji-btn
+.quick-post-body
+.form-textarea.with-bg
+.post-form-textarea-footer
+.post-emoji-btn
 	svg {
 	width: 20px;
 	height: 20px;
 	color: #fff;
 }
 
-.quick-post
-	.quick-post-body
-	.form-textarea.with-bg
-	.post-form-textarea-footer
-	.form-textarea-limit-text {
+.quick-post-body
+.form-textarea.with-bg
+.post-form-textarea-footer
+.form-textarea-limit-text {
 	color: #fff;
 }
 

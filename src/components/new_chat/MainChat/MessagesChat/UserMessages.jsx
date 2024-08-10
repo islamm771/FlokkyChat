@@ -119,6 +119,7 @@ const UserMessages = ({
 						/>
 					) : (
 						<MessageTo
+						type={"connection"}
 						key={index}
 						data={data}
 						index={index}

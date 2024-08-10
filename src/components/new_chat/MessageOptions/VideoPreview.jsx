@@ -22,7 +22,7 @@ const VideoPreview = ({ videos, setVideos }) => {
   };
 
   return (
-    <div className="video-section w-full md:w-[600px] mx-auto mb-8">
+    <div className="video-section w-full md:w-[600px] mx-auto mt-[1.5rem]">
       <div className="post-option-header">
         <h3 className="post-option-header-title">Upload Video</h3>
 

@@ -8,7 +8,7 @@ const ImagesPreview = ({ images, setImages }) => {
   const imagesArray = Array.from(images);
 
   return (
-    <div className="images-preview w-full md:w-[600px] mx-auto mb-8">
+    <div className="images-preview w-full md:w-[600px] mx-auto mt-[1.5rem]">
       
       <div className="post-option-header">
         <h3 className="post-option-header-title">Upload Image</h3>

@@ -70,6 +70,7 @@ const GroupMessages = ({
           {messageMap.map((data, index) => (
             data.sendme ? (
               <MessageFrom
+                type={"community"}
                 key={index}
                 data={data}
                 index={index}
@@ -111,6 +112,7 @@ const GroupMessages = ({
               />
             ) : (
               <MessageTo
+                type={"community"}
                 key={index}
                 data={data}
                 index={index}

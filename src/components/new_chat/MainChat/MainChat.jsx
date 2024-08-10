@@ -1,4 +1,4 @@
-import { FaPaperPlane, FaPlusCircle, FaShare } from "react-icons/fa";
+import { FaPaperPlane, FaPlusCircle, FaShare, FaTimes } from "react-icons/fa";
 import bfs4 from "../../../assests/chat/bf4.jpg";
 import "../MainChat/MainChat.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -56,6 +56,7 @@ import UserMessages from "./MessagesChat/UserMessages";
 import GroupMessages from "./MessagesChat/GroupMessages";
 import JobMessages from "./MessagesChat/JobMessages";
 import { Tooltip } from "antd";
+import RecordVoice from "../MessageOptions/RecordVoice";
 
 const MainChat = () => {
   const reactionsRefList = useRef(null);
@@ -66,7 +67,7 @@ const MainChat = () => {
   const messageOptionsRef = useRef(null)
 
   const dispatch = useDispatch();
-  const { isForward, isPinMessage,activeMessage } = useSelector(selectGlobal);
+  const { isForward, isPinMessage, activeMessage } = useSelector(selectGlobal);
 
   const [isListActionMessage, setIsListActionMessage] = useState(false);
   const [isSelectForward, setSelectForward] = useState(false);
@@ -78,7 +79,7 @@ const MainChat = () => {
   const [isReactions, setIsReactions] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
   const [actionIndex, setActionIndex] = useState(null);
-  const [activeMessageOption , setActiveMessageOption] = useState(false)
+  const [activeMessageOption, setActiveMessageOption] = useState(false)
   const [activeReactionsIndex, setActiveReactionsIndex] = useState(null);
   const [isPin, setIsPin] = useState(true);
   const [isPinMessageTop, setIsPinMessageTop] = useState(true);
@@ -155,7 +156,7 @@ const MainChat = () => {
   const handleLongPressReactionsList = (index) => {
     timeout = setTimeout(() => {
       setActiveReactionsIndex(index);
-    }, 500); 
+    }, 500);
     console.log("long press")
   };
   const handleTouchEnd = (index) => {
@@ -272,12 +273,12 @@ const MainChat = () => {
   };
 
   const handleEmojiChange = (e) => {
-    setValue( val => val + e )
+    setValue(val => val + e)
   }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if(messageOptionsRef.current && !messageOptionsRef.current.contains(event.target)){
+      if (messageOptionsRef.current && !messageOptionsRef.current.contains(event.target)) {
         setActiveMessageOption(false)
       }
       if (
@@ -337,10 +338,12 @@ const MainChat = () => {
   ]);
 
 
-  const [anotherMessage,setAnotherMessage] = useState(false)
+  const [anotherMessage, setAnotherMessage] = useState(false)
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedVideos, setSelectedVideos] = useState([]);
-  const [selectedAudio , setSelectedAudio] = useState(null);
+  const [selectedAudio, setSelectedAudio] = useState(null);
+  const [recordedVoice, setRecordedVoice] = useState(false)
+  const [recordBlobLink, setRecordBlobLink] = useState(null);
 
   const [value, setValue] = useState('');
   const txtAreaRef = useRef(null)
@@ -349,13 +352,13 @@ const MainChat = () => {
     setValue(event.target.value);
   };
 
-  useEffect( ()=>{
-    if(txtAreaRef.current){
+  useEffect(() => {
+    if (txtAreaRef.current) {
       txtAreaRef.current.style.height = "48px";
       txtAreaRef.current.style.height = txtAreaRef.current.scrollHeight + "px";
       txtAreaRef.current.style.height = `${Math.min(txtAreaRef.current.scrollHeight, 136)}px`;
     }
-  } ,[value])
+  }, [value])
 
   return (
     <div>
@@ -367,8 +370,8 @@ const MainChat = () => {
         handleToggleOnlineList={handleToggleOnlineList}
       />
 
-      { activeMessage == 1 && (
-          <GroupMessages
+      {activeMessage == 1 && (
+        <GroupMessages
           isPinMessage={isPinMessage}
           PinMessageTop={PinMessageTop}
           isPinMessageTop={isPinMessageTop}
@@ -411,10 +414,10 @@ const MainChat = () => {
           handleTouchEnd={handleTouchEnd}
           clearLongPress={clearLongPress}
         />
-      ) }
+      )}
 
-      { activeMessage == 2 && (
-          <UserMessages
+      {activeMessage == 2 && (
+        <UserMessages
           isPinMessage={isPinMessage}
           PinMessageTop={PinMessageTop}
           isPinMessageTop={isPinMessageTop}
@@ -457,10 +460,10 @@ const MainChat = () => {
           handleTouchEnd={handleTouchEnd}
           clearLongPress={clearLongPress}
         />
-      ) }
+      )}
 
-      { activeMessage == 3 && (
-          <JobMessages
+      {activeMessage == 3 && (
+        <JobMessages
           isPinMessage={isPinMessage}
           PinMessageTop={PinMessageTop}
           isPinMessageTop={isPinMessageTop}
@@ -503,10 +506,10 @@ const MainChat = () => {
           handleTouchEnd={handleTouchEnd}
           clearLongPress={clearLongPress}
         />
-      ) }
-      
-      { activeMessage == 4 && (
-          <JobMessages
+      )}
+
+      {activeMessage == 4 && (
+        <JobMessages
           isPinMessage={isPinMessage}
           PinMessageTop={PinMessageTop}
           isPinMessageTop={isPinMessageTop}
@@ -549,14 +552,13 @@ const MainChat = () => {
           handleTouchEnd={handleTouchEnd}
           clearLongPress={clearLongPress}
         />
-      ) }
-      
+      )}
+
 
       <div className="footer-Main-chat-page">
-        <div className={`replay-message ${
-            isReplyMessage
-              ? "active-replay-message"
-              : "disactive-replay-message"
+        <div className={`replay-message ${isReplyMessage
+            ? "active-replay-message"
+            : "disactive-replay-message"
           }`}
         >
           <div className="content-replay-meessage">
@@ -579,8 +581,9 @@ const MainChat = () => {
           </div>
         </div>
 
-        <div className={`absolute left-0 w-full p-2 bg-white ${anotherMessage ? "bottom-[60px] opacity-100 visible" : 
-          "bottom-0 opacity-0 invisible"}`}>
+        <div className={`absolute left-0 w-[99%] py-2 px-3 bg-white ${anotherMessage ? "bottom-[63px] opacity-100 visible" :
+          "bottom-0 opacity-0 invisible"}`}
+          style={{ borderLeft: "1px solid #eee" }}>
           <button
             className="w-fit absolute right-2 z-10"
             onClick={() => {
@@ -590,46 +593,24 @@ const MainChat = () => {
               setSelectedAudio(null)
             }}
           >
-            <MdClose />
+            <FaTimes className="text-[#adafca]" />
           </button>
 
-          { selectedImages.length > 0 && (
-              <div className="img-preview-container">
-                { selectedImages.map((img, imgIndex) => (
-                  <div className="img-preview-item" key={imgIndex}>
-                    <img
-                      src={URL.createObjectURL(img)}
-                      alt={img?.name}
-                      loading="lazy"
-                    />
-
-                    <button
-                      className="img-preview-close"
-                      onClick={() => {
-                        setSelectedImages(selectedImages.filter((_, index) => index !== imgIndex));
-                        if(selectedImages.length == 1){
-                          setAnotherMessage(false)
-                        }
-                      }}
-                    >
-                      <MdClose />
-                    </button>
-                  </div>
-                ))}
-              </div>
-          )}
-
-          { selectedVideos.length > 0 && (
+          {selectedImages.length > 0 && (
             <div className="img-preview-container">
-              { selectedVideos.map((vid, vidIndex) => (
-                <div className="img-preview-item" key={vidIndex}>
-                  <video src={URL.createObjectURL(vid)} />
+              {selectedImages.map((img, imgIndex) => (
+                <div className="img-preview-item" key={imgIndex}>
+                  <img
+                    src={URL.createObjectURL(img)}
+                    alt={img?.name}
+                    loading="lazy"
+                  />
 
                   <button
                     className="img-preview-close"
                     onClick={() => {
-                      setSelectedVideos(selectedVideos.filter((_, index) => index !== vidIndex));
-                      if(selectedVideos.length == 1){
+                      setSelectedImages(selectedImages.filter((_, index) => index !== imgIndex));
+                      if (selectedImages.length == 1) {
                         setAnotherMessage(false)
                       }
                     }}
@@ -641,14 +622,36 @@ const MainChat = () => {
             </div>
           )}
 
-          { selectedAudio && (
+          {selectedVideos.length > 0 && (
+            <div className="img-preview-container">
+              {selectedVideos.map((vid, vidIndex) => (
+                <div className="img-preview-item" key={vidIndex}>
+                  <video src={URL.createObjectURL(vid)} />
+
+                  <button
+                    className="img-preview-close"
+                    onClick={() => {
+                      setSelectedVideos(selectedVideos.filter((_, index) => index !== vidIndex));
+                      if (selectedVideos.length == 1) {
+                        setAnotherMessage(false)
+                      }
+                    }}
+                  >
+                    <MdClose />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {selectedAudio && (
             <div className="">
               <h4 className="mb-4">1 Audio Selected</h4>
               <p>{selectedAudio.name}</p>
             </div>
-          )
+          )}
 
-          }
+          <RecordVoice place={"footer"} recordBlobLink={recordBlobLink} setRecordBlobLink={setRecordBlobLink} voice={recordedVoice} setVoice={setRecordedVoice} />
 
 
         </div>
@@ -660,36 +663,36 @@ const MainChat = () => {
             </div> */}
             <Tooltip placement="top" color="#fd6728" title="Upload Images">
               <div className="box-camera-chat">
-                <input type="file" 
-                multiple
-                accept="image/x-png, image/gif, image/jpeg"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    setSelectedImages(Array.from(e.target.files));
-                    setAnotherMessage(true)
-                    setActiveMessageOption(false)
-                    setSelectedVideos([])
-                    setSelectedAudio(null)
-                  } else {
-                    // setAnotherMessage(false)
-                  }
-                }}
+                <input type="file"
+                  multiple
+                  accept="image/x-png, image/gif, image/jpeg"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setSelectedImages(Array.from(e.target.files));
+                      setAnotherMessage(true)
+                      setActiveMessageOption(false)
+                      setSelectedVideos([])
+                      setSelectedAudio(null)
+                    } else {
+                      // setAnotherMessage(false)
+                    }
+                  }}
                 />
                 <img src={camera} alt="" />
-            </div>
+              </div>
             </Tooltip>
           </div>
 
           <span className="message-options-wrapper" ref={messageOptionsRef}>
             <div className="cursor-pointer"
-              onClick={() => setActiveMessageOption( prev => !prev )}
+              onClick={() => setActiveMessageOption(prev => !prev)}
             >
               <FaPlusCircle size={20} color="#fd6729" />
             </div>
 
             <div className={`flex flex-col bg-white gap-3 py-[5px] px-[10px] rounded-lg shadow-[0px_0px_7px_0px_#ddd] absolute bottom-[60px] left-[8px] z-20 transition-opacity duration-[0.5s]
-                  ${ activeMessageOption ? "opacity-100 visible" : "opacity-0 invisible" } `}>
+                  ${activeMessageOption ? "opacity-100 visible" : "opacity-0 invisible"} `}>
 
               <div className="icons-actions-main-chat icons-actions-main-chat-bg"
                 onClick={() => {
@@ -721,23 +724,23 @@ const MainChat = () => {
                 {/* <div className="text-icons-actions-audio">
                   <p>Audio Upload</p>
                 </div> */}
-                
+
                 <Tooltip placement="right" color="#fd6728" title="Audio Upload">
                   <div className="box-camera-chat">
-                    <input 
-                    type="file" 
-                    accept="audio/*"
-                    onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        setSelectedAudio(e.target.files[0]);
-                        setAnotherMessage(true)
-                        setActiveMessageOption(false)
-                        setSelectedVideos([])
-                        setSelectedImages([])
-                      } else {
-                      }
-                    }}
+                    <input
+                      type="file"
+                      accept="audio/*"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                          setSelectedAudio(e.target.files[0]);
+                          setAnotherMessage(true)
+                          setActiveMessageOption(false)
+                          setSelectedVideos([])
+                          setSelectedImages([])
+                        } else {
+                        }
+                      }}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -762,24 +765,24 @@ const MainChat = () => {
                 {/* <div className="text-icons-actions-video">
                   <p>Upload Video</p>
                 </div> */}
-                
+
                 <Tooltip placement="right" color="#fd6728" title="Upload Video">
                   <div className="box-camera-chat">
-                    <input 
-                    type="file" 
-                    multiple
-                    accept="video/*"
-                    onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        setSelectedVideos( Array.from(e.target.files) );
-                        setAnotherMessage(true)
-                        setActiveMessageOption(false)
-                        setSelectedAudio(null)
-                        setSelectedImages([])
-                      } else {
-                      }
-                    }}/>
+                    <input
+                      type="file"
+                      multiple
+                      accept="video/*"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                          setSelectedVideos(Array.from(e.target.files));
+                          setAnotherMessage(true)
+                          setActiveMessageOption(false)
+                          setSelectedAudio(null)
+                          setSelectedImages([])
+                        } else {
+                        }
+                      }} />
                     <img src={video} alt="" />
                   </div>
                 </Tooltip>
@@ -844,12 +847,12 @@ const MainChat = () => {
         </div>
 
         <div className="input-send-messag-main-chat">
-          <textarea 
-          className="!py-[12px] !border-none"
-          ref={txtAreaRef}
-          value={value}
-          onChange={handleChange}
-          placeholder="Type a message..."></textarea>
+          <textarea
+            className="!py-[12px] !border-none"
+            ref={txtAreaRef}
+            value={value}
+            onChange={handleChange}
+            placeholder="Type a message..."></textarea>
           <BsEmojiSmile onClick={handleOpenPickerEmoji} />
         </div>
 
@@ -860,22 +863,24 @@ const MainChat = () => {
             </div>
              */}
             <Tooltip placement="top" color="#fd6728" title="Record Voice">
-              <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              className="feather feather-mic"
-            >
-              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-              <line x1="12" y1="19" x2="12" y2="23"></line>
-              <line x1="8" y1="23" x2="16" y2="23"></line>
-              </svg>
+              <span onClick={() => setAnotherMessage(true)} >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  className="feather feather-mic"
+                >
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                  <line x1="12" y1="19" x2="12" y2="23"></line>
+                  <line x1="8" y1="23" x2="16" y2="23"></line>
+                </svg>
+              </span>
             </Tooltip>
           </div>
           <FaPaperPlane />
@@ -906,9 +911,8 @@ const MainChat = () => {
 
         <div
           ref={pickerRef}
-          className={`pickerEmojiChatMessage ${
-            isPickerEmoju ? "active-picker" : "disactive-picker"
-          }`}
+          className={`pickerEmojiChatMessage ${isPickerEmoju ? "active-picker" : "disactive-picker"
+            }`}
         >
           <Picker
             theme="light"

@@ -29,7 +29,7 @@ const CreatePoll = ({
   };
 
   return (
-    <div className="quick-post-create-poll w-full md:w-[600px] mx-auto mt-8">
+    <div className="quick-post-create-poll w-full md:w-[600px] mx-auto mt-[1.5rem]">
       <div className="post-option-header">
         <h3 className="post-option-header-title">Create Poll</h3>
 

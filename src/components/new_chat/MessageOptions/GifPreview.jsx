@@ -103,7 +103,7 @@ const GifPreview = ({
     searchGifs(inputValue); // Call searchGifs with the updated query
   };
   return (
-    <div className="w-full md:w-[700px] mx-auto mb-8">
+    <div className="w-full md:w-[700px] mx-auto mt-[1.5rem]">
       <GifDisplay
         selectedGif={selectedGif}
         setSelectedGif={setSelectedGif}

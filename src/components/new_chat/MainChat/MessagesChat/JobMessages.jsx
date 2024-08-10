@@ -112,6 +112,7 @@ const JobMessages = ({
               />
             ) : (
               <MessageTo
+                type={"job"}
                 key={index}
                 data={data}
                 index={index}
