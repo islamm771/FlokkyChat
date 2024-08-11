@@ -129,7 +129,7 @@ const ShareService = () => {
         onTouchEnd={handleTouchEnd}
         >
         <div className='drawer-heading block md:hidden'>
-          <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
+          <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[25px] mx-auto rounded-3xl'></span>
         </div>
         <div className="share-service-container">
             <div className="flex items-center justify-between mb-8">

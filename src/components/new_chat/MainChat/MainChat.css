@@ -1071,12 +1071,12 @@ margin-bottom: 5px;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: 370px;
+  width: 400px;
   height: 44px;
 }
 .wrap-chat-main img {
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .wrap-chat-main img:hover{
   margin-bottom: 8px;

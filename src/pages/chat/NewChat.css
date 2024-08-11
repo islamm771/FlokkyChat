@@ -1592,6 +1592,7 @@
     width: 100%;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
+    min-height: 650px;
   }
 
   .Report{

@@ -31,7 +31,7 @@ const DisplayReact = ({ data, handleToggleModelCodeSnipest, like, react }) => {
         <div className="flex items-center"
           ref={reactListRef}
           onClick={() => { setIsReactionListOpen(prev => !prev) }}>
-          <div className="react w-[20px]">
+          <div className="react">
             <img src={imgSrc} alt="" />
           </div>
           <div className="count">{react?.people.length}</div>

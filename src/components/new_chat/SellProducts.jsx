@@ -224,7 +224,7 @@ const SellProducts = () => {
 
           <form action="">
             <div className="wrap-new-chat" ref={scrollDivRef}>
-              <div className="sell-product-form px-[20px] py-[15px]">
+              <div className="sell-product-form pr-[20px] py-[15px]">
                 <label
                   className={`sell-upload-product-img ${isDragOver ? "scale-125 !text-[#fd6729] !border-[#fd6729]" : ""}`}
                   htmlFor="upload-product-img"

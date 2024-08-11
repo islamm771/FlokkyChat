@@ -130,19 +130,17 @@ const MessageTo = ({
                 <p className="max-w-[280px] md:max-w-[500px]"
                   {...longPressEvent} onClick={handleClick}
                 >{data.message}</p>
-                <div className="display-react">
-                  {type == "community" && (
-                    <div className="display-react">
-                      {Object.keys(reacts).map(react => <DisplayReact
-                        data={data}
-                        handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}
-                        like={like}
-                        react={{ react: react, people: reacts[react] }}
-                      />)
-                      }
-                    </div>
-                  )}
-                </div>
+                {type == "community" && (
+                  <div className="display-react">
+                    {Object.keys(reacts).map(react => <DisplayReact
+                      data={data}
+                      handleToggleModelCodeSnipest={handleToggleModelCodeSnipest}
+                      like={like}
+                      react={{ react: react, people: reacts[react] }}
+                    />)
+                    }
+                  </div>
+                )}
                 <div className={`message-options left`}>
                   <span className="text-[#adafca] hover:text-[#fd6729] cursor-pointer" onClick={() => handleToggleReactionsList(index)}>
                     <MdEmojiEmotions size={18} />

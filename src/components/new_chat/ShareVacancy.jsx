@@ -138,12 +138,12 @@ const ShareVacancy = () => {
         onTouchEnd={handleTouchEnd}
         >
         <div className='drawer-heading block md:hidden'>
-          <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
+          <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[25px] mx-auto rounded-3xl'></span>
         </div>
         <div className="share-vacancy-container">
             <div className="flex items-center justify-between mb-8">
               <h2 className="sell-product-title !mb-0">Share Vacancy</h2>
-              <button className="w-fit p-2 text-[#adafca]" onClick={handleToggleShareVacancy}><FaTimes /></button>
+              <button className="w-fit p-2 text-[#adafca] hidden md:block" onClick={handleToggleShareVacancy}><FaTimes /></button>
             </div>
             <form action="">
               <div className="wrap-new-chat pr-[20px]" ref={scrollDivRef}>
