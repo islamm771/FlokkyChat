@@ -5,6 +5,7 @@ import { FaCircle, FaPaperPlane, FaTimes } from "react-icons/fa";
 import FormInputwithIcon from "../ui/formInputWithSearchIcon/FormInputwithIcon";
 import { HiDotsVertical } from "react-icons/hi";
 import { useSwipeable } from 'react-swipeable';
+import UserProfileImage from "../user-profile-image/UserProfileImage";
 
 
 const contacts = [
@@ -52,7 +53,7 @@ const Contacts = () => {
       {sortedContacts[char].map((contact) => (
         <div className="content-info-forw" key={contact.id}>
           {/* <input type="checkbox" onChange={() => setSelected(!selected)} /> */}
-          <div className="info">
+          {/* <div className="info">
             <img src={contact.avatar} alt="" className="people-img" />
             <div className="info-forw">
               <div className="admin-for">
@@ -62,6 +63,14 @@ const Contacts = () => {
                 <FaCircle /> Online
               </p>
             </div>
+          </div> */}
+          <div className="user-status">
+            <div className="user-status-avatar">
+              <UserProfileImage src={contact.avatar} />
+            </div>
+            <p class="user-status-title"><span class="bold">{contact.name}</span></p>
+            <p class="user-status-text small">Marketing - Brandmarks</p>
+            <p class="user-status-text small">Cambridge</p>
           </div>
           <div className="relative">
             <span className="cursor-pointer" onClick={ () => handleActiveList(contact.id) }>
@@ -199,7 +208,7 @@ const Contacts = () => {
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
         </div>
         <div className="header-forward">
-          <h5>Contacts</h5>
+          <h5>Connections</h5>
           <button className="w-fit p-2 text-[#adafca] hidden md:block"
             onClick={() => dispatch(FalseContacts())}>
             <FaTimes />

@@ -70,6 +70,7 @@ const OnlineList = () => {
 
   const [position, setPosition] = useState(0); // Current position of the div
   const startX = useRef(0); // Initial touch position
+  const [isScrolling, setIsScrolling] = useState(false);
   const divRef = useRef(null);
 
   const disableScroll = () => {
@@ -85,9 +86,11 @@ const OnlineList = () => {
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
     disableScroll();
+    setIsSliding(true);
   };
 
   const handleTouchMove = (e) => {
+    if (isScrolling) return; // Prevent touch movement if scrolling
     const currentX = e.touches[0].clientX;
     const difference = currentX - startX.current; // Difference to determine direction
 
@@ -109,6 +112,7 @@ const OnlineList = () => {
       setPosition(0)
     }
     enableScroll();
+    setIsSliding(false);
   };
 
   const handleOutsideClose = (e) => {
@@ -138,7 +142,12 @@ const OnlineList = () => {
   const scrollDivRef = useRef()
   useEffect(() => {
     const handleScroll = () => {
-      setPosition(0)
+      setIsScrolling(true);
+      // Use a timeout to reset the isScrolling flag after scrolling stops
+      clearTimeout(window.scrollTimeout);
+      window.scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 100); // Adjust this delay as needed
     };
 
     const scrollDiv = scrollDivRef.current;
@@ -146,6 +155,7 @@ const OnlineList = () => {
 
     return () => {
       scrollDiv.removeEventListener('scroll', handleScroll);
+      clearTimeout(window.scrollTimeout);
     };
   }, []);
 

@@ -807,7 +807,7 @@
   margin-left: 20px;
 } */
 
-.wrapImages-tabs {
+/* .wrapImages-tabs {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -823,10 +823,11 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-}
+} */
+
 .EndMoreImageChat {
   position: relative;
-  width: calc((100% / 4) - 10px);
+  /* width: calc((100% / 4) - 10px); */
 }
 .EndMoreImageChat img {
   width: 100%;
