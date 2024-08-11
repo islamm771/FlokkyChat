@@ -74,7 +74,7 @@ const items = [
 ];
 
 
-const InformationChat = ({ direction }) => {
+const InformationChat = ({ direction,scrollDivRef }) => {
   const dispatch = useDispatch()
   const BoxRef1 = useRef(null);
   const BoxRef2 = useRef(null);
@@ -179,6 +179,8 @@ const InformationChat = ({ direction }) => {
 
     setIsShowBoxThree7(true);
   };
+
+  
   return (
     <div
       className={`InformationChat ${direction === "right" ? "reverse" : ""}`}
@@ -204,7 +206,7 @@ const InformationChat = ({ direction }) => {
             </div>
           </div>
         </div>
-        <div className="overflow-online-list">
+        <div className="overflow-online-list" ref={scrollDivRef}>
           <div className="content-info-online-list">
             <div className="wrap-above-info">
               <figure className="navigation-widget-cover liquid onlineListFigure">

@@ -24,7 +24,6 @@ const DisplayReact = ({ data, handleToggleModelCodeSnipest, like, react }) => {
     }
   }, [isReactionListOpen])
 
-  console.log(react)
   return (
     <>
       {data.liked && (

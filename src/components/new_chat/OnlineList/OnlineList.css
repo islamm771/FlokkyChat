@@ -702,7 +702,7 @@
   opacity: 1;
   visibility: visible;
 } */
-.txt-invite-via-link::before {
+/* .txt-invite-via-link::before {
   position: absolute;
   content: "";
   height: 5px;
@@ -718,7 +718,7 @@
   -moz-transform: rotate(-180deg);
   -ms-transform: rotate(-180deg);
   -o-transform: rotate(-180deg);
-}
+} */
 
 .content-info-online-list {
   margin-bottom: 40px;

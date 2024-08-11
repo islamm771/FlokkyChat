@@ -135,6 +135,20 @@ const OnlineList = () => {
     }
   }, [isOnlineList]);
 
+  const scrollDivRef = useRef()
+  useEffect(() => {
+    const handleScroll = () => {
+      setPosition(0)
+    };
+
+    const scrollDiv = scrollDivRef.current;
+    scrollDiv.addEventListener('scroll', handleScroll);
+
+    return () => {
+      scrollDiv.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div
       className={`${
@@ -153,7 +167,7 @@ const OnlineList = () => {
         // setIsSetting={setIsSetting}
         // isSetting={isSetting}
       />
-      {activeTabOnline === 1 && <InformationChat direction="right" />}
+      {activeTabOnline === 1 && <InformationChat direction="right" scrollDivRef={scrollDivRef} />}
       {activeTabOnline === 2 && <SterredMessages direction="right" />}
       {activeTabOnline === 3 && <ArchieveMessages direction="right" />}
       {activeTabOnline === 4 && <SearchChat direction="right" />}
