@@ -71,6 +71,7 @@ const OnlineList = () => {
   const [position, setPosition] = useState(0); // Current position of the div
   const startX = useRef(0); // Initial touch position
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isSliding, setIsSliding] = useState(false);
   const divRef = useRef(null);
 
   const disableScroll = () => {
@@ -147,7 +148,7 @@ const OnlineList = () => {
       clearTimeout(window.scrollTimeout);
       window.scrollTimeout = setTimeout(() => {
         setIsScrolling(false);
-      }, 100); // Adjust this delay as needed
+      }, 300); // Adjust this delay as needed
     };
 
     const scrollDiv = scrollDivRef.current;
