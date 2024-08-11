@@ -36,14 +36,14 @@ const DisplayReact = ({ data, handleToggleModelCodeSnipest, like, react }) => {
           <div className="count">{react?.people.length}</div>
 
           <div
-            className={`simple-dropdown padded reaction-item-dropdown !w-[270px] absolute top-[30px] ${data.sendme ? "left-0" : "right-0"} z-[9999] transition-all duration-[0.5s]`}
+            className={`simple-dropdown reaction-item-dropdown !w-[270px] absolute top-[30px] ${data.sendme ? "left-0" : "right-0"} z-[9999] transition-all duration-[0.5s]`}
             style={{
               opacity: isReactionListOpen ? 1 : 0,
               visibility: isReactionListOpen ? "visible" : "hidden",
               transform: isReactionListOpen ? "translateY(0px)" : "translateY(-20px)"
             }}
           >
-            <p className="simple-dropdown-text mb-[15px]">
+            <p className="simple-dropdown-text mb-[15px] px-[15px] md:px-0">
               <img
                 className="reaction"
                 src={imgSrc}
@@ -53,7 +53,7 @@ const DisplayReact = ({ data, handleToggleModelCodeSnipest, like, react }) => {
               <span className="bold !text-[#3e3f5e]">{react?.react}</span>
             </p>
 
-            <div className="wrap-new-chat !max-h-[250px] !mt-0 pr-[15px]">
+            <div className="wrap-new-chat !max-h-[250px] !mt-0 py-[5px]">
               {react?.people.map(person => (
                 <p className="simple-dropdown-text pl-[12px] mb-[10px]" key={person.id}>
                   <div className="user-status">

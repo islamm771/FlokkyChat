@@ -132,7 +132,7 @@ const ShareService = () => {
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[25px] mx-auto rounded-3xl'></span>
         </div>
         <div className="share-service-container">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-8 px-[15px] md:px-0">
               <h2 className="sell-product-title !mb-0">Share Service</h2>
               <button className="hidden md:block w-fit p-2 text-[#adafca]" onClick={handleToggleShareService}><FaTimes /></button>
             </div>
@@ -144,7 +144,7 @@ const ShareService = () => {
               }
             <form action="">
               <div className="wrap-new-chat" ref={scrollDivRef}>
-                <div className="grid md:!grid-cols-2 lg:!grid-cols-3 py-[10px] pr-[20px]">
+                <div className="grid md:!grid-cols-2 lg:!grid-cols-3 py-[10px]">
                   <div className="select-service-card" onClick={() => setService("Service 1")}>
                     <img className="rounded-t-[12px] w-full" src="/img/cover/05.jpg" alt="" />
                     <p className="text-[16px] p-[20px] text-center font-semibold">Service Name Here</p>
@@ -167,7 +167,7 @@ const ShareService = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-[15px] mt-[3rem]">
+              <div className="flex gap-[15px] mt-[3rem] px-[15px] md:px-0">
                 <button className="button white">Cancel</button>
                 <button className="button primary">Share Service</button>
               </div>

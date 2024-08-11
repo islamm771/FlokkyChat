@@ -207,14 +207,14 @@ const Contacts = () => {
         <div className='drawer-heading block md:hidden'>
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
         </div>
-        <div className="header-forward">
+        <div className="header-forward px-[15px] md:px-0">
           <h5>Connections</h5>
           <button className="w-fit p-2 text-[#adafca] hidden md:block"
             onClick={() => dispatch(FalseContacts())}>
             <FaTimes />
           </button>
         </div>
-        <div className="Search-people-chat">
+        <div className="px-[15px] md:px-0">
           <FormInputwithIcon
             name="Search-People"
             id="Search-People"
@@ -222,7 +222,7 @@ const Contacts = () => {
           />
           <div style={{ marginBottom: "5px" }}></div>
         </div>
-        <div className="wrap-new-chat pb-[15px] md:pb-0 !pr-[20px]" ref={scrollDivRef}>
+        <div className="wrap-new-chat pb-[15px] md:pb-0" ref={scrollDivRef}>
           {renderContacts}
         </div>
         {selected && (

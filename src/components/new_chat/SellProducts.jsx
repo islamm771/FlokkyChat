@@ -217,14 +217,14 @@ const SellProducts = () => {
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
         </div>
         <div className="sell-product-container">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-8 px-[15px] md:px-0">
               <h2 className="sell-product-title !mb-0">Add a Listing to Classifieds</h2>
               <button className="hidden md:block w-fit p-2 text-[#adafca]" onClick={handleToggleSellProducts}><FaTimes /></button>
             </div>
 
           <form action="">
             <div className="wrap-new-chat" ref={scrollDivRef}>
-              <div className="sell-product-form pr-[20px] py-[15px]">
+              <div className="sell-product-form py-[15px]">
                 <label
                   className={`sell-upload-product-img ${isDragOver ? "scale-125 !text-[#fd6729] !border-[#fd6729]" : ""}`}
                   htmlFor="upload-product-img"
@@ -324,7 +324,7 @@ const SellProducts = () => {
                 />
               </div>
             </div>
-            <div className="flex gap-[15px] mt-[3rem]">
+            <div className="flex gap-[15px] mt-[3rem] px-[15px] md:px-0">
               <button className="button white">Cancel</button>
               <button className="button primary">Sell product</button>
             </div>

@@ -141,12 +141,12 @@ const ShareVacancy = () => {
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[25px] mx-auto rounded-3xl'></span>
         </div>
         <div className="share-vacancy-container">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-8 px-[15px] md:px-0">
               <h2 className="sell-product-title !mb-0">Share Vacancy</h2>
               <button className="w-fit p-2 text-[#adafca] hidden md:block" onClick={handleToggleShareVacancy}><FaTimes /></button>
             </div>
             <form action="">
-              <div className="wrap-new-chat pr-[20px]" ref={scrollDivRef}>
+              <div className="wrap-new-chat" ref={scrollDivRef}>
               <Select defaultValue={value} setValue={setValue} optionsArray={businessPages} />
               {vacancy && 
                 <h2 className="mt-[2rem] w-fit text-white text-[1rem] bg-[#fd6729] py-[8px] px-[20px] rounded-[30px] cursor-pointer"
@@ -182,7 +182,7 @@ const ShareVacancy = () => {
                 </div>
               )}
               </div>
-              <div className="flex gap-[15px] mt-[3rem]">
+              <div className="flex gap-[15px] mt-[3rem] px-[15px] md:px-0">
                 <button className="button white">Cancel</button>
                 <button className="button primary">Publich Job</button>
               </div>

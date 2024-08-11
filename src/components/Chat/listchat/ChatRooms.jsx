@@ -119,16 +119,16 @@ const ChatRooms = () => {
         <div className='block md:hidden drawer-heading'>
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
         </div>
-        <div className="header-chatRoom">
+        <div className="header-chatRoom px-[15px] md:px-0">
           <h5>Chat Rooms</h5>
           <span className="hidden md:block" onClick={handleToggleChatList}>
             <FaTimes />
           </span>
         </div>
-        <div className="search-input my-3">
+        <div className="search-input my-3 px-[15px] md:px-0">
           <FormInputwithIcon label={"Search for communities..."} id={"comm-search"} name={"comm-search"} />
         </div>
-        <div className="wrap-new-chat pb-[15px] md:pb-0 pr-[20px]" ref={scrollDivRef}>
+        <div className="wrap-new-chat pb-[15px] md:pb-0" ref={scrollDivRef}>
           <div className="joined mb-4">
             <p className="joined-title">Joined</p>
             <div className="list-joined">

@@ -1420,6 +1420,7 @@
   max-height: 500px;
   height: 94%;
   overflow-y: scroll;
+  padding-right: 20px;
   /* padding-bottom: 90px; */
 }
 
@@ -1593,6 +1594,7 @@
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
     min-height: 650px;
+    padding: 20px 0;
   }
 
   .Report{
@@ -1610,6 +1612,8 @@
     margin-top: 20px;
     overflow-x: hidden;
     overflow-y: scroll;
+    padding-left: 15px;
+    padding-right: 20px;
   }
 
   .inpt-newchat {
@@ -1624,6 +1628,7 @@
   .pin {
     width: 100%;
   }
+  .ForwardMessage-Model,
   .chatRoom{
     position: fixed;
     top: unset;
@@ -1633,16 +1638,7 @@
     max-height: 80%;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
-  }
-  .ForwardMessage-Model{
-    top: unset;
-    left: 0;
-    /* transform: translateX(-50%); */
-    bottom: -100%;
-    width: 100%;
-    max-height: 80%;
-    transition: 0.5s;
-    border-radius: 10px 10px 0 0;
+    padding: 20px 0;
   }
   .chatRoom.active,
   .ForwardMessage-Model.active{
