@@ -76,7 +76,7 @@ const MyFlokkItems = ({ isMobile }) => {
 				}`}
 			>
 				<Link
-					to={"/connections"}
+					to={"https://main.flokky.app/connections"}
 					className="menu-item-link"
 					onClick={() => {
 						if (isMobile) {

@@ -8,6 +8,7 @@ import { selectGlobal, toggleListOnlineListChat } from "../../../../app/feature/
 
 import { Tabs } from 'antd';
 import { setActiveTabOnline } from "../../../../app/feature/TabOnlineList";
+import { useNavigate } from "react-router-dom";
 
 const items = [
   {
@@ -194,12 +195,14 @@ const ViewProfile = ({ direction }) => {
   const [isFriend, setIsFriend] = useState(false);
   const { activeMessage } = useSelector(selectGlobal);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleToggleOnlineList = () => {
     if(activeMessage == 1) {
       dispatch( setActiveTabOnline(1) )
     }else{
       dispatch(toggleListOnlineListChat());
+      navigate("/messages")
     }
   }
 

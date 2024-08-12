@@ -57,6 +57,7 @@ import GroupMessages from "./MessagesChat/GroupMessages";
 import JobMessages from "./MessagesChat/JobMessages";
 import { Tooltip } from "antd";
 import RecordVoice from "../MessageOptions/RecordVoice";
+import { useNavigate } from "react-router-dom";
 
 const MainChat = () => {
   const reactionsRefList = useRef(null);
@@ -67,6 +68,7 @@ const MainChat = () => {
   const messageOptionsRef = useRef(null)
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isForward, isPinMessage, activeMessage } = useSelector(selectGlobal);
 
   const [isListActionMessage, setIsListActionMessage] = useState(false);
@@ -86,10 +88,11 @@ const MainChat = () => {
   const [isStar, setIsStar] = useState(true);
 
   const handleViewProfile = () => {
-    dispatch(setActiveTabOnline(5));
-    if (window.innerWidth < 1670) {
-      dispatch(toggleListOnlineListChat());
+    if(window.innerWidth <= 632){
+      navigate("/info")
     }
+      dispatch(setActiveTabOnline(5));
+      dispatch(toggleListOnlineListChat());
   };
   const handleTogglePinMessage = () => {
     dispatch(togglePinMessageChat());

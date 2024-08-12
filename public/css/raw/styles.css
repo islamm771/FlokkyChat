@@ -15342,6 +15342,7 @@ figure > img {
   transition: -webkit-transform .35s ease-in-out;
   transition: transform .35s ease-in-out;
   transition: transform .35s ease-in-out, -webkit-transform .35s ease-in-out;
+  z-index: 9999999999;
 }
 
 .sidebar.navigation-widget.navigation-widget-mobile {

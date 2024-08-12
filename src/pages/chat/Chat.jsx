@@ -27,13 +27,11 @@ import VideoCall from "../../components/Chat/mainchat/VideoCall";
 import Mute from "../../components/Chat/Mute";
 import ShareService from "../../components/new_chat/ShareService";
 import ShareVacancy from "../../components/new_chat/ShareVacancy";
+import Chats from "../../components/new_chat/WrapGroupPeople/Chats";
 
 const Chat = () => {
-  const { isListActionPeopleChat, isOnlineList, isWrapgroupPeopleChat } =
-    useSelector(selectGlobal);
-  const isMobileNavOpen = useSelector((state) => state.outlet.isMobileNavOpen);
-  const dispatch = useDispatch();
-
+  const { isOnlineList } = useSelector(selectGlobal);
+  const dispatch = useDispatch()
   useEffect(() => {
     if (window.innerWidth <= 1670) {
       dispatch(ListOnlineListChatFalse());
@@ -43,116 +41,22 @@ const Chat = () => {
     }
   }, [dispatch]);
 
-  const [position, setPosition] = useState(0); // This will track the position of the div
-  const startX = useRef(0); // To track the initial touch position
-  const divRef = useRef(null); // Reference to the sliding div
-
-  const disableScroll = () => {
-    document.body.style.overflow = 'hidden';
-    document.body.style.overscrollBehavior = 'none';
-  };
-
-  const enableScroll = () => {
-    document.body.style.overflow = 'auto';
-    document.body.style.overscrollBehavior = 'auto';
-  };
-  
-
-  const handleTouchStart = (e) => {
-    startX.current = e.touches[0].clientX;
-    disableScroll();
-  };
-
-  const handleTouchMove = (e) => {
-    const currentX = e.touches[0].clientX;
-    const difference = startX.current - currentX;
-    setPosition((prevPosition) =>
-      Math.min(Math.max(prevPosition - difference, -800), 0)
-    );
-
-    startX.current = currentX;
-  };
-
-  const handleTouchEnd = () => {
-    if (position < -200) {
-      setPosition(-divRef.current.clientWidth - 50);
-      dispatch(toggleWrapgroupPeopleChat());
-    } else {
-      setPosition(0);
-    }
-    enableScroll();
-  };
-
-
-  useEffect( () => {
-    if(screen.width <= 768){
-      if(isWrapgroupPeopleChat){
-        setPosition(0)
-      }
-      else{
-        setPosition(-divRef.current.clientWidth)
-      }
-    }
-  } ,[isWrapgroupPeopleChat])
 
 
   return (
     <>
-      <div
-        className={`overlay-online-list ${
-          isOnlineList && screen.width > 768
+      <div className={`overlay-online-list ${isOnlineList && screen.width > 768
             ? "active-overlay-online-list"
-            : "disactive-overlay-online-list"
-        }`}
-      ></div>
+            : "disactive-overlay-online-list"}`}></div>
       <div className="ChatContainer">
-
-        <div className={`wrap-grouping-people-chat ${
-            isListActionPeopleChat ? "wAuto-wrap-grupPeopleChat" : ""
-          } ${
-            isWrapgroupPeopleChat
-              ? `${
-                  isListActionPeopleChat
-                    ? "wrap-grouping-people-chatSm"
-                    : "wrap-grouping-people-chat-full-width"
-                }`
-              : "wrap-grouping-people-chat-disactive"
-          }`}
-          ref={divRef}
-          style={{ left: `${position}px`}}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          <div
-            className={`${
-              isListActionPeopleChat
-                ? "GroupingContainerSm"
-                : "GroupingContainer"
-            }`}
-          >
-            <Grouping />
-          </div>
-          <div
-            className={`${
-              isListActionPeopleChat
-                ? "PeopleChatContainerSm"
-                : "PeopleChatContainer"
-            }`}
-          >
-            <PeopleChat />
-          </div>
-        </div>
-
+        { window.innerWidth > 632 && <Chats />}
         <div className="flex-wrap-videocall-main-chat">
           <VideoCall />
           <div className="MainChatContainer">
             <MainChat />
           </div>
         </div>
-
         <OnlineList />
-        
       </div>
       <Mute />
       <ChatRooms />

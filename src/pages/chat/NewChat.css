@@ -190,10 +190,12 @@
 
 .active-chat {
   opacity: 1;
+  visibility: visible;
   z-index: 5555555555555;
 }
 .disactive-chat {
   opacity: 0;
+  visibility: hidden;
   z-index: -5555;
 }
 .header-chatRoom {
@@ -557,7 +559,8 @@
 }
 @media screen and (max-width: 632px) {
   .OnlineListContainer {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   .images-actions-main-chat,
   .icons-actions-main-chat-mic {
@@ -587,17 +590,18 @@
     border-top: 1px solid #eee;
     z-index: 0;
   }
-  .footer-online-list {
+  /* .footer-online-list {
     position: fixed;
     bottom: 0;
     height: 60px;
     background-color: #fff;
     border-top: 1px solid #eee;
     width: 100%;
-  }
-  /* .wrap-grouping-people-chat {
-    width: 100% !important;
   } */
+  .wrap-grouping-people-chat {
+    /* display: none; */
+    left: 0;
+  }
   .wrap-images-sell-product {
     width: 100% !important;
   }
@@ -1387,10 +1391,6 @@
   background: #fd6729;
 }
 .new-chat {
-  padding: 0px 20px;
-}
-
-.new-chat {
   max-width: 900px;
   border-radius: 10px;
   position: absolute;
@@ -1402,7 +1402,7 @@
   transform: translate(-50%, -50%);
   z-index: 5555555;
   /* padding: 10px 5px; */
-  padding: 20px 24px;
+  padding: 20px 0;
   background: #fff;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -1421,6 +1421,7 @@
   height: 94%;
   overflow-y: scroll;
   padding-right: 20px;
+  padding-left: 20px;
   /* padding-bottom: 90px; */
 }
 

@@ -19,6 +19,7 @@ const initialState = {
   isForwardModel: false,
   selectedAlumaniUniversity: "",
   selectedCollege: "",
+  chatSearch:"",
 
   // New Chart
   isListActionPeopleChat: false,
@@ -40,6 +41,8 @@ const initialState = {
 
   // Messages
   activeMessage:1,
+  messageColor:"#fd6729",
+  messageBackground:"",
 };
 
 export const GlobalSlice = createSlice({
@@ -178,6 +181,9 @@ export const GlobalSlice = createSlice({
     setSelectedCollege(state, action) {
       state.selectedCollege = action.payload.college;
     },
+    setChatSearch(state, action) {
+      state.chatSearch = action.payload;
+    },
     toggleListActionPeopleChat(state) {
       state.isListActionPeopleChat = !state.isListActionPeopleChat;
     },
@@ -207,7 +213,13 @@ export const GlobalSlice = createSlice({
     },
     setIsMuteModel : (state,action) => {
       state.isMuteModel = action.payload
-    }
+    },
+    setMessageColor(state,action) {
+      state.messageColor = action.payload
+    },
+    setMessageBackground(state,action) {
+      state.messageBackground = action.payload
+    },
   },
 });
 
@@ -232,6 +244,7 @@ export const {
   toggleDmChat,
   setSelectedAlumaniUniversity,
   setSelectedCollege,
+  setChatSearch,
   ReportFalse,
   NewChatFalse,
   toggleReactPeopleInfo,
@@ -266,6 +279,8 @@ export const {
   togglePinMessageChat,
   setIsMuteModel,
   setCreateMessageOptions,
+  setMessageColor,
+  setMessageBackground,
 
 } = GlobalSlice.actions;
 

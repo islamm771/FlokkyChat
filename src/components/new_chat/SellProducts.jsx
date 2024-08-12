@@ -217,7 +217,7 @@ const SellProducts = () => {
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[15px] mx-auto rounded-3xl'></span>
         </div>
         <div className="sell-product-container">
-          <div className="flex items-center justify-between mb-8 px-[15px] md:px-0">
+          <div className="flex items-center justify-between mb-8 px-[15px] md:px-[20px]">
               <h2 className="sell-product-title !mb-0">Add a Listing to Classifieds</h2>
               <button className="hidden md:block w-fit p-2 text-[#adafca]" onClick={handleToggleSellProducts}><FaTimes /></button>
             </div>
@@ -324,7 +324,7 @@ const SellProducts = () => {
                 />
               </div>
             </div>
-            <div className="flex gap-[15px] mt-[3rem] px-[15px] md:px-0">
+            <div className="flex gap-[15px] mt-[3rem] px-[15px] md:px-[20px]">
               <button className="button white">Cancel</button>
               <button className="button primary">Sell product</button>
             </div>

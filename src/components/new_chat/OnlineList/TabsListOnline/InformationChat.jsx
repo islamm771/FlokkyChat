@@ -1,7 +1,7 @@
 import { FaBell, FaCircle, FaMinusCircle, FaPen, FaPoll } from "react-icons/fa";
 import "../../OnlineList/OnlineList.css";
 import { MdAdminPanelSettings, MdModeNight, MdPermMedia } from "react-icons/md";
-import { IoEllipsisVerticalSharp, IoOptionsOutline, IoStatsChart } from "react-icons/io5";
+import { IoArrowBack, IoEllipsisVerticalSharp, IoOptionsOutline, IoStatsChart } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import duke from "../../../../assests/chat/duke.jpeg";
 import tony from "../../../../assests/chat/tony.jpeg";
@@ -13,8 +13,8 @@ import { FiMapPin } from "react-icons/fi";
 import { Tabs } from 'antd';
 import { Wheel } from '@uiw/react-color';
 import { IoIosInformationCircle } from "react-icons/io";
-import { setIsMuteModel } from "../../../../app/feature/ListChatSlice";
-import { useDispatch } from "react-redux";
+import { selectGlobal, setIsMuteModel, setMessageBackground, setMessageColor } from "../../../../app/feature/ListChatSlice";
+import { useDispatch, useSelector } from "react-redux";
 import UserProfileImage from "../../../user-profile-image/UserProfileImage";
 import ImgOnlineList from "./ImgOnlineList";
 import { FaMusic, FaPlay } from "react-icons/fa6";
@@ -535,109 +535,11 @@ const items = [
 ];
 
 
-const InformationChat = ({ direction, scrollDivRef }) => {
+const InformationChat = ({ direction }) => {
   const dispatch = useDispatch()
-  const BoxRef1 = useRef(null);
-  const BoxRef2 = useRef(null);
-  const BoxRef3 = useRef(null);
-  const BoxRef5 = useRef(null);
-  const BoxRef6 = useRef(null);
-  const BoxRef7 = useRef(null);
-  const [isShowBoxOne, setIsShowBoxOne] = useState(false);
-  const [isShowBoxTwo, setIsShowBoxTwo] = useState(false);
-  const [isShowBoxThree, setIsShowBoxThree] = useState(false);
-  const [isShowBoxOne5, setIsShowBoxOne5] = useState(false);
-  const [isNote, setIsNote] = useState(false);
-  const [isShowBoxTwo6, setIsShowBoxTwo6] = useState(false);
-  const [isShowBoxThree7, setIsShowBoxThree7] = useState(false);
-  const [hex, setHex] = useState("#fff");
+  
   const [chatSettings, setChatSettings] = useState("about")
-
-
-  const handleToggleShowBox6 = () => {
-    setIsShowBoxTwo6(!isShowBoxTwo6);
-  };
-  const handleToggleNoteBox = () => {
-    setIsNote(!isNote);
-  };
-
-  const handleToggleShowBox = () => {
-    setIsShowBoxOne(!isShowBoxOne);
-  };
-
-  const handleToggleCloseBox = () => {
-    setIsShowBoxOne(false);
-    setIsShowBoxOne5(false);
-    setIsShowBoxTwo(false);
-    setIsShowBoxThree(false);
-    setIsShowBoxTwo6(false);
-    setIsShowBoxThree7(false);
-  };
-
-  const handleToggleShowBoxBlock = () => {
-    setIsShowBoxThree7(!isShowBoxOne5);
-  };
-
-  const handleTogglesetIsShowBoxTwo = () => {
-    setIsShowBoxTwo(!isShowBoxOne);
-  };
-
-  const handleToggleShowBoxThree = () => {
-    setIsShowBoxThree(!isShowBoxOne);
-  };
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (BoxRef5.current && !BoxRef5.current.contains(event.target)) {
-        setIsShowBoxOne5(false);
-      }
-      if (BoxRef2.current && !BoxRef2.current.contains(event.target)) {
-        setIsShowBoxTwo(false);
-      }
-      if (BoxRef3.current && !BoxRef3.current.contains(event.target)) {
-        setIsShowBoxThree(false);
-      }
-      if (BoxRef1.current && !BoxRef1.current.contains(event.target)) {
-        setIsShowBoxOne(false);
-      }
-      if (BoxRef6.current && !BoxRef6.current.contains(event.target)) {
-        setIsShowBoxTwo6(false);
-      }
-      if (BoxRef7.current && !BoxRef7.current.contains(event.target)) {
-        setIsShowBoxThree7(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-
-    const images = document.querySelectorAll(".img-online-list img");
-    const numImages = images.length;
-    images.forEach((image, index) => {
-      image.style.zIndex = numImages - index;
-    });
-
-    const numbersOnlineList = document.querySelector(".numbers-online-list");
-    numbersOnlineList.style.zIndex = numImages + 1;
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [BoxRef5, BoxRef2, BoxRef3, BoxRef1, BoxRef6]);
-  const handleRightClick = (event) => {
-    event.preventDefault();
-
-    setIsShowBoxOne(true);
-  };
-  const handleRightClick6 = (event) => {
-    event.preventDefault();
-
-    setIsShowBoxTwo6(true);
-  };
-  const handleRightClick7 = (event) => {
-    event.preventDefault();
-
-    setIsShowBoxThree7(true);
-  };
-
+  const {messageColor} = useSelector(selectGlobal)
 
   return (
     <div
@@ -664,9 +566,9 @@ const InformationChat = ({ direction, scrollDivRef }) => {
             </div>
           </div>
         </div>
-        <div className="overflow-online-list" ref={scrollDivRef}>
+        <div className="overflow-online-list">
           <div className="content-info-online-list">
-            <div className="wrap-above-info">
+            <div className="wrap-above-info relative">
               <figure className="navigation-widget-cover liquid onlineListFigure">
                 <img src="img/cover/01.jpg" alt="cover-01" />
               </figure>
@@ -689,6 +591,10 @@ const InformationChat = ({ direction, scrollDivRef }) => {
                   {/* <p className="font-semibold">Mute</p> */}
                 </p>
               </div>
+
+              <Link to={"/messages"} className="btn-OnlineClose absolute top-2 left-2 text-white cursor-pointer block md:hidden">
+                <IoArrowBack size={20}/>
+              </Link>
             </div>
           </div>
           <div className="grid !grid-cols-3 p-3 mb-4 chat-settings-wrapper">
@@ -743,31 +649,29 @@ const InformationChat = ({ direction, scrollDivRef }) => {
                 <div className="flex items-center gap-3 px-3 py-[7px]">
                   <div className="w-[50px] h-[50px] bg-[#f5f5f5] rounded-[50%] p-2 flex items-center justify-center">
                     <span className="bg-[#fd6729] rounded-[50%] block w-[100%] h-[100%] cursor-pointer"
-                      onClick={() => setHex("#fd6729")}
+                      onClick={() => dispatch(setMessageColor("#fd6729"))}
                     >
                     </span>
                   </div>
                   <div className="w-[50px] h-[50px] bg-[#f5f5f5] rounded-[50%] p-2 flex items-center justify-center">
-                    <Wheel width={34} height={34} color={hex}
-                      onChange={(color) => {
-                        setHex(color.hex);
-                      }} />
+                    <Wheel width={34} height={34} color={messageColor}
+                      onChange={(color) => dispatch(setMessageColor(color.hex)) } />
                   </div>
 
                 </div>
                 <p className="title-online-list">Change Background</p>
                 <div className="grid !grid-cols-4 !gap-[10px] px-3 py-[7px] mb-4">
-                  <div>
-                    <img className="rounded-lg" src="/img/avatar/10.jpg" alt="" />
+                  <div className="cursor-pointer" onClick={() => dispatch(setMessageBackground("/img/cover/01.jpg")) }>
+                    <img className="rounded-lg" src="/img/cover/01.jpg" alt="" />
                   </div>
-                  <div>
-                    <img className="rounded-lg" src="/img/avatar/11.jpg" alt="" />
+                  <div className="cursor-pointer" onClick={() => dispatch(setMessageBackground("/img/cover/02.jpg")) }>
+                    <img className="rounded-lg" src="/img/cover/02.jpg" alt="" />
                   </div>
-                  <div>
-                    <img className="rounded-lg" src="/img/avatar/12.jpg" alt="" />
+                  <div className="cursor-pointer" onClick={() => dispatch(setMessageBackground("/img/cover/05.jpg")) }>
+                    <img className="rounded-lg" src="/img/cover/05.jpg" alt="" />
                   </div>
-                  <div>
-                    <img className="rounded-lg" src="/img/avatar/13.jpg" alt="" />
+                  <div className="cursor-pointer" onClick={() => dispatch(setMessageBackground("/img/cover/04.jpg")) }>
+                    <img className="rounded-lg" src="/img/cover/04.jpg" alt="" />
                   </div>
                 </div>
               </div>

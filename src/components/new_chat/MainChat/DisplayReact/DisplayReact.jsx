@@ -43,7 +43,7 @@ const DisplayReact = ({ data, handleToggleModelCodeSnipest, like, react }) => {
               transform: isReactionListOpen ? "translateY(0px)" : "translateY(-20px)"
             }}
           >
-            <p className="simple-dropdown-text mb-[15px] px-[15px] md:px-0">
+            <p className="simple-dropdown-text mb-[15px] px-[15px]">
               <img
                 className="reaction"
                 src={imgSrc}

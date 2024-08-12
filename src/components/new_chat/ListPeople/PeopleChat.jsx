@@ -19,7 +19,7 @@ import {
   setIsOverlayVisible,
   setSearchInput,
 } from "../../../app/feature/outletSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Flokkancing from "../TabsChat/Flokkancing";
 import UserProfileImage from "../../user-profile-image/UserProfileImage";
 const PeopleChat = () => {
@@ -29,6 +29,8 @@ const PeopleChat = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 680);
   const searchInput = useSelector((state) => state.outlet.searchInput);
   const [focused, setFocused] = useState(false)
+
+  const inputRef=useRef()
 
   const handleFocus = () => {
     setFocused(true);
@@ -105,6 +107,7 @@ const PeopleChat = () => {
               }`}
             >
               <input
+                ref={inputRef}
                 type="text"
                 id="search-main"
                 name="search_main"
@@ -132,7 +135,10 @@ const PeopleChat = () => {
 
               <div
                 className="interactive-input-action"
-                onClick={() => dispatch(setSearchInput({ value: "" }))}
+                onClick={() => {
+                  dispatch(setSearchInput({ value: "" }))
+                  inputRef?.current?.focus();
+                }}
               >
                 <svg className="interactive-input-action-icon icon-cross-thin">
                   <use xlinkHref="#svg-cross-thin"></use>

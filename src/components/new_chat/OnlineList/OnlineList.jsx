@@ -15,6 +15,7 @@ import Footer from "./Footer/Footer";
 
 const OnlineList = () => {
   const list_music = useRef(null);
+  const onlineListRef = useRef(null);
   const {isMuteModel} = useSelector( state => state.global );
 
   const dispatch = useDispatch();
@@ -58,6 +59,9 @@ const OnlineList = () => {
 
   useEffect(() => {
     function handleClickOutside(event) {
+      if (onlineListRef.current && !onlineListRef.current.contains(event.target) && isOnlineList) {
+        dispatch(toggleListOnlineListChat());
+      }
       if (list_music.current && !list_music.current.contains(event.target)) {
         setOnlineListMusic(false);
       }
@@ -66,110 +70,15 @@ const OnlineList = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [list_music]);
+  }, [list_music,isOnlineList]);
 
-  const [position, setPosition] = useState(0); // Current position of the div
-  const startX = useRef(0); // Initial touch position
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [isSliding, setIsSliding] = useState(false);
-  const divRef = useRef(null);
-
-  const disableScroll = () => {
-    document.body.style.overflow = 'hidden';
-    document.body.style.overscrollBehavior = 'none';
-  };
-
-  const enableScroll = () => {
-    document.body.style.overflow = 'auto';
-    document.body.style.overscrollBehavior = 'auto';
-  };
-  
-  const handleTouchStart = (e) => {
-    startX.current = e.touches[0].clientX;
-    disableScroll();
-    setIsSliding(true);
-  };
-
-  const handleTouchMove = (e) => {
-    if (isScrolling) return; // Prevent touch movement if scrolling
-    const currentX = e.touches[0].clientX;
-    const difference = currentX - startX.current; // Difference to determine direction
-
-    setPosition((prevPosition) => {
-      // Calculate new position and clamp it between 0 and maxPosition
-      const newPosition = Math.min(Math.max(prevPosition + difference, 0), 600);
-      // Update the position and return it
-      return newPosition;
-    });
-
-    startX.current = currentX; // Update start position
-  };
-
-  const handleTouchEnd = () => {
-    if(position > 200){
-      setPosition(divRef.current.clientWidth + 50 )
-      handleToggleOnlineList();
-    }else{
-      setPosition(0)
-    }
-    enableScroll();
-    setIsSliding(false);
-  };
-
-  const handleOutsideClose = (e) => {
-    if (divRef.current && !divRef.current.contains(e.target)) {
-      handleToggleOnlineList();
-    }
-  };
-
-  useEffect(() => {
-    if (isOnlineList && !isMuteModel && window.innerWidth < 1670) {
-      document.addEventListener("mousedown", handleOutsideClose);
-    } else {
-      document.removeEventListener('mousedown', handleOutsideClose);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClose);
-    };
-  }, [isOnlineList, isMuteModel, window.innerWidth]);
-
-  useEffect(() => {
-    if (isOnlineList) {
-      setPosition(0);
-    }
-  }, [isOnlineList]);
-
-  const scrollDivRef = useRef()
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolling(true);
-      // Use a timeout to reset the isScrolling flag after scrolling stops
-      clearTimeout(window.scrollTimeout);
-      window.scrollTimeout = setTimeout(() => {
-        setIsScrolling(false);
-      }, 300); // Adjust this delay as needed
-    };
-
-    const scrollDiv = scrollDivRef.current;
-    scrollDiv.addEventListener('scroll', handleScroll);
-
-    return () => {
-      scrollDiv.removeEventListener('scroll', handleScroll);
-      clearTimeout(window.scrollTimeout);
-    };
-  }, []);
 
   return (
     <div
       className={`${
         isOnlineList ? "OnlineListContainer" : "OnlineListContainerHidden"
       }`}
-      ref={divRef}
-      style={{ right: `${-position}px` }}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      ref={onlineListRef}
     >
       <Header
         handleToggleOnlineList={handleToggleOnlineList}
@@ -178,7 +87,7 @@ const OnlineList = () => {
         // setIsSetting={setIsSetting}
         // isSetting={isSetting}
       />
-      {activeTabOnline === 1 && <InformationChat direction="right" scrollDivRef={scrollDivRef} />}
+      {activeTabOnline === 1 && <InformationChat direction="right" />}
       {activeTabOnline === 2 && <SterredMessages direction="right" />}
       {activeTabOnline === 3 && <ArchieveMessages direction="right" />}
       {activeTabOnline === 4 && <SearchChat direction="right" />}

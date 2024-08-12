@@ -132,7 +132,7 @@ const ShareService = () => {
           <span className='w-[100px] h-[5px] bg-[#ddd] block mb-[25px] mx-auto rounded-3xl'></span>
         </div>
         <div className="share-service-container">
-            <div className="flex items-center justify-between mb-8 px-[15px] md:px-0">
+            <div className="flex items-center justify-between mb-8 px-[15px] md:px-[20px]">
               <h2 className="sell-product-title !mb-0">Share Service</h2>
               <button className="hidden md:block w-fit p-2 text-[#adafca]" onClick={handleToggleShareService}><FaTimes /></button>
             </div>
@@ -167,7 +167,7 @@ const ShareService = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-[15px] mt-[3rem] px-[15px] md:px-0">
+              <div className="flex gap-[15px] mt-[3rem] px-[15px] md:px-[20px]">
                 <button className="button white">Cancel</button>
                 <button className="button primary">Share Service</button>
               </div>

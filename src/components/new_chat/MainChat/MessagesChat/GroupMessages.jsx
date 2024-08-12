@@ -3,6 +3,8 @@ import MessageFrom from "./MessageFrom";
 import MessageTo from "./MessageTo";
 import PinMessage from "../PinMessage/PinMessage";
 import { messages as messageMap } from "../../../../assests/data/messages";
+import { useSelector } from "react-redux";
+import { selectGlobal } from "../../../../app/feature/ListChatSlice";
 
 const GroupMessages = ({
   isPinMessage,
@@ -48,14 +50,14 @@ const GroupMessages = ({
   clearLongPress,
 }) => {
   const [activeMessageOptionsIndex, setActiveMessageOptionsIndex] = useState(null);
-  
+  const {messageBackground} = useSelector(selectGlobal)
   const handleShowMessageOptions = (index) => {
     setActiveMessageOptionsIndex(activeMessageOptionsIndex === index ? null : index);
   };
 
   return (
     <>
-      <div className="wrap-Message">
+      <div className="wrap-Message" style={{background:`#fff url(${messageBackground}) center center/cover no-repeat fixed`}}>
         <PinMessage
           isPinMessage={isPinMessage}
           PinMessageTop={PinMessageTop}

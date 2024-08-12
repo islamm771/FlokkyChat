@@ -880,7 +880,7 @@ margin-bottom: 5px;
   transform: translate(-50%, -50%);
   z-index: 5555555;
   /* padding: 10px 5px; */
-  padding: 20px;
+  padding: 20px 0;
   background: #fff;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);

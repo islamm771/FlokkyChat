@@ -4,9 +4,11 @@ import { setActiveMessage, toggleWrapgroupPeopleChat } from '../../../app/featur
 import useLongPress from '../../../hooks/useLongPress';
 import { FaVolumeUp } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 const PeopleHeaderChat = ({ name,id, bfs,activeMessage ,activeChat,setActiveChat,activeMenu, onLongPress }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const listRef = useRef();
 
   const handleToggleWrapgroupPeopleChat = () => {
@@ -14,12 +16,14 @@ const PeopleHeaderChat = ({ name,id, bfs,activeMessage ,activeChat,setActiveChat
   };
 
   const handleChatClick = () => {
-    if (window.innerWidth < 918) {
-      dispatch(toggleWrapgroupPeopleChat());
+    if (window.innerWidth <= 632) {
+      navigate("/messages")
       dispatch(setActiveMessage(activeMessage));
-    } else {
-      dispatch(setActiveMessage(activeMessage));
+    } 
+    else if(632 < window.innerWidth && window.innerWidth <= 998){
+      handleToggleWrapgroupPeopleChat();
     }
+    dispatch(setActiveMessage(activeMessage));
     setActiveChat(id)
   };
 
@@ -53,17 +57,14 @@ const PeopleHeaderChat = ({ name,id, bfs,activeMessage ,activeChat,setActiveChat
         <img src={bfs} alt="avatar" />
       </div>
       <div className="profile-header__content">
-        <div className="timeStamp-name"
+        <div className="timeStamp-name flex-1"
         onClick={handleChatClick}
         >
           <p className="name-peopla-chat">{name}</p>
           <p className="message_Recieved-chat">Salem: How are you?</p>
         </div>
         <div className="message-people-count">
-          <div
-            className="wrap-list-toggle"
-            onClick={handleToggleWrapgroupPeopleChat}
-          >
+          <div className="wrap-list-toggle">
             <p className="timeStamp-chat-people">12:19 pm</p>
             <div className="count-volume-chat-list">
               <FaVolumeUp className="icon-volume-chat" />

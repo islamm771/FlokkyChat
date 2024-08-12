@@ -6,6 +6,8 @@ import ListAction from "../ListAction/ListAction";
 import Reactions from "../Reactions/Reactions";
 import DisplayReact from "../DisplayReact/DisplayReact";
 import useLongPress from "../../../../hooks/useLongPress";
+import { useSelector } from "react-redux";
+import { selectGlobal } from "../../../../app/feature/ListChatSlice";
 
 export const reacts = {
   "like": [
@@ -56,6 +58,7 @@ const MessageTo = ({
   handleShowMessageOptions,
   activeMessageOptionsIndex
 }) => {
+  const {messageColor} = useSelector(selectGlobal)
   const onLongPress = () => {
     if (screen.width <= 768) {
       handleLongPressReactionsList(index)
@@ -70,6 +73,7 @@ const MessageTo = ({
   };
 
   const longPressEvent = useLongPress(onLongPress, 500);
+
   return (
     (
       <div className={`wrap-message-select-to ${isForward ? "active-selected" : ""}`}>
@@ -81,11 +85,7 @@ const MessageTo = ({
         <div className="message-to">
           <div className="message flex-messages-to">
             <div className="wrap-message-contnet">
-              <div
-                className="message message-Content-to"
-              //   onMouseEnter={() => handleShowMessageOptions(index)}
-              //   onMouseLeave={() => handleShowMessageOptions(index)}
-              >
+              <div className="message message-Content-to" style={{backgroundColor:messageColor}}>
                 <ListAction
                   activeIndex={activeIndex}
                   index={index}
@@ -130,7 +130,7 @@ const MessageTo = ({
                 <p className="max-w-[280px] md:max-w-[500px]"
                   {...longPressEvent} onClick={handleClick}
                 >{data.message}</p>
-                {type == "community" && (
+                {type == "community" && data.liked && (
                   <div className="display-react">
                     {Object.keys(reacts).map(react => <DisplayReact
                       data={data}

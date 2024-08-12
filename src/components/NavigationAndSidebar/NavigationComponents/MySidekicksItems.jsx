@@ -40,7 +40,7 @@ const MySidekicksItems = ({ isMobile }) => {
 				>
 					<Link
 						className="menu-item-link"
-						to="https://main.flokky.app/crea8"
+						to="https://crea8.flokky.app/"
 						onClick={() => {
 							if (isMobile) {
 								dispatch(setIsOverlayVisible({ value: false }));
@@ -88,7 +88,7 @@ const MySidekicksItems = ({ isMobile }) => {
 			<li className={`menu-item`}>
 				<Link
 					className="menu-item-link"
-					to="/"
+					to="https://trot.flokky.app/"
 					onClick={() => {
 						if (isMobile) {
 							dispatch(setIsOverlayVisible({ value: false }));

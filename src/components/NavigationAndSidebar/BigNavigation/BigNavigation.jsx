@@ -232,7 +232,7 @@ const BigNavigation = () => {
 				>
 					<Link
 						className="menu-item-link"
-						to="/"
+						to="https://main.flokky.app/"
 						onClick={() => {
 							dispatch(setIsLargeHidden({ value: !isLargeHidden }));
 						}}
@@ -250,7 +250,7 @@ const BigNavigation = () => {
 					}`}
 				>
 					<Link
-						to={"/directory"}
+						to={"https://main.flokky.app/directory"}
 						className="menu-item-link"
 						onClick={() => {
 							dispatch(setIsLargeHidden({ value: !isLargeHidden }));

@@ -4,6 +4,8 @@ import "./App.css";
 import "../src/styles/css/styles.css";
 import MainPage from "./pages/PagesOutlet/Pages";
 import Chat from "./pages/chat/Chat";
+import OnlineList from "./components/new_chat/OnlineList/OnlineList";
+import Chats from "./components/new_chat/WrapGroupPeople/Chats";
 // import AOS from "aos";
 // import "aos/dist/aos.css";
 // AOS.init();
@@ -30,10 +32,16 @@ function App() {
       }}
     >
       <div className="App">
-          <Chat />
-        {/* <Routes>
-          <Route path="/" element={<Chat />} />
-        </Routes> */}
+        { window.innerWidth <= 632 ? (
+            <Routes>
+              <Route path="/" element={<Chats />} />
+              <Route path="/messages" element={<Chat />} />
+              <Route path="/info" element={<OnlineList />} />
+            </Routes>
+          ) : <Chat />
+        }
+
+
       </div>
     </ConfigProvider>
   );

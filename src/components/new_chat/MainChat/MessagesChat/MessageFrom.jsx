@@ -148,7 +148,7 @@ const MessageFrom = ({
               <p className="max-w-[280px] md:max-w-[500px]"
                 {...longPressEvent} onClick={handleClick}
               >{data.message}</p>
-              { type == "community" && (
+              { type == "community" && data.liked && (
                 <div className="display-react">
                   {Object.keys(reacts).map(react => <DisplayReact
                     data={data}
